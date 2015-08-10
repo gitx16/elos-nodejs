@@ -19,9 +19,13 @@ angular.module('fscApp')
                 SESSION_POST:"SESSION_POST",
                 USER_UPDATE:"USER_UPDATE"
             },
+            rCode:{
+                text:1,
+                img:3
+            },
             portrait: {
-                default: "/assets/img_tmp/portrait.jpg",
-                class: "/assets/img_tmp/group_default.png",
+                _default: "/assets/img_tmp/portrait.jpg",
+                _class: "/assets/img_tmp/group_default.png",
                 public: "/assets/img_tmp/portrait.jpg"
             },
             userType: {
@@ -34,7 +38,7 @@ angular.module('fscApp')
                 user: 1,
                 group: 2,
                 public: 3,
-                class: 4,
+                _class: 4,
                 trg: 5
             }
         }

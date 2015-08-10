@@ -11,6 +11,10 @@ angular.module('fscApp')
     .factory('global', function () {
         return {
             /**
+             * 表情缓存 emojiCache
+             */
+
+            /**
              * cache:{
              *  user:"用户缓存",
              *  sessions:"会话缓存"

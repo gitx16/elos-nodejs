@@ -29,7 +29,8 @@
                     {{ selectSession.msName| limitTo: 30}}{{selectSession.msName.length > 30 ? '...' : ''}}
                 </span>
             </div>
-            <div  class="chat-content" resize style="height:{{winHeight-120}}px;word-break:break-all;">
+            <!--<div  class="chat-content" resize style="height:{{winHeight-272+ToNumber(viewHeight)}}px;word-break:break-all;">-->
+            <div  class="chat-content" resize ng-style="{height:(winHeight-viewHeight-90)+'px','word-break':'break-all'}">
                 <div ng-repeat="recorder in selectSession.recorders">
                     <div ng-if="recorder.type=='5'">
                         <recorder_tip recorder="recorder"></recorder_tip>
@@ -67,14 +68,33 @@
                 </div>
             </div>
             <div class="chat-input">
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="msg" placeholder="输入..." ng-keypress="send($event)" >
-                    <span class="input-group-btn">
-                        <button ng-class="{'btn btn-default':msg.length==0,'btn btn-success':msg.length!=0}" ng-disabled="msg.length==0"
-                                type="button" ng-click="doSend()">发送</button>
-                    </span>
+                <div>
+                    <input id="chat-input" ng-show="!view" type="text" class="form-control" ng-model="msg" placeholder="输入..." ng-keypress="send($event)" ng-blur="blur()" ng-focus="focu()">
+                    <div class="img-preview" ng-show="view">
+                        <div class="img-preview-img">
+                            <!--图片显示区域-->
+                            <img ng-src="{{file.filePath}}">
+                        </div>
+                        <div class="img-preview-button">
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="imgDelete()">删除</button>
+                            <!--//删除按钮-->
+                        </div>
+                    </div>
                 </div>
-             
+                <div class="input-widget">
+                    <!--表情-->
+                    <span class="input-widget-face" ng-click="faceOn()"><i class="fa fa-smile-o"></i></span>
+                    <!--图片上传-->
+                    <span class="input-widget-pic" ngf-select ng-model="file" ngf-multiple="false"><i class="fa fa-file-image-o"></i></span>
+                    <div class="emotion" ng-if="click">
+                        <table>
+                            <tr ng-repeat="items in emojiArray"><td ng-repeat="item in items"><img ng-src="/im/images/emoji/{{item.img}}" ng-click="faceLable(item.label,blur())"></td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="input-send">
+                    <button ng-class="{'btn btn-default':msg.length==0&&!view,'btn btn-success':msg.length!=0||view}" ng-disabled="msg.length==0&&!view" type="button" ng-click="doSend()">发送</button>
+                </div>
             </div>
         </div>
     </div>

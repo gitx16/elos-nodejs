@@ -15,7 +15,8 @@ var fscApp = angular
         'ngRoute',
         'ngSanitize',
         'ui.bootstrap',
-        'LocalStorageModule'
+        'LocalStorageModule',
+        'ngFileUpload'
     ])
     .config(function ($routeProvider) {
         var viewPath = "/im/javascripts/app/";
@@ -42,7 +43,7 @@ var fscApp = angular
         Init.get({}, function (data) {
             global.cache = data.model;
             global.cache.groups = {
-                "cGroup": {name: "班级组", open: false,type:constants.session.class},
+                "cGroup": {name: "班级组", open: false,type:constants.session._class},
                 "gGroup": {name: "群组", open: false,type:constants.session.group}
             };
             var userType = global.cache.user.userType;
@@ -66,5 +67,11 @@ var fscApp = angular
                 }
             })
             msgRegister.dispatchMsg(constants.msgCode.USER_UPDATE);
+
+            if(typeof String.prototype.trim !== 'function') {
+                String.prototype.trim = function() {
+                    return this.replace(/^\s+|\s+$/g, '');
+                }
+            }
         });
     });

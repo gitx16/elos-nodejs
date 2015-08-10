@@ -15,8 +15,8 @@ angular.module('fscApp')
             scope: {
                 recorder: '='
             },
-            link: function(scope, element, attrs){
-                scope.resUrl=global.cache.resUrl;
+            link: function(scope, element, attrs,SessionCtrl){
+                scope.resUrl = global.cache.resUrl;
             }
         }
     })

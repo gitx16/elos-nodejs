@@ -34,8 +34,8 @@ angular.module('fscApp')
                         var user = users[i];
                         if (selectUserIdMap[user.id]) {
                             user.checked = true;
-                        } else {
                             user.checked = false;
+                        } else {
                         }
                     }
                 };

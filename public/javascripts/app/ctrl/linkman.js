@@ -96,7 +96,7 @@ angular.module('fscApp')
                     }
                     if(!sessionExists){
                         $scope.isGoing = true;
-                        Sessions.new({linkmanId:userId},{},function(data){
+                        Sessions.create({linkmanId:userId},{},function(data){
                             sync.syncSessions(function(sessions){
                                 for (var i = 0; i < sessions.length; i++) {
                                     var session = sessions[i];
@@ -131,7 +131,7 @@ angular.module('fscApp')
                     }
                     if (!sessionExists) {
                         $scope.isGoing = true;
-                        Sessions.new({linkmanId: $scope.selectUser.id}, {}, function (data) {
+                        Sessions.create({linkmanId: $scope.selectUser.id}, {}, function (data) {
                             sync.syncSessions(function (sessions) {
                                 for (var i = 0; i < sessions.length; i++) {
                                     var session = sessions[i];

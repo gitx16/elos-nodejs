@@ -20,14 +20,14 @@ angular.module('fscApp')
                     if (!session.portraitArray) {
                         if (session.type == constants.session.public) {
                             session.portraitArray = [constants.portrait.public];
-                        } else if (session.type == constants.session.class) {
-                            session.portraitArray = [constants.portrait.class];
+                        } else if (session.type == constants.session._class) {
+                            session.portraitArray = [constants.portrait._class];
                         } else {
                             var array = session.portrait.split(",");
                             for (var j = 0; j < array.length; j++) {
                                 var obj1 = array[j];
                                 if (obj1 == "-") {
-                                    array[j] = constants.portrait.default;
+                                    array[j] = constants.portrait._default;
                                 } else {
                                     array[j] = global.cache.resUrl + "/" + array[j];
                                 }
@@ -59,7 +59,7 @@ angular.module('fscApp')
             procUser: function () {
                 var user = global.cache.user;
                 if (!user.portrait) {
-                    user.portrait = constants.portrait.default;
+                    user.portrait = constants.portrait._default;
                 }else{
                     user.portrait = global.cache.resUrl + "/" + user.portrait;
                 }
@@ -68,7 +68,7 @@ angular.module('fscApp')
                 for (var i = 0; i < users.length; i++) {
                     var user = users[i];
                     if (!user.portrait) {
-                        user.portrait = constants.portrait.default;
+                        user.portrait = constants.portrait._default;
                     }else{
                         user.portrait = global.cache.resUrl + "/" + user.portrait;
                     }
@@ -78,7 +78,7 @@ angular.module('fscApp')
                 for (var i = 0; i < students.length; i++) {
                     var student = students[i];
                     if (!student.portrait) {
-                        student.portrait = constants.portrait.default;
+                        student.portrait = constants.portrait._default;
                     }else{
                         student.portrait = global.cache.resUrl + "/" + student.portrait;
                     }
@@ -89,7 +89,7 @@ angular.module('fscApp')
                 for (var i = 0; i < parents.length; i++) {
                     var parent = parents[i];
                     if (!parent.portrait) {
-                        parent.portrait = constants.portrait.default;
+                        parent.portrait = constants.portrait._default;
                     }else{
                         parent.portrait = global.cache.resUrl + "/" + parent.portrait;
                     }
@@ -100,7 +100,7 @@ angular.module('fscApp')
                 for (var i = 0; i < teachers.length; i++) {
                     var teacher = teachers[i];
                     if (!teacher.portrait) {
-                        teacher.portrait = constants.portrait.default;
+                        teacher.portrait = constants.portrait._default;
                     }else{
                         teacher.portrait = global.cache.resUrl + "/" + teacher.portrait;
                     }
@@ -112,7 +112,7 @@ angular.module('fscApp')
                 for (var i = 0; i < groups.length; i++) {
                     var group = groups[i];
                     if (!group.portrait) {
-                        group.portrait = constants.portrait.default;
+                        group.portrait = constants.portrait._default;
                     } else {
                         group.portrait = global.cache.resUrl + "/" + group.portrait;
                     }
@@ -189,7 +189,7 @@ angular.module('fscApp')
                 for (var i = 0; i < recorders.length; i++) {
                     var obj = recorders[i];
                     if (!obj.portrait) {
-                        obj.portrait = constants.portrait.default;
+                        obj.portrait = constants.portrait._default;
                     } else {
                         obj.portrait = global.cache.resUrl + "/" + obj.portrait;
                     }

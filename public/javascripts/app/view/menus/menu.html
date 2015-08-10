@@ -24,7 +24,7 @@
     </div>
     <div class="modal-new-right">
         <div class="modal-new-right-name">姓名</div>
-        <div class="modal-new-right-member" ng-repeat="user in groupUsers" ng-click="userClick(user)">
+        <div class="modal-new-right-member" ng-repeat="user in groupUsers" ng-click="updateClick(user)">
             <span class='circle-o' ng-class=" {'fa fa-circle-o':user.checked==false,'fa fa-check-circle-o':user.checked==true}"></span>
             <span>
                <img ng-src="{{user.portrait}}"/>
@@ -36,13 +36,13 @@
 <div class="modal-new-selected">
     <span>已选成员(单击移除)</span>
     <div class="modal-new-name">姓名</div>
-    <div class="modal-update-down-edit" ng-repeat="user in selectUsers" ng-click="removeMember(user)">
-     <span>
-         <img ng-src="{{user.portrait}}"/>
-     </span>
-     <span class="modal-new-width">
-         {{user.name}}
-     </span>
+    <div  ng-class="{'modal-new-down':user.lock==true,'modal-update-down-edit':user.lock==false}"  ng-repeat="user in selectUsers" ng-click="removeMember(user)">
+            <span>
+                <img ng-src="{{user.portrait}}"/>
+            </span>
+            <span class="modal-new-width">
+                {{user.name}}
+            </span>
     </div>
 </div>
 <div class="modal-footer">

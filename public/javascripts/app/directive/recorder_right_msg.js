@@ -30,4 +30,4 @@ angular.module('fscApp')
                 scope.recorder.message = msg;
             }
         }
-    })
+    });

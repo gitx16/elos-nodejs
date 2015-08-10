@@ -8,12 +8,18 @@
  * Controller of the elmApp
  */
 angular.module('fscApp')
-    .controller('SessionCtrl', function ($scope, $window, resourcePool,sync,
+    .controller('SessionCtrl',function ($scope, $window,$timeout,resourcePool,sync,
                                          constants, global, socket, utils,
-                                         msgRegister) {
+                                         msgRegister,emoji,Upload) {
         $scope.sessionList = global.cache.sessions;
-        var resUrl = global.cache.resUrl;
+        $scope.resUrl = global.cache.resUrl;
         $scope.msg = "";
+        $scope.file = {
+            filepath:"",
+            viewHeight:0
+        }
+        $scope.view = false;
+        $scope.viewHeight = 90;
         var w = angular.element($window);
         $scope.winHeight = w.height();
         var doReorder = function (data, firstLoad) {
@@ -26,7 +32,10 @@ angular.module('fscApp')
                 recorderList.push(obj);
             }
             setTimeout(function () {
-                $(".chat-content").scrollTop($(".chat-content")[0].scrollHeight);
+                if( $(".chat-content")[0])
+                {$(".chat-content").scrollTop($(".chat-content")[0].scrollHeight);
+                }
+
             }, 100)
         };
         var loadNewMsg = function (sessionId, lastTimestamp, firstTimestamp) {
@@ -54,7 +63,8 @@ angular.module('fscApp')
             }
             loadNewMsg($scope.selectSession.id, lastTimestamp, null);
             SessionUsers.query({sessionId: $scope.selectSession.id}, function (users) {
-                users.forEach(function (user) {
+                angular.forEach(users,function(user){
+                    //forEach����IE8
                     userIdArray.push(user.id);
                 });
             });
@@ -68,19 +78,98 @@ angular.module('fscApp')
         };
         $scope.doSend = function () {
             var msg = $scope.msg.trim();
-            if ($scope.msg.trim()) {
+            if ($scope.msg.trim()||$scope.view) {
                 var recorder = {
                     sessionId: $scope.selectSession.id,
-                    message: msg
+                    message: msg,
+                    type:constants.rCode.text
                 };
+                if($scope.view){
+                    recorder.message = $scope.jmdc;
+                    recorder.type = constants.rCode.img;
+                    $scope.view = false;
+                    $scope.viewHeight -= 96;
+                }
                 $scope.msg = "";
-                Recorders.new(recorder, function (data) {
+                Recorders.create(recorder, function (data) {
                     var lastRecorder = recorderList[recorderList.length - 1];
                     loadNewMsg($scope.selectSession.id, lastRecorder ? lastRecorder.timestamp : 0, null);
                     socket.emit("notify", {userIdArray: userIdArray, reqCode: "NOTIFY_PULL_FSC_SESSION"})
                 });
                 sync.syncSessionToTop($scope.selectSession)
             }
+        };
+
+        $scope.imgDelete = function(){
+            $scope.view = false;
+            $scope.viewHeight -= 96;
+        }
+
+        $scope.enterFile = function(){
+            $scope.msg = "";
+        };
+
+        $scope.blurFirst = 0;
+
+        $scope.focu = function(){
+            $scope.blurFirst = 0;
+        };
+        $scope.blur = function(){
+            $scope.flag = 1;
+            var pos;
+            var el = $('#chat-input').get(0);
+            if ('selectionStart' in el) {
+                //debugger
+                pos = el.selectionStart;
+            }else if ('selection' in document) {
+                //debugger
+                el.focus();
+                var Sel = document.selection.createRange();
+                var SelLength = document.selection.createRange().text.length;
+                Sel.moveStart('character', -el.value.length);
+                pos = Sel.text.length - SelLength;
+            }
+            if($scope.blurFirst == 0){
+                $scope.flag = 0;
+            }
+            return pos;
+        }
+
+        $scope.click = false;
+        $scope.faceOn = function(){
+            $scope.click = !$scope.click;
+        }
+
+        if(!global.emojiCache){
+            global.emojiCache = [];
+            var row;
+            var i = 0;
+            angular.forEach(emoji,function(data,label){
+                if(i%15==0){
+                    row = [];
+                    global.emojiCache.push(row);
+                }
+                row.push({
+                    img:data,
+                    label:label
+                });
+                i++;
+            });
+        }
+        $scope.emojiArray = global.emojiCache;
+
+        //��ӱ����ǩ
+        $scope.faceLable = function(label,blur){
+            var str = $('#chat-input').val();
+            if($scope.flag == true){ //flagΪ1��ʾ����Ϊ�����Ľ��
+                blur = $scope.blurFirst;
+            }
+            str = str.substr(0,blur) + label + str.substr(blur,str.length);
+            $scope.msg = str;
+            if($scope.blurFirst == 0 || $scope.flag == true){
+                $scope.blurFirst = blur+label.length;
+            }
+            $scope.faceOn();
         };
 
         var sessionUpdateHandler = function (sessionId) {
@@ -118,5 +207,29 @@ angular.module('fscApp')
 
         $scope.$on("$destroy", function () {
             msgRegister.removeMsg(constants.msgCode.SESSION_UPDATE, sessionUpdateHandler);
+        });
+
+        $scope.$watch('file', function () {
+            $scope.upload = function (files) {
+                if (files && files.length&&files[0].filepath != "") {
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+                        Upload.upload({
+                            url: '/files',
+                            fileFormDataName:"myfile",
+                            file: file
+                        }).success(function (data, status, headers, config) {
+                            $timeout(function() {
+                                //$scope.log = 'file: ' + config.file.name + 'Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+                                $scope.file.filePath = $scope.resUrl+'/'+data.data.url;//�ϴ�ͼƬ�ĵ�ַ
+                                $scope.jmdc = data.data.url;
+                                $scope.view = true;
+                                $scope.viewHeight = 182;
+                            });
+                        });
+                    }
+                }
+            };
+            $scope.upload([$scope.file]);
         });
     });

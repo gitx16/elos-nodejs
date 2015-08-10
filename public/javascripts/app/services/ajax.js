@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc service
  * @name elmApp.elmAjax
@@ -21,7 +19,6 @@ angular.module('fscApp')
             loading(!hideLoading);
             // 调用的地方，只需要关心业务上的成功失败，http级别的error在这里统一处理，所以需要重新创建一个defer对象，而不能直接返回http的defer（这个defer只能触发http的失败）
             var deferred = $q.defer();
-
             if (options.ids) {
                 options.ids.forEach(function (id, index) {
                     options.url = options.url.replace('{' + index + '}', id);
@@ -54,8 +51,7 @@ angular.module('fscApp')
                     $log.log('请求失败：' + res);
                     msg.error('请求失败：' + res);
                     deferred.reject(res, status, headers, config);
-                })
-                .finally(function () {
+                })['finally'](function () {
                     loading(false);
                 });
             return deferred.promise;

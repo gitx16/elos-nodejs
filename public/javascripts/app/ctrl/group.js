@@ -11,6 +11,10 @@ angular.module('fscApp')
     .controller('GroupCtrl', function ($scope, $window,$location,resourcePool,
                                        global,utils,constants,sync,dialog,msg,msgRegister) {
         var w = angular.element($window);
+        var ClassStudents = resourcePool.classStudents;
+        var Teachers = resourcePool.teachers;
+        var Deans = resourcePool.deans;
+        var selectUserIdMap = {};
         $scope.winHeight = w.height();
         $scope.groups = global.cache.groups;
         var Groups = resourcePool.groups;
@@ -23,25 +27,32 @@ angular.module('fscApp')
                 });
             }
         };
-
         $scope.openGroup =function(userMember){
             dialog.complexBox(
                 {
-                    templateUrl: '/im/javascripts/app/view/menus/update-sidebar.html',
+                    templateUrl: '/im/javascripts/app/view/menus/menu.html',
                     size:'md',
                     onComplete: function (dialogScope,modalInstance) {
-                        dialogScope.update=true;
-                        dialogScope.userMember=userMember;
-                        dialogScope.global = global;
-                        dialogScope.global.selectGroup = [];
-                        dialogScope.global.selectUsers = [];
+                        dialogScope.selectGroup = [];
+                        dialogScope.selectUsers= [];
                         dialogScope.classes = global.cache.classes;
-                        dialogScope.students=global.cache.students;
+                        dialogScope.students = global.cache.students;
                         dialogScope.groups = global.pageStatus.linkman.groups;
+                        var users=dialogScope.selectUsers;
+                        for (var i = 0; i < userMember.length; i++) {
+                            selectUserIdMap[userMember[i].id]=true;
+                            userMember[i].lock=true;
+                            dialogScope.selectUsers[i]=userMember[i];
+                        }
+                        userSelectCheck(userMember);
+                        var Groups = resourcePool.groups;
+                        var userList = [];
+                        var userUpdateList = [];
+                        dialogScope.update=true;
                         dialogScope.ok=function() {
-                            var users = dialogScope.global.selectUsers;
-                            var Groups = resourcePool.groups;
-                            var userList = [];
+                            for (var i = 0; i < users.length; i++) {
+                                userUpdateList.push({userId:users[i].id});
+                            }
                             var fscSession = utils.getFscSession($scope.selectGroup.type, $scope.selectGroup.id);
                             var sessionName = fscSession.msName;
                             for (var i = userMember.length; i < users.length; i++) {
@@ -60,7 +71,8 @@ angular.module('fscApp')
                             var groupSession = {
                                 userList: userList,
                                 id: fscSession.sessionId,
-                                name:sessionName
+                                name:sessionName,
+                                usersList:userUpdateList
                             };
                             if (userList.length>0) {
                                 Groups.update(groupSession, function (data) {
@@ -76,6 +88,108 @@ angular.module('fscApp')
                                 msg.warn("至少选择一个成员");
                             }
                         };
+                        dialogScope.classClick = function (class_) {
+                            if (!class_.students) {
+                                ClassStudents.query({classId: class_.id}, function (students) {
+                                    utils.procStudents(students);
+                                    class_.students = students;
+                                    dialogScope.groupUsers = students;
+                                    userSelectCheck(dialogScope.groupUsers);
+                                });
+                            } else {
+                                dialogScope.groupUsers = class_.students;
+                                userSelectCheck(dialogScope.groupUsers);
+                            }
+                            dialogScope.selectGroup = class_;
+                        };
+
+                        dialogScope.groupClick = function (type, group) {
+                            if (group.users) {
+                                dialogScope.groupUsers = group.users;
+                                userSelectCheck($scope.groupUsers);
+                            } else {
+                                if (type == "teacher") {
+                                    Teachers.query({}, function (teachers) {
+                                        utils.procTeachers(teachers);
+                                        global.cache.teachers = teachers;
+                                        group.users = teachers;
+                                        dialogScope.groupUsers = group.users;
+                                        userSelectCheck(dialogScope.groupUsers);
+                                    });
+                                } else if (type == "dean") {
+                                    Deans.query({}, function (deans) {
+                                        utils.procTeachers(deans);
+                                        global.cache.deans = deans;
+                                        group.users = deans;
+                                        dialogScope.groupUsers = group.users;
+                                        userSelectCheck(dialogScope.groupUsers);
+                                    });
+                                }
+                            }
+                            dialogScope.selectGroup = group;
+                        };
+
+                        dialogScope.removeMember = function (user) {
+                            var flag=true;
+                            dialogScope.user = user;
+                            for (var j = 0; j < dialogScope.selectUsers.length; j++) {
+                                if (!user.lock) {
+                                    var obj = dialogScope.selectUsers[j];
+                                    if (obj.id == user.id) {
+                                        delete selectUserIdMap[obj.id];
+                                        dialogScope.selectUsers.splice(j, 1);
+                                        break;
+                                    }
+                                }
+                                else {
+                                    flag=false;
+                                }
+                            }
+                            for (var j = 0; j < dialogScope.groupUsers.length&&dialogScope.groupUsers.length>0; j++) {
+                                if(flag) {
+                                    var obj = dialogScope.groupUsers[j];
+                                    if (obj.id == user.id) {
+                                        obj.checked = false;
+                                        break;
+                                    }
+                                }
+                            }
+                        };
+
+                        dialogScope.updateClick=function(user) {
+                            user.lock=false;
+                            for(var i=0;i<userMember.length;i++) {
+                                if (user.id == userMember[i].id) {
+                                    user.lock=true;
+                                    break;
+                                }
+                            }
+                            if(!user.lock) {
+                                var flag = false;
+                                user.checked = false;
+                                if (!user.checked) {
+                                    selectUserIdMap[user.id] = true;
+                                    for (var j = 0; j < dialogScope.selectUsers.length; j++) {
+                                        var obj = dialogScope.selectUsers[j];
+                                        if (obj.id == user.id) {
+                                            obj.checked = false;
+                                            dialogScope.selectUsers.splice(j, 1);
+                                            delete selectUserIdMap[obj.id];
+                                            dialogScope.removeMember(obj);
+                                            flag = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!flag) {
+                                        user.checked = true;
+                                        dialogScope.selectUsers.push(user);
+                                    }
+                                }
+                                else {
+                                    scope.removeMember(user);
+                                }
+                            }
+                        };
 
                         dialogScope.cancel=function(){
                             modalInstance.close();
@@ -84,7 +198,17 @@ angular.module('fscApp')
                     }
                 })
         };
-
+        var userSelectCheck = function (users) {
+            if(users)
+            for (var i = 0; i < users.length; i++) {
+                var user = users[i];
+                if (selectUserIdMap[user.id]) {
+                    user.checked = true;
+                } else {
+                    user.checked = false;
+                }
+            }
+        };
         var showUser = function(fscSession){
             if(!fscSession.users){
                 sync.syncSessionUsers(fscSession,function(users){
@@ -113,6 +237,7 @@ angular.module('fscApp')
                 showUser(fscSession);
             }
         };
+
         var SessionClasses = resourcePool.sessionClasses;
 
         $scope.goSession = function(){
@@ -124,12 +249,10 @@ angular.module('fscApp')
             }
         };
 
-
         $scope.$on('$viewContentLoaded', function () {
             $scope.selectGroup = global.pageStatus.group.selectGroup;
             $scope.users = global.pageStatus.group.users;
         });
-
         var userUpdateHandler = function () {
             $scope.user = global.cache.user;
         };

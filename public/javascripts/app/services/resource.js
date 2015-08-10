@@ -27,7 +27,7 @@ angular.module('fscApp')
                     currentPage: 1
                 }
             },
-            'new': {
+            'create': {
                 method: 'post'
             },
             'update': {

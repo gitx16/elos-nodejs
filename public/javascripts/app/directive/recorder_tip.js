@@ -10,7 +10,7 @@
  * # elmMsg
  * Factory in the elmApp.
  */
-angular    .module('fscApp')
+angular.module('fscApp')
     .directive('recorderTip', function(){
         return {
             restrict: 'E',
@@ -22,4 +22,4 @@ angular    .module('fscApp')
             link: function(scope, element, attrs){
             }
         }
-    })
+    });

@@ -90,6 +90,7 @@ body {
   margin: 10px 0;
   text-align: center;
   padding: 5px 0;
+  font-size: 12px;
 }
 .sidebar .pop-add-group:hover {
   background: #dcdcdc;
@@ -314,6 +315,70 @@ body {
   border-top: 1px solid #dfdfdf;
   padding: 10px;
 }
+.session .session-chat .chat-input .img-preview {
+  background: #BCBCBC;
+  height: 128px;
+  margin-top: 0px;
+}
+.session .session-chat .chat-input .img-preview .img-preview-img img {
+  width: 100px;
+  height: 100px;
+}
+.session .session-chat .chat-input .img-preview .img-preview-button button {
+  width: 100px;
+}
+.session .session-chat .input-widget {
+  position: relative;
+  float: left;
+  width: 100px;
+}
+.session .session-chat .input-widget .input-widget-face {
+  font-size: 25px;
+  margin-top: 5px;
+  float: left;
+}
+.session .session-chat .input-widget .input-widget-face:hover {
+  cursor: pointer;
+}
+.session .session-chat .input-widget .input-widget-pic {
+  font-size: 25px;
+  margin-top: 5px;
+  margin-left: 15px;
+  float: left;
+}
+.session .session-chat .input-widget .input-widget-pic:hover {
+  cursor: pointer;
+}
+.session .session-chat .input-widget .emotion {
+  z-index: 1000;
+  position: absolute;
+  margin-top: -225px;
+  margin-left: 17px;
+  background-color: #eaffb3;
+  height: 209px;
+  width: 385px;
+}
+.session .session-chat .input-widget .emotion table {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.session .session-chat .input-widget .emotion table tr td img {
+  border: 1px solid #abcdef;
+  width: 25px;
+  height: 25px;
+}
+.session .session-chat .input-widget .emotion table tr td img:hover {
+  border: 2px solid #000000;
+  cursor: pointer;
+}
+.session .session-chat .input-send {
+  position: relative;
+  white-space: nowrap;
+  width: 50px;
+  float: right;
+  margin-top: 5px;
+  margin-right: 5px;
+}
 .group .group-gs {
   overflow-y: auto;
 }
@@ -475,63 +540,71 @@ body {
 .notify .messages.show {
   top: 52px;
 }
-.modal-title {
+.modal-content {
+  width: 598px;
+  height: 433px;
+  margin: 0 auto;
+}
+.modal-content .modal-header {
+  width: 592px;
+}
+.modal-content .modal-header .modal-title {
   padding-bottom: 5px;
   padding-top: 10px;
   font-size: 12px;
   text-align: center;
   cursor: default;
+  width: 590px;
 }
-.modal-between {
+.modal-content .modal-between {
   padding-left: 15px;
   background-color: #e0e0e0;
   font-size: 14px;
   padding-top: 10px;
   cursor: default;
 }
-.modal-search-box {
+.modal-content .modal-search-box {
   background-color: #e0e0e0;
   text-align: center;
   height: 23px;
 }
-.input-box {
+.modal-content .input-box {
   text-align: center;
   width: 570px;
   height: 20px;
   color: #aaaaaa;
 }
-.modal-body {
+.modal-content .modal-body {
   background-color: #e0e0e0;
   height: auto!important;
   min-height: 100px;
-  width: 598px;
 }
-.modal-body .modal-new-left {
+.modal-content .modal-body .modal-new-left {
   border-style: groove;
   background-color: #ffffff;
   float: left;
   width: 200px;
   height: 230px;
 }
-.modal-body .modal-new-left .modal-new-left-class:hover {
+.modal-content .modal-body .modal-new-left .modal-new-left-class:hover {
   cursor: pointer;
   background: #dcdcdc;
 }
-.modal-body .modal-new-left .class-select {
+.modal-content .modal-body .modal-new-left .class-select {
   background: #dcdcdc;
 }
-.modal-body .modal-new-left .group-select {
+.modal-content .modal-body .modal-new-left .group-select {
   background: #dcdcdc;
 }
-.modal-body .modal-new-left .modal-new-left-group:hover {
+.modal-content .modal-body .modal-new-left .modal-new-left-group:hover {
   cursor: pointer ;
   background: #dcdcdc;
 }
-.modal-body .modal-new-left img {
+.modal-content .modal-body .modal-new-left img {
   width: 10px;
   height: 10px;
 }
-.modal-body .modal-new-right {
+.modal-content .modal-body .modal-new-right {
   border-style: groove;
   background-color: #ffffff;
   float: right;
@@ -539,64 +612,63 @@ body {
   width: 200px;
   overflow-y: auto;
 }
-.modal-body .modal-new-right .modal-new-right-name {
+.modal-content .modal-body .modal-new-right .modal-new-right-name {
   padding-left: 48px;
   border-bottom: 1px solid #e5e5e5;
 }
-.modal-body .modal-new-right .modal-new-right-member:hover {
+.modal-content .modal-body .modal-new-right .modal-new-right-member:hover {
   cursor: pointer;
   background: #dcdcdc;
 }
-.modal-body .modal-new-right .modal-new-right-member img {
+.modal-content .modal-body .modal-new-right .modal-new-right-member img {
   width: 20px;
   height: 20px;
 }
-.modal-body .modal-new-right .modal-new-right-member .circle-o {
+.modal-content .modal-body .modal-new-right .modal-new-right-member .circle-o {
   color: #B5AEAE;
 }
-.modal-body .modal-new-right .modal-new-right-member .circle-x {
+.modal-content .modal-body .modal-new-right .modal-new-right-member .circle-x {
   color: #00FF00;
 }
-.modal-body .modal-new-right .member-width {
+.modal-content .modal-body .modal-new-right .member-width {
   padding-left: 8px;
 }
-.modal-body .modal-new-right .modal-new-right-group img {
+.modal-content .modal-body .modal-new-right .modal-new-right-group img {
   width: 20px;
   height: 20px;
 }
-.modal-new-selected {
+.modal-content .modal-new-selected {
   background-color: #e0e0e0;
   padding-left: 14px;
   padding-right: 14px;
   cursor: default;
 }
-.modal-new-name {
+.modal-content .modal-new-name {
   border-bottom: 1px solid #e5e5e5;
   background-color: #ffffff;
 }
-.modal-update-down-edit {
+.modal-content .modal-update-down-edit {
   background-color: #ffffff;
 }
-.modal-update-down-edit:hover {
+.modal-content .modal-update-down-edit:hover {
   background: #dcdcdc;
   cursor: pointer;
 }
-.modal-update-down-edit img {
+.modal-content .modal-update-down-edit img {
   width: 20px;
   height: 20px;
 }
-.modal-new-down {
+.modal-content .modal-new-down {
   background-color: #e0e0e0;
   width: 578px;
   height: auto!important;
   float: inherit;
   overflow-y: auto;
 }
-.modal-new-down img {
+.modal-content .modal-new-down img {
   width: 20px;
   height: 20px;
 }
-.modal-footer {
+.modal-content .modal-footer {
   background-color: #e0e0e0;
-  width: 598px;
 }
