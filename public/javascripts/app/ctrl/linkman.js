@@ -79,7 +79,6 @@ angular.module('fscApp')
         var Sessions = resourcePool.sessions;
         $scope.goSession = function(userId){
             var sessions = global.cache.sessions;
-            debugger
             if(userId){
                 if(sessions){
                     var sessionExists = false;

@@ -50,7 +50,6 @@ angular.module('fscApp')
                                 }
                             }
                         };
-                        debugger
                         var Groups = resourcePool.groups;
                         dialogScope.ok=function() {
                             for (var i = 0; i <dialogScope.selectUsers.length; i++) {
