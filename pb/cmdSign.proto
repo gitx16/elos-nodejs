@@ -1,0 +1,15 @@
+package pb;
+
+option java_package = "com.jiazi.elos.fsc.protobuf";
+
+option java_outer_classname = "CmdSignProtos";
+
+message CmdSignPb {
+    optional string cmdCode = 1; //命令code
+    optional string reqCode = 2; //请求code
+    optional string respCode = 3; //响应code
+    optional string msg = 4; //消息
+    optional bytes source = 5; //数据
+    optional string token = 6; //token
+    optional bool openTransaction = 7; //是否开启事务
+}

@@ -1,0 +1,23 @@
+<div class="linkman-group">
+    <div class="linkman-group-header" ng-click="headerClick({code:group.code})">
+         <span>
+            <img ng-src="{{group.open?'/im/images/arrow_down.png':'/im/images/arrow_right.png'}}"/>
+        </span>
+        <span>
+            {{group.name}}
+        </span>
+    </div>
+    <div class="linkman-group-users" ng-if="group.open">
+        <span ng-if="!users">加载中...</span>
+        <div ng-class="{'linkman-item':true,'linkman-item-select':user.id==selectUser.id}"
+             ng-click="showUser(user)"
+             ng-repeat="user in users">
+            <span>
+                <img ng-src="{{user.portrait}}"/>
+            </span>
+            <span class="session-label">
+                {{user.name}}
+            </span>
+        </div>
+    </div>
+</div>

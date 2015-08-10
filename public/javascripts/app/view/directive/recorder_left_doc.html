@@ -1,0 +1,18 @@
+<div class="recorder-row clearfix2">
+    <div class="recorder-left pull-left">
+        <img class="recorder-portrait" ng-src="{{recorder.portrait}}"/>
+    </div>
+    <div class="pull-left recorder-left mrgl10">
+        <div class="recorder-name">{{recorder.createdName}}</div>
+        <div class="recorder-doc clearfix">
+            <div class="pull-right recorder-doc-ico">
+                <i  class="fa fa-file-zip-o" ng-click="document()"></i>
+            </div>
+            <div class="pull-right mrgr10">
+                <div class="recorder-doc-name">{{recorder.message.fileName}}</div>
+                <div class="recorder-doc-size">{{recorder.message.fileSize/1024/1024>1?recorder.message.fileSize/1024/1024+"MB":recorder.message.fileSize/1024+"KB"}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+

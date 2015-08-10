@@ -1,0 +1,177 @@
+<div class="linkman frame">
+    <div class="frame-left">
+        <div class="frame-left-header">
+            <input class="form-control" type="text" ng-model="keywords"/>
+        </div>
+        <div class="linkman-groups" resize style="height:{{winHeight-90}}px">
+            <div class="linkman-group" ng-repeat="class_ in classes">
+                <div class="linkman-group-header" ng-click="headerClick('class',$index)">
+                     <span>
+                        <img class="group-icon" ng-src="{{class_.open?'/im/images/arrow_down.png':'/im/images/arrow_right.png'}}"/>
+                    </span>
+                    <span>
+                        {{(class_.gradeName+class_.className) | limitTo: 8 }}{{(class_.gradeName+class_.className).length > 20 ? '...' : ''}}(学生组)
+                    </span>
+                </div>
+                <div class="linkman-group-users" ng-if="class_.open">
+                    <span class="frame-left-item-loading" ng-if="!class_.students">加载中...</span>
+                    <div ng-class="{'frame-left-item':true,'frame-left-item-select':student.id==selectUser.id}"
+                         ng-click="selectLinkman(student)"
+                         ng-repeat="student in class_.students">
+                        <span>
+                            <img ng-src="{{student.portrait}}"/>
+                        </span>
+                        <span class="session-label">
+                            {{ student.name | limitTo: 8 }}{{student.name.length > 8 ? '...' : ''}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="linkman-group" ng-repeat="class_ in classes">
+                <div class="linkman-group-header" ng-click="headerClick('class_parent',$index)">
+                     <span>
+                        <img class="group-icon" ng-src="{{class_.open_parents?'/im/images/arrow_down.png':'/im/images/arrow_right.png'}}"/>
+                    </span>
+                    <span>
+                        {{(class_.gradeName+class_.className) | limitTo: 8 }}{{(class_.gradeName+class_.className).length > 8 ? '...' : ''}}(家长组)
+                    </span>
+                </div>
+                <div class="linkman-group-users" ng-if="class_.open_parents">
+                    <span class="frame-left-item-loading" ng-if="!class_.parents">加载中...</span>
+                    <div ng-class="{'frame-left-item':true,'frame-left-item-select':parent.id==selectUser.id}"
+                         ng-click="selectParent(parent)"
+                         ng-repeat="parent in class_.parents">
+                        <span>
+                            <img ng-src="{{parent.portrait}}"/>
+                        </span>
+                        <span class="session-label">
+                            {{ parent.name | limitTo: 8 }}{{parent.name.length > 20 ? '...' : ''}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="linkman-group" ng-repeat="(code, group) in groups">
+                <div class="linkman-group-header" ng-click="headerClick(code)">
+                     <span>
+                        <img class="group-icon" ng-src="{{group.open?'/im/images/arrow_down.png':'/im/images/arrow_right.png'}}"/>
+                    </span>
+                    <span>
+                        {{group.name}}
+                    </span>
+                </div>
+                <div class="linkman-group-users" ng-if="group.open">
+                    <span class="frame-left-item-loading" ng-if="!group.users">加载中...</span>
+                    <div ng-class="{'frame-left-item':true,'frame-left-item-select':user.id==selectUser.id}"
+                         ng-click="selectLinkman(user)"
+                         ng-repeat="user in group.users">
+                        <span>
+                            <img ng-src="{{user.portrait}}"/>
+                        </span>
+                        <span class="session-label">
+                            {{user.name}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="frame-right">
+        <div class="default-view" ng-hide="selectUser">
+            <i class="fa fa-weixin"></i>
+        </div>
+        <div class="linkman-detail" ng-show="selectUser">
+            <div class="linkman-detail-portrait">
+                <img ng-src="{{selectUser.portrait}}"/>
+            </div>
+            <div class="linkman-detail-name">
+                {{selectUser.name}}
+            </div>
+            <div class="linkman-detail-other" ng-if="selectUser.userType==2">
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">学号</span>
+                    <span class="linkman-detail-other-value">{{selectUser.sid}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">年级</span>
+                    <span class="linkman-detail-other-value">{{selectUser.gradeName}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">班级</span>
+                    <span class="linkman-detail-other-value">{{selectUser.className}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">地址</span>
+                    <span class="linkman-detail-other-value">{{selectUser.address?selectUser.address:"无"}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">邮件</span>
+                    <span class="linkman-detail-other-value">{{selectUser.email?selectUser.email:"无"}}</span>
+                </div>
+            </div>
+
+            <div class="linkman-detail-other" ng-if="selectUser.userType==1">
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">工号</span>
+                    <span class="linkman-detail-other-value">{{selectUser.tid}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">手机</span>
+                    <span class="linkman-detail-other-value">{{selectUser.mobile}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">学科</span>
+                    <span class="linkman-detail-other-value">{{selectUser.subjectName}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">地址</span>
+                    <span class="linkman-detail-other-value">{{selectUser.address?selectUser.address:"无"}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">邮件</span>
+                    <span class="linkman-detail-other-value">{{selectUser.email?selectUser.email:"无"}}</span>
+                </div>
+            </div>
+            <div class="linkman-detail-other" ng-if="selectUser.userType==3">
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">性别</span>
+                    <span class="linkman-detail-other-value" ng-if="selectUser.gender==1">男</span>
+                    <span class="linkman-detail-other-value" ng-if="selectUser.gender==2">女</span>
+                    <span class="linkman-detail-other-value" ng-if="!selectUser.gender">未知</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">邮件</span>
+                    <span class="linkman-detail-other-value">{{selectUser.email?selectUser.email:"无"}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">电话</span>
+                    <span class="linkman-detail-other-value">{{selectUser.mobile?selectUser.mobile:"无"}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">子女</span>
+                    <span class="linkman-detail-parentSon"
+                          ng-repeat="user in selectUser.parentStudents"
+                            ng-click="goSession(user.id)">
+                        {{user.name }}</span>
+                </div>
+            </div>
+            <div class="linkman-detail-other" ng-if="selectUser.userType==4">
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">手机</span>
+                    <span class="linkman-detail-other-value">{{selectUser.mobile}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">地址</span>
+                    <span class="linkman-detail-other-value">{{selectUser.address?selectUser.address:"无"}}</span>
+                </div>
+                <div class="linkman-detail-other-item">
+                    <span class="linkman-detail-other-label">邮件</span>
+                    <span class="linkman-detail-other-value">{{selectUser.email?selectUser.email:"无"}}</span>
+                </div>
+            </div>
+
+            <div class="linkman-detail-btn">
+                <button class="btn btn-warning" ng-disabled="isGoing" ng-click="goSession()">{{isGoing?'发起中':'发起会话'}}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .notify
+        div(class="loading alert alert-info",ng-class="{show:showLoading}")
+            i(class="fa fa-spinner fa-spin")
+            label 通讯中...
+        div(class="messages alert alert-{{ROOT_messageData.globalMsg.type}} {{ROOT_messageData.globalMsg.show ? 'show' : ''}}")
+            p(ng-repeat="item in ROOT_messageData.globalMsg.messages" ng-bind="item.msg")
+    #wise-container
+        div.pull-left.sidebar(ng-controller="SidebarCtrl")
+            script(type="text/ng-template" id="myPopoverTemplate.html")
+                div sdfsdf
+            .bar-portrait
+                div
+                    img(ng-src="{{user.portrait}}")
+            .bar-menu
+                each item,index in menu
+                    a(ng-href="#{item.link}")
+                        div(class="item-icon")
+                            img(ng-src="/im/images/tab-#{item.icon}-{{isActive('#{item.link}')}}.png")
+            .bar-plus
+                i(class="fa fa-plus" ng-click="shouldShow=!shouldShow")
+                div.pop-add(ng-show="shouldShow" class="ng-hide")
+                    div.pop-add-group(ng-click="openGroup()") 创建群
+        div.content(ng-view)
