@@ -18,7 +18,7 @@ angular.module('fscApp')
         return {
             confirm: function (msg, callback) {
                 $modal.open({
-                    templateUrl: '/im/javascripts/app/view/dialog/dialog.html',
+                    templateUrl: '/node_static/javascripts/app/view/dialog/dialog.html',
                     controller: 'DialogConfirmCtrl',
                     size: 'md',
                     backdrop: 'static',

@@ -14,7 +14,7 @@ angular.module('fscApp')
     .directive('recorderTip', function(){
         return {
             restrict: 'E',
-            templateUrl: '/im/javascripts/app/view/directive/recorder_tip.html',
+            templateUrl: '/node_static/javascripts/app/view/directive/recorder_tip.html',
             replace: true,
             scope: {
                 recorder: '='

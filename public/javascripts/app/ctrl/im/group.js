@@ -30,7 +30,7 @@ angular.module('fscApp')
         $scope.openGroup =function(userMember){
             dialog.complexBox(
                 {
-                    templateUrl: '/im/javascripts/app/view/menus/menu.html',
+                    templateUrl: '/node_static/javascripts/app/view/menus/menu.html',
                     size:'md',
                     onComplete: function (dialogScope,modalInstance) {
                         dialogScope.selectGroup = [];

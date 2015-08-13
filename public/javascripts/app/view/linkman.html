@@ -7,7 +7,7 @@
             <div class="linkman-group" ng-repeat="class_ in classes">
                 <div class="linkman-group-header" ng-click="headerClick('class',$index)">
                      <span>
-                        <img class="group-icon" ng-src="{{class_.open?'/im/images/arrow_down.png':'/im/images/arrow_right.png'}}"/>
+                        <img class="group-icon" ng-src="{{class_.open?'/node_static/images/arrow_down.png':'/node_static/images/arrow_right.png'}}"/>
                     </span>
                     <span>
                         {{(class_.gradeName+class_.className) | limitTo: 8 }}{{(class_.gradeName+class_.className).length > 20 ? '...' : ''}}(学生组)
@@ -30,7 +30,7 @@
             <div class="linkman-group" ng-repeat="class_ in classes">
                 <div class="linkman-group-header" ng-click="headerClick('class_parent',$index)">
                      <span>
-                        <img class="group-icon" ng-src="{{class_.open_parents?'/im/images/arrow_down.png':'/im/images/arrow_right.png'}}"/>
+                        <img class="group-icon" ng-src="{{class_.open_parents?'/node_static/images/arrow_down.png':'/node_static/images/arrow_right.png'}}"/>
                     </span>
                     <span>
                         {{(class_.gradeName+class_.className) | limitTo: 8 }}{{(class_.gradeName+class_.className).length > 8 ? '...' : ''}}(家长组)
@@ -53,7 +53,7 @@
             <div class="linkman-group" ng-repeat="(code, group) in groups">
                 <div class="linkman-group-header" ng-click="headerClick(code)">
                      <span>
-                        <img class="group-icon" ng-src="{{group.open?'/im/images/arrow_down.png':'/im/images/arrow_right.png'}}"/>
+                        <img class="group-icon" ng-src="{{group.open?'/node_static/images/arrow_down.png':'/node_static/images/arrow_right.png'}}"/>
                     </span>
                     <span>
                         {{group.name}}

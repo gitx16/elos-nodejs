@@ -19,7 +19,7 @@ var fscApp = angular
         'ngFileUpload'
     ])
     .config(function ($routeProvider) {
-        var viewPath = "/im/javascripts/app/";
+        var viewPath = "/node_static/javascripts/app/";
         $routeProvider
             .when('/session', {
                 templateUrl: viewPath + 'view/session.html',

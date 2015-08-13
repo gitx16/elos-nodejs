@@ -1,0 +1,29 @@
+doctype html
+html(ng-app='voteApp')
+    head
+        meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
+        title= title
+        link(rel='stylesheet', href='/node_static/stylesheets/vote.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
+    body
+        div.vote.container(ng-controller="VoteCtrl")
+            div.row.activity-content
+                div.col-xs-12
+                    h2.text-center(ng-bind="vote.voteName")
+                    div( ng-repeat="voteQues in vote.voteQuesList")
+                        p
+                            strong(ng-bind="($index+1)+'.'+voteQues.title + '(' + (voteQues.checkType==1?'单选':'多选') + ')'  ")
+                            div(ng-repeat="voteQuesItem in voteQues.voteQuesItemList",
+                                ng-init="itemIndex = $index",
+                                ng-class="{radio:voteQues.checkType==1,checkbox:voteQues.checkType!=1,active:voteQuesItem.isChecked}")
+                                label
+                                    span {{itemIndex+1}}.{{voteQuesItem.title}}
+                                    i(ng-class="{fa:true,'fa-check-circle-o pull-right':voteQues.checkType==1,'fa-check-square-o':voteQues.checkType!=1}")
+
+            div
+                button(class="btn btn-warning btn-block") 提&nbsp;&nbsp;&nbsp;&nbsp;交
+
+        script(src='/node_static/bower_components/angular/angular.min.js')
+        script(src='/node_static/javascripts/app/ctrl/fsc/vote.js')
+

@@ -8,9 +8,8 @@
  * Factory in the elmApp.
  */
 angular.module('fscApp')
-    .factory('socket', function ($rootScope) {
-        //var socket = io('http://115.231.93.40:41922');
-        var socket = io('http://localhost:3000');
+    .factory('socket', function ($rootScope,constants,global) {
+        var socket = io(constants[global.env]);
         return {
             on: function(eventName, callback) {
                 socket.on(eventName, function() {

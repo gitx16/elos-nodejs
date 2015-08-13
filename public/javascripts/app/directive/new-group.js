@@ -13,7 +13,7 @@ angular.module('fscApp')
         var Deans = resourcePool.deans;
         return {
             restrict:'E',
-            templateUrl: '/im/javascripts/app/view/directive/new_group/new-group.html',
+            templateUrl: '/node_static/javascripts/app/view/directive/new_group/new-group.html',
             replace:true,
             scope:{
                 global: '=',

@@ -11,7 +11,7 @@ angular.module('fscApp')
     .directive('linkmanGroup', function(){
         return {
             restrict: 'E',
-            templateUrl: '/im/javascripts/app/view/directive/linkman_group.html',
+            templateUrl: '/node_static/javascripts/app/view/directive/linkman_group.html',
             replace: true,
             scope: {
                 group: '=',

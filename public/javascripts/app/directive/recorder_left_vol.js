@@ -14,7 +14,7 @@ angular.module('fscApp')
     .directive('recorderLeftVol', function(msg) {
         return {
             restrict: 'E',
-            templateUrl: '/im/javascripts/app/view/directive/recorder_left_vol.html',
+            templateUrl: '/node_static/javascripts/app/view/directive/recorder_left_vol.html',
             replace: true,
             scope: {
                 recorder: '='

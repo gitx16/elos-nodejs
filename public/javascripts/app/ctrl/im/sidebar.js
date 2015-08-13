@@ -30,7 +30,7 @@ angular.module('fscApp')
             $scope.shouldShow=false;
             dialog.complexBox(
                 {
-                    templateUrl: '/im/javascripts/app/view/menus/menu-dialog.html',
+                    templateUrl: '/node_static/javascripts/app/view/menus/menu-dialog.html',
                     size:'md',
                     onComplete: function (dialogScope,modalInstance) {
                         dialogScope.selectGroup = [];

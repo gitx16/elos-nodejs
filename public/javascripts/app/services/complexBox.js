@@ -17,7 +17,7 @@ angular.module('fscApp')
         {
             dialog.complexBox(
                 {
-                    templateUrl: '/im/javascripts/app/view/menus/menu.html',
+                    templateUrl: '/node_static/javascripts/app/view/menus/menu.html',
                     size:'md',
                     onComplete: function (dialogScope,modalInstance) {
                         dialogScope.selectUsers =[];

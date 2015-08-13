@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
-var routes = require('./routes/index');
-
 var app = express();
 //初始化数据
 app.set('views', path.join(__dirname, 'views'));
@@ -18,8 +16,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
 //初始化route
-app.use('/', routes);
+var indexRoute = require('./routes/index');
+app.use('/im', indexRoute);
+
+var appRoute = require('./routes/app');
+app.use('/app', appRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -48,40 +51,5 @@ app.use(function (err, req, res, next) {
 
 require(path.join(__dirname, 'helper/') +'Init');
 require(path.join(__dirname, 'helper/') +'SocketServer');
-
-//var net = require("net");
-//var ProtoBuf = require("protobufjs");
-//
-//var HOST = "192.168.1.90";
-//var PORT = 10081;
-//var BUFSIZE = 256;
-//var buf = new Buffer(BUFSIZE);
-//var client = new net.Socket();
-//// open a connection for a gived socket
-//client.connect(PORT,HOST,function()
-//{
-//    var builder = ProtoBuf.loadProtoFile(path.join(__dirname, 'pb')+"/cmdSign.proto");
-//    var pb = builder.build("pb");
-//    var CmdSignPb = pb.CmdSignPb;
-//    var signPb = new CmdSignPb({
-//        "cmdCode": "test",
-//        "reqCode": "test1"
-//    });
-//    var buffer = signPb.encode().toBuffer();
-//    buffer = Buffer.concat([buffer, new Buffer("\r\n\n\n\r")]);
-//    client.write(buffer);
-//});
-//// add a 'data' event handler for the client socket,the callback funtion receive the data whick server give back
-//client.on("data",function(buf)
-//{
-//    console.log("data :" + buf.toString('utf8', 0, buf.length));
-//    //client.write(buf);
-//});
-//
-//// add a 'close' event handler for the client socket
-//client.on("close",function()
-//{
-//    console.log("connect closed!");
-//});
 
 module.exports = app;

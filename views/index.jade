@@ -18,7 +18,7 @@ block content
                 each item,index in menu
                     a(ng-href="#{item.link}")
                         div(class="item-icon")
-                            img(ng-src="/im/images/tab-#{item.icon}-{{isActive('#{item.link}')}}.png")
+                            img(ng-src="/node_static/images/tab-#{item.icon}-{{isActive('#{item.link}')}}.png")
             .bar-plus
                 i(class="fa fa-plus" ng-click="shouldShow=!shouldShow")
                 div.pop-add(ng-show="shouldShow" class="ng-hide")

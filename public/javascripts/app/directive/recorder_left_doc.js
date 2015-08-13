@@ -13,7 +13,7 @@ angular.module('fscApp')
     .directive('recorderLeftDoc', function(msg) {
         return {
             restrict: 'E',
-            templateUrl: '/im/javascripts/app/view/directive/recorder_left_doc.html',
+            templateUrl: '/node_static/javascripts/app/view/directive/recorder_left_doc.html',
             replace: true,
             scope: {
                 recorder: '='

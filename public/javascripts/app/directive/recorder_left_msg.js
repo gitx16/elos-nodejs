@@ -11,7 +11,7 @@ angular.module('fscApp')
     .directive('recorderLeftMsg', function(emoji){
         return {
             restrict: 'E',
-            templateUrl: '/im/javascripts/app/view/directive/recorder_left_msg.html',
+            templateUrl: '/node_static/javascripts/app/view/directive/recorder_left_msg.html',
             replace: true,
             scope: {
                 recorder: '='
@@ -24,7 +24,7 @@ angular.module('fscApp')
                     var emojiStr =  match[0];
                     var imgStr = emoji[emojiStr];
                     if(imgStr){
-                        msg = msg.replace(emojiStr,"<img src='/im/images/emoji/"+imgStr+"' />");
+                        msg = msg.replace(emojiStr,"<img src='/node_static/images/emoji/"+imgStr+"' />");
                     }
                 }
                 scope.recorder.message = msg;
