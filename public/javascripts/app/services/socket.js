@@ -9,7 +9,7 @@
  */
 angular.module('fscApp')
     .factory('socket', function ($rootScope,constants,global) {
-        var socket = io(constants[global.env]);
+        var socket = io(constants.env[global.env].socketUrl);
         return {
             on: function(eventName, callback) {
                 socket.on(eventName, function() {
