@@ -9,7 +9,7 @@
  */
 angular.module('fscApp')
     .controller('LinkmanCtrl', function ($scope, $window,$location,resourcePool,
-                                         global,utils,constants,sync) {
+                                         global,utils,constants,sync,socket) {
         $scope.classes = global.cache.classes;
         $scope.teachers = global.cache.teachers;
         var w = angular.element($window);
@@ -96,6 +96,7 @@ angular.module('fscApp')
                     if(!sessionExists){
                         $scope.isGoing = true;
                         Sessions.create({linkmanId:userId},{},function(data){
+                            socket.emit("notify", {userIdArray: [userId], reqCode: "NOTIFY_PULL_FSC_LINKMAN_ACCEPT"})
                             sync.syncSessions(function(sessions){
                                 for (var i = 0; i < sessions.length; i++) {
                                     var session = sessions[i];
@@ -131,6 +132,7 @@ angular.module('fscApp')
                     if (!sessionExists) {
                         $scope.isGoing = true;
                         Sessions.create({linkmanId: $scope.selectUser.id}, {}, function (data) {
+                            socket.emit("notify", {userIdArray: [$scope.selectUser.id], reqCode: "NOTIFY_PULL_FSC_LINKMAN_ACCEPT"})
                             sync.syncSessions(function (sessions) {
                                 for (var i = 0; i < sessions.length; i++) {
                                     var session = sessions[i];
