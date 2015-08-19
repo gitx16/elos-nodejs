@@ -14,8 +14,8 @@ angular.module('fscApp')
                 "info": 2,
                 "success": 2,
                 "warning": 3,
-                "danger": 8,
-                "error": 8
+                "danger": 4,
+                "error": 4
             },
             timer,
             clear = function () {

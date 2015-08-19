@@ -1,0 +1,33 @@
+doctype html
+html(ng-app='fscApp' ng-init="activityId=#{activityId}")
+    head
+        meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
+        title= title
+        link(rel='stylesheet', href='/node_static/stylesheets/activity.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
+    body
+        .notify
+            div(class="messages alert alert-{{ROOT_messageData.globalMsg.type}} {{ROOT_messageData.globalMsg.show ? 'show' : ''}}")
+                p(ng-repeat="item in ROOT_messageData.globalMsg.messages" ng-bind="item.msg")
+
+        div.activity(ng-controller="ActivityCtrl")
+            div.container(ng-show="hasLoding" ng-cloak)
+                div.activity-content
+                    h2(class="text-center" ng-bind="activity.actName")
+                    div(ng-bind-html="to_trusted(activity.desc)")
+
+                div.vote(ng-show="activity.dataStatus!=0" )
+                    p(class="apply-info" ng-bind="'报名截止时间:'+activity.deadline+',已有'+activity.actNum+'人参与投票'")
+                    button(ng-class="{'btn btn-block':true,'btn-warning':activity.dataStatus==1,'btn-danger':activity.dataStatus==3}",
+                        ng-show="activity.dataStatus==1||activity.dataStatus==3" ng-click="submitAct()" ng-disabled="doSubmit"
+                        ng-bind="activity.dataStatus==1?'报名':'取消报名'")
+                    p(class="alert alert-disabled text-center" ng-show="activity.dataStatus==2" ng-bind="'已截止'")
+            div.loading(ng-hide="hasLoding")
+                i.fa.fa-spinner.fa-pulse
+
+        script(src='/node_static/bower_components/angular/angular.min.js')
+        script(src='/node_static/javascripts/app/ctrl/fsc/activity.js')
+        script(src='/node_static/javascripts/app/services/msg.js')
+
+
