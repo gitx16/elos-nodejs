@@ -1,11 +1,11 @@
-.vote img {
+.activity img {
   display: block;
   max-width: 100%;
 }
-.vote .activity-content {
+.activity .activity-content {
   margin-bottom: 100px;
 }
-.vote .vote {
+.activity .vote {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -15,41 +15,41 @@
   color: #fff;
   z-index: 1000;
 }
-.vote label {
+.activity label {
   display: block;
 }
-.vote .fa {
+.activity .fa {
   color: #ddd;
 }
-.vote .alert {
+.activity .alert {
   padding: 10px 15px;
   margin: 0;
 }
-.vote .alert-disabled {
+.activity .alert-disabled {
   background-color: #dcdcdc;
   color: #000;
 }
-.vote .active {
+.activity .active {
   background: #428bca;
   color: #fff;
 }
-.vote .active .fa {
+.activity .active .fa {
   color: #fff;
 }
-.vote .active .glyphicon-ok {
+.activity .active .glyphicon-ok {
   display: block;
 }
-.vote .radio,
-.vote .checkbox {
+.activity .radio,
+.activity .checkbox {
   padding: 10px 10px 10px 0;
 }
-.vote .loading {
+.activity .loading {
   width: 100%;
   position: absolute;
   top: 50%;
   text-align: center;
 }
-.vote .fa-spinner {
+.activity .fa-spinner {
   font-size: 40px;
 }
 .notify {
@@ -84,4 +84,9 @@
 }
 .notify .messages.show {
   top: 52px;
+}
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+  display: none !important;
 }
