@@ -33,6 +33,7 @@ angular.module('fscApp')
                     templateUrl: '/node_static/javascripts/app/view/menus/menu.html',
                     size:'md',
                     onComplete: function (dialogScope,modalInstance) {
+                        selectUserIdMap = {};
                         dialogScope.selectGroup = [];
                         dialogScope.selectUsers= [];
                         dialogScope.classes = global.cache.classes;
@@ -82,12 +83,14 @@ angular.module('fscApp')
                                         $location.path('/session');
                                         modalInstance.close();
                                     });
+                                    sync.syncGroups(codes);
                                 });
                             }
                             else{
                                 msg.warn("至少选择一个成员");
                             }
                         };
+
                         dialogScope.classClick = function (class_) {
                             if (!class_.students) {
                                 ClassStudents.query({classId: class_.id}, function (students) {
@@ -104,6 +107,7 @@ angular.module('fscApp')
                         };
 
                         dialogScope.groupClick = function (type, group) {
+                            group = [];
                             if (group.users) {
                                 dialogScope.groupUsers = group.users;
                                 userSelectCheck($scope.groupUsers);
@@ -226,7 +230,7 @@ angular.module('fscApp')
             global.pageStatus.group.selectGroup = group;
             var fscSession = utils.getFscSession(group.type,group.id);
             if(!fscSession){
-                SessionClasses.new({classId:group.classId},{},function(){
+                SessionClasses.create({classId:group.classId},{},function(){
                     sync.syncSessions(function(syncSessions){
                         if(syncSessions&&syncSessions.length>0){
                             showUser(syncSessions[0]);

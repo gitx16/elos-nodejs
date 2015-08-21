@@ -24,7 +24,7 @@
     </div>
     <div class="modal-new-right">
         <div class="modal-new-right-name">姓名</div>
-        <div class="modal-new-right-member" ng-repeat="user in groupUsers" ng-click="updateClick(user)">
+        <div class="modal-new-right-member" ng-repeat="user in groupUsers" ng-click="updateClick(user)" ng-if="user.unGoSession==false">
             <span class='circle-o' ng-class=" {'fa fa-circle-o':user.checked==false,'fa fa-check-circle-o':user.checked==true}"></span>
             <span>
                <img ng-src="{{user.portrait}}"/>

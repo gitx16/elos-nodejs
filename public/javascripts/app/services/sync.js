@@ -12,6 +12,15 @@ angular.module('fscApp')
                                global,utils,msgRegister) {
         return {
             /**
+             * 同步群组
+             */
+            syncGroups:function(code) {
+                var Groups = resourcePool.groups;
+                Groups.query({code: code}, function (groups) {
+                    utils.procGroups(groups, code);
+                });
+            },
+            /**
              * 同步会话
              */
             syncSessions:function(cb){

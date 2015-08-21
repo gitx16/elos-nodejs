@@ -33,6 +33,7 @@ angular.module('fscApp')
                     templateUrl: '/node_static/javascripts/app/view/menus/menu-dialog.html',
                     size:'md',
                     onComplete: function (dialogScope,modalInstance) {
+                        selectUserIdMap = {};
                         dialogScope.selectGroup = [];
                         dialogScope.selectUsers= [];
                         dialogScope.classes = global.cache.classes;
@@ -69,6 +70,7 @@ angular.module('fscApp')
                             };
                             if (userList.length>0) {
                                 Groups.create(groupSession, function (data) {
+                                    sync.syncGroups("gGroup");
                                     sync.syncSessions(function(syncSessions){
                                         if(syncSessions[0]){
                                             global.pageStatus.session.selectSession = syncSessions[0];

@@ -67,6 +67,12 @@ angular.module('fscApp')
             procUsers: function (users) {
                 for (var i = 0; i < users.length; i++) {
                     var user = users[i];
+                    if(user.id==global.cache.user.id){
+                        user.unGoSession=true;
+                    }
+                    else{
+                        user.unGoSession=false;
+                    }
                     if (!user.portrait) {
                         user.portrait = constants.portrait._default;
                     }else{
@@ -77,6 +83,12 @@ angular.module('fscApp')
             procStudents: function (students) {
                 for (var i = 0; i < students.length; i++) {
                     var student = students[i];
+                    if(student.id==global.cache.user.id){
+                        student.unGoSession=true;
+                    }
+                    else{
+                        student.unGoSession=false;
+                    }
                     if (!student.portrait) {
                         student.portrait = constants.portrait._default;
                     }else{
@@ -88,6 +100,12 @@ angular.module('fscApp')
             procParents: function (parents) {
                 for (var i = 0; i < parents.length; i++) {
                     var parent = parents[i];
+                    if(parent.id==global.cache.user.id){
+                        parent.unGoSession=true;
+                    }
+                    else{
+                        parent.unGoSession=false;
+                    }
                     if (!parent.portrait) {
                         parent.portrait = constants.portrait._default;
                     }else{
@@ -99,6 +117,12 @@ angular.module('fscApp')
             procTeachers: function (teachers) {
                 for (var i = 0; i < teachers.length; i++) {
                     var teacher = teachers[i];
+                    if(teacher.id==global.cache.user.id){
+                        teacher.unGoSession=true;
+                    }
+                    else{
+                        teacher.unGoSession=false;
+                    }
                     if (!teacher.portrait) {
                         teacher.portrait = constants.portrait._default;
                     }else{
@@ -109,15 +133,15 @@ angular.module('fscApp')
             },
             procGroups: function (groups, code) {
                 var groupObj = global.cache.groups[code];
-                for (var i = 0; i < groups.length; i++) {
-                    var group = groups[i];
-                    if (!group.portrait) {
-                        group.portrait = constants.portrait._default;
-                    } else {
-                        group.portrait = global.cache.resUrl + "/" + group.portrait;
+                    for (var j = 0; j < groups.length; j++) {
+                        var group = groups[j];
+                        if (!group.portrait) {
+                            group.portrait = constants.portrait._default;
+                        } else {
+                            group.portrait = global.cache.resUrl + "/" + group.portrait;
+                        }
+                        group.type = groupObj.type;
                     }
-                    group.type = groupObj.type;
-                }
                 groupObj.groups = groups;
             },
             getFscSession: function(type,sessionId){

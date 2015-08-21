@@ -17,7 +17,7 @@ angular.module('fscApp')
         $scope.file = {
             filepath:"",
             viewHeight:0
-        }
+        };
         $scope.view = false;
         $scope.viewHeight = 90;
         var w = angular.element($window);
@@ -65,7 +65,9 @@ angular.module('fscApp')
             SessionUsers.query({sessionId: $scope.selectSession.id}, function (users) {
                 angular.forEach(users,function(user){
                     //forEach����IE8
-                    userIdArray.push(user.id);
+                    if(user.id!=global.cache.user.id){
+                        userIdArray.push(user.id);
+                    }
                 });
             });
             SessionReader.update({sessionId: $scope.selectSession.id}, function (users) {
@@ -94,7 +96,8 @@ angular.module('fscApp')
                 Recorders.create(recorder, function (data) {
                     var lastRecorder = recorderList[recorderList.length - 1];
                     loadNewMsg($scope.selectSession.id, lastRecorder ? lastRecorder.timestamp : 0, null);
-                    socket.emit("notify", {userIdArray: userIdArray, reqCode: "NOTIFY_PULL_FSC_SESSION"})
+                    socket.emit("notify", {userIdArray: userIdArray, reqCode: "NOTIFY_PULL_FSC_SESSION"});
+                    userIdArray = [];
                 });
                 sync.syncSessionToTop($scope.selectSession)
             }

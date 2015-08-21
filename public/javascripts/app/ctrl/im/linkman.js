@@ -8,8 +8,8 @@
  * Controller of the elmApp
  */
 angular.module('fscApp')
-    .controller('LinkmanCtrl', function ($scope, $window,$location,resourcePool,
-                                         global,utils,constants,sync,socket) {
+    .controller('LinkmanCtrl', function ($scope, $window, $location, resourcePool,
+                                         global, utils, constants, sync, socket) {
         $scope.classes = global.cache.classes;
         $scope.teachers = global.cache.teachers;
         var w = angular.element($window);
@@ -25,48 +25,48 @@ angular.module('fscApp')
         var ClassParents = resourcePool.classParents;
         var Teachers = resourcePool.teachers;
         var Deans = resourcePool.deans;
-        var ParentsStudents=resourcePool.parentsStudents;
+        var ParentsStudents = resourcePool.parentsStudents;
         $scope.selectParent = function (parent) {
-            ParentsStudents.query({parentId:parent.id},function(parentStudent) {
-                $scope.selectUser.parentStudents=parentStudent;
+            ParentsStudents.query({parentId: parent.id}, function (parentStudent) {
+                $scope.selectUser.parentStudents = parentStudent;
             })
             $scope.selectUser = parent;
             global.pageStatus.linkman.selectUser = parent;
         };
 
-        $scope.headerClick = function(code,index){
-            if(code=="class"){
+        $scope.headerClick = function (code, index) {
+            if (code == "class") {
                 var class_ = $scope.classes[index];
                 class_.open = (!class_.open);
-                if(!class_.students){
-                    ClassStudents.query({classId:class_.id},function(students){
+                if (!class_.students) {
+                    ClassStudents.query({classId: class_.id}, function (students) {
                         utils.procStudents(students);
                         class_.students = students;
                     });
                 }
-            }else if(code=="class_parent"){
+            } else if (code == "class_parent") {
                 var class_ = $scope.classes[index];
                 class_.open_parents = (!class_.open_parents);
-                if(!class_.parents){
-                    ClassParents.query({classId:class_.id},function(parents){
+                if (!class_.parents) {
+                    ClassParents.query({classId: class_.id}, function (parents) {
                         utils.procParents(parents);
                         class_.parents = parents;
                     });
                 }
-            } else{
+            } else {
                 var group = $scope.groups[code];
                 group.open = (!group.open);
-                if(code=="teacher"){
-                    if(!$scope.teachers){
-                        Teachers.query({},function(teachers){
+                if (code == "teacher") {
+                    if (!$scope.teachers) {
+                        Teachers.query({}, function (teachers) {
                             utils.procTeachers(teachers);
                             global.cache.teachers = teachers;
                             group.users = teachers;
                         });
                     }
-                }else if(code=="dean"){
-                    if(!$scope.deans){
-                        Deans.query({},function(deans){
+                } else if (code == "dean") {
+                    if (!$scope.deans) {
+                        Deans.query({}, function (deans) {
                             utils.procTeachers(deans);
                             global.cache.deans = deans;
                             group.users = deans;
@@ -77,15 +77,15 @@ angular.module('fscApp')
         };
 
         var Sessions = resourcePool.sessions;
-        $scope.goSession = function(userId){
+        $scope.goSession = function (userId) {
             var sessions = global.cache.sessions;
-            if(userId){
-                if(sessions){
+            if (userId) {
+                if (sessions) {
                     var sessionExists = false;
                     for (var i = 0; i < sessions.length; i++) {
                         var session = sessions[i];
-                        if(session.type==constants.session.user){
-                            if(session.msId== userId){
+                        if (session.type == constants.session.user) {
+                            if (session.msId == userId) {
                                 global.pageStatus.session.selectSession = session;
                                 global.pageStatus.session.toTop = true;
                                 $location.path('/session');
@@ -93,15 +93,15 @@ angular.module('fscApp')
                             }
                         }
                     }
-                    if(!sessionExists){
+                    if (!sessionExists) {
                         $scope.isGoing = true;
-                        Sessions.create({linkmanId:userId},{},function(data){
+                        Sessions.create({linkmanId: userId}, {}, function (data) {
                             socket.emit("notify", {userIdArray: [userId], reqCode: "NOTIFY_PULL_FSC_LINKMAN_ACCEPT"})
-                            sync.syncSessions(function(sessions){
+                            sync.syncSessions(function (sessions) {
                                 for (var i = 0; i < sessions.length; i++) {
                                     var session = sessions[i];
-                                    if(session.type==constants.session.user){
-                                        if(session.msId== userId){
+                                    if (session.type == constants.session.user) {
+                                        if (session.msId == userId) {
                                             global.pageStatus.session.selectSession = session;
                                             global.pageStatus.session.toTop = true;
                                             $location.path('/session');
@@ -132,7 +132,10 @@ angular.module('fscApp')
                     if (!sessionExists) {
                         $scope.isGoing = true;
                         Sessions.create({linkmanId: $scope.selectUser.id}, {}, function (data) {
-                            socket.emit("notify", {userIdArray: [$scope.selectUser.id], reqCode: "NOTIFY_PULL_FSC_LINKMAN_ACCEPT"})
+                            socket.emit("notify", {
+                                userIdArray: [$scope.selectUser.id],
+                                reqCode: "NOTIFY_PULL_FSC_LINKMAN_ACCEPT"
+                            })
                             sync.syncSessions(function (sessions) {
                                 for (var i = 0; i < sessions.length; i++) {
                                     var session = sessions[i];
