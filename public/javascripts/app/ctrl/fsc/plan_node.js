@@ -9,6 +9,7 @@
  */
 angular.module('fscApp',[])
     .controller('PlanNodeCtrl', function ($scope,$http,msg,resourcePool) {
+        var resourceNode = resourcePool.planNode
         var nodeTypeMap ={
             1:"课件",
             2:"题目作业",
@@ -17,23 +18,14 @@ angular.module('fscApp',[])
             5:"云文件"
         }
         $scope.links = []
-        $http({
-            url: "/open/plan_nodes/" + $scope.nodeId + ".json",
-            data:{suuid:"f5aa88c4-8ccb-11e4-a4d0-a4fb000a34e4"}
-        }).success(function (res) {
-            var stat = res.stat;
-            if (stat == "OK") {
-                $scope.node = res.data.model;
-                $scope.node.nodeTypeName =  nodeTypeMap[$scope.node.nodeType]
-                if( $scope.node.picture){
-                    $scope.picture =  $scope.node.picture.split(",")
-                }
-                getLinks()
+        resourceNode.get({nodeId:$scope.nodeId,suuid:"f5aa88c4-8ccb-11e4-a4d0-a4fb000a34e4"},function(data){
+            $scope.node= data.model;
+            $scope.node.nodeTypeName =  nodeTypeMap[$scope.node.nodeType]
+            if( $scope.node.picture){
+                $scope.picture =  $scope.node.picture.split(",")
             }
-            $scope.hasLoding = true;
-        }).error(function (res) {
-            $log.log('请求失败：' + res);
-        });
+            getLinks()
+        })
         var getLinks = function(){
             if( $scope.node.knowlList){
                 var depthMap = {}
