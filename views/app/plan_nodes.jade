@@ -54,22 +54,25 @@ html(ng-app='fscApp' ng-init="nodeId=#{nodeId}")
                     div.col-xs-8.control-label.text-left
                         p(ng-bind="node.imgText")
                 div.col-xs-12.bottom-btn.fix(ng-if="node.nodeType==4")
-                    div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6") 已阅
-                    div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6") 已完成
+                    div.col-xs-12.bottom-btn
+                        button(class="btn btn-default btn-block col-xs-6",ng-click="over()") 已完成
                 div.col-xs-12.bottom-btn.fix(ng-if="node.nodeType==2||node.nodeType==3")
                     div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6") 查看作业
+                        button(class="btn btn-default btn-block col-xs-6",ng-click="viewWork(node.nodeType)") 查看作业
                     div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6") 分析作业
+                        button(class="btn btn-default btn-block col-xs-6",ng-click="analyzeWork(node.nodeType)") 分析作业
                 div.col-xs-12.bottom-btn.fix(ng-if="node.nodeType==5")
                     div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6") 收藏
+                        button(class="btn btn-default btn-block col-xs-6",ng-click="collectWork()" ) 收藏
                     div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6") 下载
+                        button(class="btn btn-default btn-block col-xs-6",ng-click="download()") 下载
         script(src='/node_static/bower_components/angular/angular.min.js')
         script(src='/node_static/javascripts/app/ctrl/fsc/plan_node.js')
+        cript(src='/node_static/javascripts/app/services/global.js')
+        script(src='/node_static/javascripts/app/services/loading.js')
+        script(src='/node_static/javascripts/app/services/ajax.js')
+        script(src='/node_static/javascripts/app/services/resource.js')
+        script(src='/node_static/javascripts/app/services/resource_pool.js')
         script(src='/node_static/javascripts/app/services/msg.js')
 
 
