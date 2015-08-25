@@ -23,6 +23,9 @@ angular.module('fscApp')
             parentsStudents:rc('/im_fsc/parents/{parentId}/students'),
             teachers:rc('/im_fsc/teachers'),
             deans:rc('/im_fsc/deans'),
-            groups:rc('/im_fsc/groups')
+            groups:rc('/im_fsc/groups'),
+            planNode:rc('/open/plan_nodes/{nodeId}'),
+            works:rc('/open/works/{workId}/{type}/{qid}/{analysis}'),
+            exam:rc('/open/exam/{examId}/{type}/{qid}/{analysis}')
         }
   });
