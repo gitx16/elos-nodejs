@@ -111,6 +111,19 @@ angular.module('fscApp')
         $scope.enterFile = function(){
             $scope.msg = "";
         };
+        $scope.removeFromSession = function(session){
+            for(var i=0;i<$scope.sessionList.length;i++){
+                if($scope.sessionList[i]==session){
+                    $scope.sessionList.splice(i,1);
+                }
+            }
+        };
+        $scope.sessionRemove = function(session){
+            session.removeSession=true;
+        };
+        $scope.sessionNotRemove = function(session){
+            session.removeSession=false;
+        };
 
         $scope.blurFirst = 0;
 

@@ -4,18 +4,26 @@
             <input class="form-control" type="text" ng-model="keywords"/>
         </div>
         <div class="session-list" resize style="height:{{winHeight-90}}px">
-            <div ng-class="{'session-list-item':true,'item-select':session.id==selectSession.id}" class="session-list-item"
+            <div ng-class="{'session-list-item':true,'item-select':session.id==selectSession.id}" class="session-list-item clearfix"
                  ng-click="showSession(session)"
-                 ng-repeat="session in sessionList | filter:keywords">
-                <span class="session-portrait{{session.portraitArray.length}}">
-                    <span class="session-portrait-{{$index}}" ng-repeat="portrait in session.portraitArray track by $index">
-                        <img ng-src="{{portrait}}"/>
+                 ng-repeat="session in sessionList | filter:keywords"
+                 ng-mouseenter="sessionRemove(session)" ng-mouseleave="sessionNotRemove(session)">
+                <div class="display-inline">
+                     <span>
+                         <i ng-click="removeFromSession(session)" ng-if="session.removeSession==true" class="fa fa-close"></i>
+                     </span>
+                </div>
+                <div class="display-inline">
+                     <span class="session-portrait{{session.portraitArray.length}}">
+                        <span class="session-portrait-{{$index}}" ng-repeat="portrait in session.portraitArray track by $index">
+                            <img ng-src="{{portrait}}"/>
+                        </span>
                     </span>
-                </span>
-                <span class="session-label">
-                    {{ session.msName | limitTo: 8 }}{{session.msName.length > 8 ? '...' : ''}}
-                </span>
-                <span ng-if="session.unreadCount>0" class="badge pull-right">{{session.unreadCount}}</span>
+                    <span class="session-label">
+                        {{ session.msName | limitTo: 6 }}{{session.msName.length > 6 ? '...' : ''}}
+                    </span>
+                    <span ng-if="session.unreadCount>0" class="badge pull-right">{{session.unreadCount}}</span>
+                </div>
             </div>
         </div>
     </div>
