@@ -4,8 +4,8 @@
     </div>
     <div class="pull-left recorder-left mrgl10">
         <div class="recorder-name">{{recorder.createdName}}</div>
-        <div class="recorder-pic">
-            <img ng-src="{{resUrl}}/{{recorder.message}}"/>
+        <div class="recorder-pic" >
+            <img ng-click="openPhoto(recorder.message)" ng-src="{{resUrl}}/{{recorder.message}}"/>
         </div>
     </div>
 </div>
