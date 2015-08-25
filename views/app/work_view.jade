@@ -1,0 +1,30 @@
+doctype html
+html(ng-app='fscApp' ng-init="workId=#{workId}")
+    head
+        meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
+        title= title
+        link(rel='stylesheet', href='/node_static/stylesheets/common.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
+    body
+        div.paper-wrapper(ng-controller="WorkViewCtrl")
+            div.panel.panel-success
+                div.panel-heading(ng-click="curQuestion.expand.question = !curQuestion.expand.question")
+                    h3.panel-title 题目
+                div.panel-body(ng-show="curQuestion.expand.question",ng-bind-html="curQuestion.question")
+            div.panel.panel-success
+                div.panel-heading( ng-click="curQuestion.expand.answer = !curQuestion.expand.answer")
+                    h3.panel-title 答案
+                div.panel-body(ng-show="curQuestion.expand.answer",ng-bind-html="curQuestion.answer")
+            div.panel.panel-success
+                div.panel-heading(ng-click="curQuestion.expand.analysis = !curQuestion.expand.analysis")
+                    h3.panel-title 解析
+                div.panel-body(ng-show="curQuestion.expand.analysis",ng-bind-html="curQuestion.analysis")
+        script(src='/node_static/bower_components/angular/angular.min.js')
+        script(src='/node_static/javascripts/app/ctrl/fsc/work_view.js')
+        script(src='/node_static/javascripts/app/services/global.js')
+        script(src='/node_static/javascripts/app/services/loading.js')
+        script(src='/node_static/javascripts/app/services/ajax.js')
+        script(src='/node_static/javascripts/app/services/resource.js')
+        script(src='/node_static/javascripts/app/services/resource_pool.js')
+        script(src='/node_static/javascripts/app/services/msg.js')

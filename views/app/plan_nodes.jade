@@ -1,12 +1,5 @@
-doctype html
-html(ng-app='fscApp' ng-init="nodeId=#{nodeId}")
-    head
-        meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
-        title= title
-        link(rel='stylesheet', href='/node_static/stylesheets/common.css')
-        link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/css/bootstrap.css')
-        link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
-    body
+extends layout
+block content
         div.vote(ng-controller="PlanNodeCtrl")
             div.row.plan-info
                 div.col-xs-7
@@ -55,24 +48,16 @@ html(ng-app='fscApp' ng-init="nodeId=#{nodeId}")
                         p(ng-bind="node.imgText")
                 div.col-xs-12.bottom-btn.fix(ng-if="node.nodeType==4")
                     div.col-xs-12.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6",ng-click="over()") 已完成
+                        a(class="btn btn-default btn-block col-xs-6",ng-click="over()") 已完成
                 div.col-xs-12.bottom-btn.fix(ng-if="node.nodeType==2||node.nodeType==3")
                     div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6",ng-click="viewWork(node.nodeType)") 查看作业
+                        a(class="btn btn-default btn-block col-xs-6",href="/app/work_view/{{nodeId}}?suuid={{suuid}}") 查看作业
                     div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6",ng-click="analyzeWork(node.nodeType)") 分析作业
+                        a(class="btn btn-default btn-block col-xs-6",ng-click="/app/work_analyze/{{nodeId}}?suuid={{suuid}}") 分析作业
                 div.col-xs-12.bottom-btn.fix(ng-if="node.nodeType==5")
                     div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6",ng-click="collectWork()" ) 收藏
+                        a(class="btn btn-default btn-block col-xs-6",ng-click="collectWork()" ) 收藏
                     div.col-xs-6.bottom-btn
-                        button(class="btn btn-default btn-block col-xs-6",ng-click="download()") 下载
-        script(src='/node_static/bower_components/angular/angular.min.js')
-        script(src='/node_static/javascripts/app/ctrl/fsc/plan_node.js')
-        cript(src='/node_static/javascripts/app/services/global.js')
-        script(src='/node_static/javascripts/app/services/loading.js')
-        script(src='/node_static/javascripts/app/services/ajax.js')
-        script(src='/node_static/javascripts/app/services/resource.js')
-        script(src='/node_static/javascripts/app/services/resource_pool.js')
-        script(src='/node_static/javascripts/app/services/msg.js')
+                        a(class="btn btn-default btn-block col-xs-6",href="/oss/plan_nodes/{{nodeId}}/download") 下载
 
 

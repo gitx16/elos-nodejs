@@ -8,7 +8,8 @@
  * Controller of the elmApp
  */
 angular.module('fscApp',[])
-    .controller('PlanNodeCtrl', function ($scope,$http,msg,resourcePool) {
+    .controller('PlanNodeCtrl', function ($scope,msg,resourcePool,$location) {
+        $scope.suuid = window.location.search.split("=")[1]
         var resourceNode = resourcePool.planNode
         var nodeTypeMap ={
             1:"课件",
@@ -18,7 +19,7 @@ angular.module('fscApp',[])
             5:"云文件"
         }
         $scope.links = []
-        resourceNode.get({nodeId:$scope.nodeId,suuid:"f5aa88c4-8ccb-11e4-a4d0-a4fb000a34e4"},function(data){
+        resourceNode.get({nodeId:$scope.nodeId,suuid:$scope.suuid},function(data){
             $scope.node= data.model;
             $scope.node.nodeTypeName =  nodeTypeMap[$scope.node.nodeType]
             if( $scope.node.picture){
@@ -52,5 +53,4 @@ angular.module('fscApp',[])
                 })
             }
         }
-
 });

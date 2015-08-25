@@ -691,7 +691,7 @@ body {
 }
 .plan-info img {
   width: 100%;
-  height: 70px;
+  height: 45px;
 }
 .text-left {
   text-align: left !important;
@@ -713,4 +713,7 @@ li {
 }
 li a {
   padding: 0!important;
+}
+audio {
+  width: 175px;
 }
