@@ -88,6 +88,7 @@ angular.module('fscApp')
                             if (session.msId == userId) {
                                 global.pageStatus.session.selectSession = session;
                                 global.pageStatus.session.toTop = true;
+                                global.pageStatus.session.selectSession.show = true;
                                 $location.path('/session');
                                 sessionExists = true;
                             }
@@ -104,6 +105,7 @@ angular.module('fscApp')
                                         if (session.msId == userId) {
                                             global.pageStatus.session.selectSession = session;
                                             global.pageStatus.session.toTop = true;
+                                            global.pageStatus.session.selectSession.show = true;
                                             $location.path('/session');
                                             sessionExists = true;
                                         }

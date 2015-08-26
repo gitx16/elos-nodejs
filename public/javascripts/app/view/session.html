@@ -7,13 +7,15 @@
             <div ng-class="{'session-list-item':true,'item-select':session.id==selectSession.id}" class="session-list-item clearfix"
                  ng-click="showSession(session)"
                  ng-repeat="session in sessionList | filter:keywords"
-                 ng-mouseenter="sessionRemove(session)" ng-mouseleave="sessionNotRemove(session)">
+                 ng-mouseenter="sessionRemove(session)" ng-mouseleave="sessionNotRemove(session)"
+                 ng-if="session.show==true"
+                    >
                 <div class="display-inline">
                      <span>
                          <i ng-click="removeFromSession(session)" ng-if="session.removeSession==true" class="fa fa-close"></i>
                      </span>
                 </div>
-                <div class="display-inline">
+                <div class="display-inline" >
                      <span class="session-portrait{{session.portraitArray.length}}">
                         <span class="session-portrait-{{$index}}" ng-repeat="portrait in session.portraitArray track by $index">
                             <img ng-src="{{portrait}}"/>

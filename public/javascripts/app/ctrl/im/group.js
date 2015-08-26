@@ -249,6 +249,7 @@ angular.module('fscApp')
             if(fscSession){
                 global.pageStatus.session.selectSession = fscSession;
                 global.pageStatus.session.toTop = true;
+                global.pageStatus.session.selectSession.show = true;
                 $location.path('/session');
             }
         };

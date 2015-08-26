@@ -106,15 +106,20 @@ angular.module('fscApp')
         $scope.imgDelete = function(){
             $scope.view = false;
             $scope.viewHeight -= 96;
-        }
+        };
 
         $scope.enterFile = function(){
             $scope.msg = "";
         };
+        for(var i=0;i<$scope.sessionList.length;i++){
+            if($scope.sessionList[i].show!=false){
+                $scope.sessionList[i].show=true;
+            }
+        }
         $scope.removeFromSession = function(session){
             for(var i=0;i<$scope.sessionList.length;i++){
                 if($scope.sessionList[i]==session){
-                    $scope.sessionList.splice(i,1);
+                    session.show=false;
                 }
             }
         };
@@ -149,12 +154,12 @@ angular.module('fscApp')
                 $scope.flag = 0;
             }
             return pos;
-        }
+        };
 
         $scope.click = false;
         $scope.faceOn = function(){
             $scope.click = !$scope.click;
-        }
+        };
 
         if(!global.emojiCache){
             global.emojiCache = [];
