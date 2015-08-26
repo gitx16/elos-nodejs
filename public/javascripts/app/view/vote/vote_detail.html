@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row vote-content">
+        <div class="col-xs-12">
+            <h2 class="text-center" ng-bind="vote.voteName"></h2>
+            <div ng-repeat="voteQues in vote.voteQuesList">
+                <div>
+                    <strong ng-bind="($index+1)+'.'+voteQues.title + '(' + (voteQues.checkType==1?'单选':'多选') + ')'  "></strong>
+                    <div ng-repeat="voteQuesItem in voteQues.voteQuesItemList"
+                         ng-init="itemIndex = $index"
+                         ng-click="itemClick(voteQues,voteQuesItem)"
+                         ng-class="{radio:voteQues.checkType==1,checkbox:voteQues.checkType!=1,active:voteQuesItem.isChecked}">
+                        <label>
+                            <span ng-bind="(itemIndex+1)+'.'+voteQuesItem.title"></span>
+                            <i ng-class="{'fa pull-right':true,'fa-check-circle-o':voteQues.checkType==1,'fa-check-square-o':voteQues.checkType!=1}"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="status-bar" ng-show="vote.dataStatus!=0">
+        <p ng-bind="'投票截止时间:'+vote.deadline+',已有'+vote.voteNum+'人参与投票'"></p>
+        <button class="btn btn-warning btn-block" ng-show="vote.dataStatus==1" ng-click="submitVote()" ng-disabled="doSubmit">
+            提&nbsp;&nbsp;&nbsp;&nbsp;交
+        </button>
+        <p class="alert alert-disabled text-center" ng-show="vote.dataStatus==2||vote.dataStatus==3" ng-bind="vote.dataStatus==2?'已截止':'已投票'"></p>
+    </div>
+</div>

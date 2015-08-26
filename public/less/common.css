@@ -18,9 +18,6 @@ body {
 .mrgb5 {
   margin-bottom: 5px;
 }
-.mrgb25 {
-  margin-bottom: 25px;
-}
 .mrgl5 {
   margin-left: 5px;
 }
@@ -685,37 +682,6 @@ body {
 }
 .form-horizontal .control-label p {
   padding-right: 20px;
-}
-.plan-info {
-  margin-top: 20px;
-}
-.plan-info img {
-  width: 100%;
-  height: 45px;
-}
-.text-left {
-  text-align: left !important;
-}
-.halving-line {
-  border-bottom: 1px solid #f2f2f2;
-  margin-bottom: 20px;
-}
-.bottom-btn {
-  padding-right: 0px !important;
-  padding-left: 0px !important;
-}
-.fix {
-  bottom: 0px;
-  position: fixed !important;
-}
-li {
-  padding-left: 15px;
-}
-li a {
-  padding: 0!important;
-}
-audio {
-  width: 175px;
 }
 .display-inline {
   display: inline;
