@@ -4,6 +4,7 @@ html(ng-app='fscApp' ng-init="workId=#{workId}")
         meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
         title= title
         link(rel='stylesheet', href='/node_static/stylesheets/common.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/paper.css')
         link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/css/bootstrap.min.css')
         link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
     body
@@ -12,14 +13,27 @@ html(ng-app='fscApp' ng-init="workId=#{workId}")
                 div.panel-heading(ng-click="curQuestion.expand.question = !curQuestion.expand.question")
                     h3.panel-title 题目
                 div.panel-body(ng-show="curQuestion.expand.question",ng-bind-html="curQuestion.question")
-            div.panel.panel-success
-                div.panel-heading( ng-click="curQuestion.expand.answer = !curQuestion.expand.answer")
-                    h3.panel-title 答案
-                div.panel-body(ng-show="curQuestion.expand.answer",ng-bind-html="curQuestion.answer")
-            div.panel.panel-success
-                div.panel-heading(ng-click="curQuestion.expand.analysis = !curQuestion.expand.analysis")
-                    h3.panel-title 解析
-                div.panel-body(ng-show="curQuestion.expand.analysis",ng-bind-html="curQuestion.analysis")
+            div.panel.panel-success.fix.panel-fix(ng-if="analysis")
+                div.panel-heading
+                    h3.panel-title 答案/解析
+                div.panel-body
+                    div(ng-bind-html="curQuestion.answer")
+                    div(ng-bind-html="curQuestion.analysis")
+            div.panel.panel-success.fix.panel-fix(ng-if="!analysis")
+                div.panel-heading
+                    h3.panel-title 题目列表
+                div.panel-body
+                    div.question-nav
+                        div.type-nav
+                            ul.nav.nav-tabs
+                                li(ng-repeat="qGroup in questionGroups",ng-click="selectQuesType($index)")
+                                    a {{qGroup.quesType}}
+                                    span.q-num(ng-repeat="q in qGroup.quesList",ng-class="{'active':q.quesId ==curQuestion.id }",ng-click="selectQuesNum(q,qGroup)") {{$index + 1}}
+            div.col-xs-12.bottom-btn.fix
+                div.col-xs-6.bottom-btn
+                    a(class="btn btn-default btn-block col-xs-6",ng-click="changeShow(1)" ng-class="{'active':(analysis)}") 答案解析
+                div.col-xs-6.bottom-btn
+                    a(class="btn btn-default btn-block col-xs-6",ng-click="changeShow(2)" ng-class="{'active':(!analysis)}") 题目列表
         script(src='/node_static/bower_components/angular/angular.min.js')
         script(src='/node_static/javascripts/app/ctrl/fsc/work_view.js')
         script(src='/node_static/javascripts/app/services/global.js')

@@ -51,9 +51,9 @@ block content
                         a(class="btn btn-default btn-block col-xs-6",ng-click="over()") 已完成
                 div.col-xs-12.bottom-btn.fix(ng-if="node.nodeType==2||node.nodeType==3")
                     div.col-xs-6.bottom-btn
-                        a(class="btn btn-default btn-block col-xs-6",href="/app/work_view/{{nodeId}}?suuid={{suuid}}") 查看作业
+                        a(class="btn btn-default btn-block col-xs-6",href="/app/work_view/{{node.resId}}") 查看作业
                     div.col-xs-6.bottom-btn
-                        a(class="btn btn-default btn-block col-xs-6",ng-click="/app/work_analyze/{{nodeId}}?suuid={{suuid}}") 分析作业
+                        a(class="btn btn-default btn-block col-xs-6",href="/app/analyze/{{node.resId}}") 分析作业
                 div.col-xs-12.bottom-btn.fix(ng-if="node.nodeType==5")
                     div.col-xs-6.bottom-btn
                         a(class="btn btn-default btn-block col-xs-6",ng-click="collectWork()" ) 收藏
