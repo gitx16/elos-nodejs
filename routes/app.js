@@ -14,6 +14,6 @@ router.get('/work_view/:id', function (req, res) {
     res.render('app/work_view', { workId: req.params.id });
 });
 router.get('/analyze/:id', function (req, res) {
-    res.render('app/work_view', { workId: req.params.id });
+    res.render('app/analyze', { workId: req.params.id });
 });
 module.exports = router;
