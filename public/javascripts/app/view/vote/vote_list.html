@@ -1,0 +1,16 @@
+<div class="vote-list">
+    <div ng-class="{'vote-list-item clearfix':true,'hover':vote.hover}"
+         ng-touchstart="vote.hover=true"
+         ng-touchend="vote.hover=false"
+         ng-click="showVote(vote)"
+         ng-repeat="vote in votes">
+        <div class="pull-left">
+            <img ng-src="{{vote.coverImg?vote.coverImg:'/node_static/images/img_default.png'}}"/>
+        </div>
+        <div class="pull-left">
+            <div class="item-name">{{vote.voteName}}</div>
+            <div class="item-date"><i class="fa fa-eye"></i>&nbsp;&nbsp;{{vote.readCount}} &nbsp;&nbsp;&nbsp; <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{vote.deadline}}</div>
+        </div>
+        <img class="pull-right" ng-src="{{vote.voteStatus==1?'/node_static/images/vote_status_apply.png':'/node_static/images/act_status_end.png'}}"/>
+    </div>
+</div>
