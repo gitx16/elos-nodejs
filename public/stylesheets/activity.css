@@ -1,11 +1,29 @@
+.va-list .hover {
+  background-color: #ccc;
+}
+.va-list .va-list-item {
+  padding: 10px;
+  border-bottom: 1px solid #dfdfdf;
+}
+.va-list .va-list-item img {
+  width: 50px;
+  height: 50px;
+}
+.va-list .va-list-item .item-name {
+  font-size: 16px;
+  padding-left: 10px;
+}
+.va-list .va-list-item .item-date {
+  font-size: 12px;
+  color: #b4b3b1;
+  padding-left: 10px;
+  padding-top: 10px;
+}
 .activity img {
   display: block;
   max-width: 100%;
 }
-.activity .activity-content {
-  margin-bottom: 100px;
-}
-.activity .vote {
+.activity .status-bar {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -15,33 +33,18 @@
   color: #fff;
   z-index: 1000;
 }
-.activity label {
-  display: block;
-}
-.activity .fa {
-  color: #ddd;
-}
-.activity .alert {
+.activity .status-bar .alert {
   padding: 10px 15px;
   margin: 0;
 }
-.activity .alert-disabled {
+.activity .status-bar .alert-disabled {
   background-color: #dcdcdc;
   color: #000;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
-.activity .active {
-  background: #428bca;
-  color: #fff;
-}
-.activity .active .fa {
-  color: #fff;
-}
-.activity .active .glyphicon-ok {
-  display: block;
-}
-.activity .radio,
-.activity .checkbox {
-  padding: 10px 10px 10px 0;
+.activity .act-content {
+  margin-bottom: 100px;
 }
 .activity .loading {
   width: 100%;
@@ -49,7 +52,7 @@
   top: 50%;
   text-align: center;
 }
-.activity .fa-spinner {
+.activity .loading .fa-spinner {
   font-size: 40px;
 }
 .notify {
@@ -84,9 +87,4 @@
 }
 .notify .messages.show {
   top: 52px;
-}
-[ng\:cloak],
-[ng-cloak],
-.ng-cloak {
-  display: none !important;
 }

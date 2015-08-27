@@ -4,8 +4,8 @@ var router = express.Router();
 router.get('/votes', function (req, res) {
     res.render('app/vote');
 });
-router.get('/activity/:id', function (req, res) {
-    res.render('app/activity', { activityId: req.params.id });
+router.get('/activities', function (req, res) {
+    res.render('app/activity');
 });
 router.get('/plan_nodes/:id', function (req, res) {
     res.render('app/plan_nodes', { nodeId: req.params.id });

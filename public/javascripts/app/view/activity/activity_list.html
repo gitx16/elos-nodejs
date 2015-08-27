@@ -1,0 +1,16 @@
+<div class="va-list">
+    <div ng-class="{'va-list-item clearfix':true,'hover':activity.hover}"
+         ng-touchstart="activity.hover=true"
+         ng-touchend="activity.hover=false"
+         ng-click="showAct(activity)"
+         ng-repeat="activity in activities">
+        <div class="pull-left">
+            <img ng-src="{{activity.coverImg?activity.coverImg:'/node_static/images/img_default.png'}}"/>
+        </div>
+        <div class="pull-left">
+            <div class="item-name">{{activity.actName}}</div>
+            <div class="item-date"><i class="fa fa-eye"></i>&nbsp;&nbsp;{{activity.readCount}} &nbsp;&nbsp;&nbsp; <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{activity.deadline}}</div>
+        </div>
+        <img class="pull-right" ng-src="{{'/node_static/images/'+activity.statusImg}}"/>
+    </div>
+</div>
