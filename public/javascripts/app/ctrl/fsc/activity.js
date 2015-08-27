@@ -9,7 +9,8 @@
  */
 angular.module('fscApp', [
     'ngRoute',
-    'ngTouch'
+    'ngTouch',
+    'infinite-scroll'
 ]).config(function ($routeProvider) {
     var viewPath = "/node_static/javascripts/app/";
     $routeProvider
@@ -40,6 +41,9 @@ angular.module('fscApp', [
     }
 }).factory('global', function ($rootScope, resourcePool) {
     return {
+        activities:[],
+        currentPage:1,
+        noMore:false,
         procActList:function(actList){
             for (var i = 0; i < actList.length; i++) {
                 var obj = actList[i];
@@ -56,26 +60,40 @@ angular.module('fscApp', [
         }
     }
 }).controller('ActivityListCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
-    $rootScope.loading = true;
     $rootScope.showBack = false;
     $rootScope.inSelf = false;
     $rootScope.backUrl = "#/";
+    $scope.noMore = global.noMore;
+
+    var Activity = resourcePool.activity;
+    var doRequire = false;
+    var doLoadData = function(){
+        doRequire = true;
+        Activity.query({currentPage:global.currentPage}, function (data) {
+            global.procActList(data);
+            global.activities = global.activities.concat(data);
+            $scope.activities = global.activities;
+            global.currentPage+=1;
+            if(data.length<10){
+                global.noMore = true;
+                $scope.noMore = global.noMore;
+            }
+            doRequire = false;
+        });
+    };
 
     if (global.activities) {
         $scope.activities = global.activities;
-        $rootScope.loading = false;
-    } else {
-        var Activity = resourcePool.activity;
-        Activity.query({}, function (data) {
-            global.procActList(data);
-            global.activities = data;
-            $scope.activities = global.activities;
-            $rootScope.loading = false;
-        });
     }
+
     $scope.showAct = function (activity) {
         $rootScope.backUrl = "#/";
         $location.path('/' + activity.id);
+    }
+    $scope.loadData = function(){
+        if(!doRequire){
+            doLoadData();
+        }
     }
 }).controller('ActivitySelfCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
     $rootScope.backUrl = "#/";

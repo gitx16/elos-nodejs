@@ -1,16 +1,22 @@
 <div class="va-list">
-    <div ng-class="{'va-list-item clearfix':true,'hover':activity.hover}"
-         ng-touchstart="activity.hover=true"
-         ng-touchend="activity.hover=false"
-         ng-click="showAct(activity)"
-         ng-repeat="activity in activities">
-        <div class="pull-left">
-            <img ng-src="{{activity.coverImg?activity.coverImg:'/node_static/images/img_default.png'}}"/>
+    <div infinite-scroll="loadData()" infinite-scroll-disabled='noMore'>
+        <div ng-class="{'va-list-item clearfix':true,'hover':activity.hover}"
+             ng-touchstart="activity.hover=true"
+             ng-touchend="activity.hover=false"
+             ng-click="showAct(activity)"
+             ng-repeat="activity in activities">
+            <div>
+                <img ng-src="{{activity.coverImg?activity.coverImg:'/node_static/images/img_default.png'}}"/>
+            </div>
+            <div class="item-content">
+                <div class="item-name">{{activity.actName}}</div>
+                <div class="item-date"><i class="fa fa-eye"></i>&nbsp;&nbsp;{{activity.readCount}} &nbsp;&nbsp;&nbsp; <i
+                        class="fa fa-clock-o"></i>&nbsp;&nbsp;{{activity.deadline}}
+                </div>
+            </div>
+            <img class="pull-right" ng-src="{{'/node_static/images/'+activity.statusImg}}"/>
         </div>
-        <div class="pull-left">
-            <div class="item-name">{{activity.actName}}</div>
-            <div class="item-date"><i class="fa fa-eye"></i>&nbsp;&nbsp;{{activity.readCount}} &nbsp;&nbsp;&nbsp; <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{activity.deadline}}</div>
-        </div>
-        <img class="pull-right" ng-src="{{'/node_static/images/'+activity.statusImg}}"/>
     </div>
+    <div class="text-center" ng-show="!noMore"><i class="fa fa-spinner fa-pulse"></i> 数据加载中...</div>
+    <div class="text-center" ng-show="noMore"><i class="fa fa-frown-o"></i> 没有更多数据</div>
 </div>
