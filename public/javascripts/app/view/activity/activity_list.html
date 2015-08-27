@@ -1,8 +1,6 @@
 <div class="va-list">
     <div infinite-scroll="loadData()" infinite-scroll-disabled='noMore'>
-        <div ng-class="{'va-list-item clearfix':true,'hover':activity.hover}"
-             ng-touchstart="activity.hover=true"
-             ng-touchend="activity.hover=false"
+        <div class="va-list-item clearfix"
              ng-click="showAct(activity)"
              ng-repeat="activity in activities">
             <div>

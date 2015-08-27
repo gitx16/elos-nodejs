@@ -1,8 +1,6 @@
 <div class="va-list">
     <div infinite-scroll="loadData()" infinite-scroll-disabled='noMore'>
-        <div ng-class="{'va-list-item clearfix':true,'hover':vote.hover}"
-             ng-touchstart="vote.hover=true"
-             ng-touchend="vote.hover=false"
+        <div class="va-list-item clearfix"
              ng-click="showVote(vote)"
              ng-repeat="vote in votes">
             <div>
