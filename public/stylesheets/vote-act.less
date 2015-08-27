@@ -34,3 +34,39 @@
     }
   }
 }
+
+
+@notifyTop: -52px;
+.notify {
+  position: fixed;
+  top: @notifyTop;
+  z-index: 2000;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  border-radius: 0 0 4px 4px;
+  text-align: center;
+  .alert {
+    border-radius: 0 0 4px 4px;
+  }
+  .loading {
+    position: relative;
+    top: 52px;
+    display: none;
+  }
+  .loading.show {
+    display: block;
+  }
+  .messages {
+    position: relative;
+    top: 0px;
+    -webkit-transition: top 0.4s;
+    -moz-transition: top 0.4s;
+    -ms-transition: top 0.4s;
+    -o-transition: top 0.4s;
+    transition: top 0.4s;
+  }
+  .messages.show {
+    top: 52px;
+  }
+}

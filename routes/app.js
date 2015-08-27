@@ -7,6 +7,9 @@ router.get('/votes', function (req, res) {
 router.get('/activities', function (req, res) {
     res.render('app/activity');
 });
+router.get('/notices', function (req, res) {
+    res.render('app/notice');
+});
 router.get('/plan_nodes/:id', function (req, res) {
     res.render('app/plan_nodes', { nodeId: req.params.id });
 });
