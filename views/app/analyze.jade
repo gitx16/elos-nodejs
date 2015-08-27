@@ -1,5 +1,5 @@
 doctype html
-html(ng-app='fscApp' ng-init="workId=#{workId}")
+html(ng-app='fscApp' ng-init="nodeId=#{workId};")
     head
         meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
         title= title
@@ -7,14 +7,15 @@ html(ng-app='fscApp' ng-init="workId=#{workId}")
         link(rel='stylesheet', href='/node_static/stylesheets/paper.css')
         link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/css/bootstrap.min.css')
         link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
-    body
-        div.paper-wrapper(ng-controller="AnalyzeCtrl")
+    body.vote
+        div(ng-hide="loading" ng-view)
         script(src='/node_static/bower_components/angular/angular.min.js')
+        script(src='/node_static/bower_components/angular-route/angular-route.min.js')
+        script(src='/node_static/bower_components/angular-touch/angular-touch.min.js')
         script(src='/node_static/javascripts/app/ctrl/fsc/analyze.js')
-        script(src='/node_static/javascripts/app/directive/echarts.js')
-        script(src='/node_static/javascripts/app/services/global.js')
         script(src='/node_static/javascripts/app/services/loading.js')
         script(src='/node_static/javascripts/app/services/ajax.js')
         script(src='/node_static/javascripts/app/services/resource.js')
-        script(src='/node_static/javascripts/app/services/resource_pool.js')
         script(src='/node_static/javascripts/app/services/msg.js')
+        script(src='/node_static/javascripts/app/directive/touch.js')
+                                                                                                                                                                                                                     
