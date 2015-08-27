@@ -1,10 +1,10 @@
 doctype html
-html(ng-app='fscApp' ng-init="year=#{year};semester=#{semester}")
+html(ng-app='fscApp')
     head
         meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
         title= title
         link(rel='stylesheet', href='/node_static/stylesheets/vote.css')
-        link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/3.3.5/css/bootstrap.min.css')
         link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
     body.vote
         .notify
@@ -27,6 +27,7 @@ html(ng-app='fscApp' ng-init="year=#{year};semester=#{semester}")
         script(src='/node_static/bower_components/angular/angular.min.js')
         script(src='/node_static/bower_components/angular-route/angular-route.min.js')
         script(src='/node_static/bower_components/angular-touch/angular-touch.min.js')
+        script(src='/node_static/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js')
         script(src='/node_static/javascripts/app/ctrl/fsc/vote.js')
         script(src='/node_static/javascripts/app/services/loading.js')
         script(src='/node_static/javascripts/app/services/ajax.js')

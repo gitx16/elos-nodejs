@@ -9,7 +9,8 @@
  */
 angular.module('fscApp', [
     'ngRoute',
-    'ngTouch'
+    'ngTouch',
+    'infinite-scroll'
 ]).config(function ($routeProvider) {
     var viewPath = "/node_static/javascripts/app/";
     $routeProvider
@@ -40,27 +41,44 @@ angular.module('fscApp', [
     }
 }).factory('global', function ($rootScope, resourcePool) {
     return {
+        votes:[],
+        currentPage:1,
+        noMore:false
     }
 }).controller('VoteListCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
-    $rootScope.loading = true;
     $rootScope.showBack = false;
     $rootScope.inSelf = false;
     $rootScope.backUrl = "#/";
+    $scope.noMore = global.noMore;
 
-    if (global.votes) {
-        $scope.votes = global.votes;
-        $rootScope.loading = false;
-    } else {
-        var Vote = resourcePool.vote;
-        Vote.query({}, function (data) {
-            global.votes = data;
+    var Vote = resourcePool.vote;
+    var doRequire = false;
+    var doLoadData = function(){
+        doRequire = true;
+        Vote.query({currentPage:global.currentPage}, function (data) {
+            global.votes = global.votes.concat(data);
             $scope.votes = global.votes;
-            $rootScope.loading = false;
+            global.currentPage+=1;
+            if(data.length<10){
+                global.noMore = true;
+                $scope.noMore = global.noMore;
+            }
+            doRequire = false;
         });
+    };
+
+    if (global.votes.length>0) {
+        $scope.votes = global.votes;
     }
+
     $scope.showVote = function (vote) {
         $rootScope.backUrl = "#/";
         $location.path('/' + vote.id);
+    };
+    $scope.loadData = function(){
+        if(!doRequire){
+            doLoadData();
+        }
     }
 }).controller('VoteSelfCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
     $rootScope.backUrl = "#/";
