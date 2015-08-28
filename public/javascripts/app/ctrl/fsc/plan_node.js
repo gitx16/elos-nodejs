@@ -44,7 +44,6 @@ angular.module('fscApp', [
     }
 }).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location) {
     $scope.suuid = window.location.search.split("=")[1]
-    debugger
     var resourceNode = resourcePool.planNode
     var nodeTypeMap ={
         1:"课件",
