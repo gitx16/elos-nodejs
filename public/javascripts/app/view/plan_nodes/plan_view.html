@@ -5,25 +5,25 @@
         </div>
         <div ng-show="curQuestion.expand.question" ng-bind-html="curQuestion.question" class="panel-body"></div>
     </div>
-    <div ng-if="analysis" class="panel panel-success fix panel-fix">
-        <div class="panel-heading">
+    <div ng-if="analysis" class="panel panel-success fix panel-fix" >
+        <div class="panel-heading" ng-click="curQuestion.expand.answer = !curQuestion.expand.answer">
             <h3 class="panel-title">答案/解析</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" ng-show="!curQuestion.expand.question">
             <div ng-bind-html="curQuestion.answer"></div>
             <div ng-bind-html="curQuestion.analysis"></div>
         </div>
     </div>
     <div ng-if="!analysis" class="panel panel-success fix panel-fix">
-        <div class="panel-heading">
+        <div class="panel-heading"  ng-click="curQuestion.expand.questionGroups = !curQuestion.expand.questionGroups">
             <h3 class="panel-title">题目列表</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" ng-show="!curQuestion.expand.questionGroups">
             <div class="question-nav">
                 <div class="type-nav">
-                    <ul class="nav nav-tabs">
-                        <li ng-repeat="qGroup in questionGroups" ng-click="selectQuesType($index)">
-                            <a>{{qGroup.quesType}}</a>
+                    <ul class="nav nav nav-pills">
+                        <li ng-repeat="qGroup in questionGroups">
+                            {{qGroup.quesType}}：
                             <span ng-repeat="q in qGroup.quesList" ng-class="{'active':q.quesId ==curQuestion.id }" ng-click="selectQuesNum(q,qGroup)" class="q-num">{{$index + 1}}</span>
                         </li>
                     </ul>

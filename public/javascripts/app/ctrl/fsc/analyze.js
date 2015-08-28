@@ -42,7 +42,7 @@ angular.module('fscApp', [
             getAnalysis:{method:'get',params:{type:'papers',analysis:"analysis"}}
         })
     }
-}).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location) {
+}).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location,$routeParams) {
     $scope.suuid = window.location.search.split("=")[1]
     var resourceNode = resourcePool.planNode
     var nodeTypeMap ={
@@ -124,6 +124,13 @@ angular.module('fscApp', [
     $scope.workId = $routeParams.workId;
     $scope.paperId = $routeParams.paperId;
     var ResourceSc = resourcePool.works
+    $scope.type = 1
     ResourceSc.getAnalysis({workId:$scope.workId,qid: $scope.paperId},function(data){
+        var resource = data.model
+        $scope.eachKnowlStat = resource.eachKnowlStat;
+        $scope.knowlStat = resource.knowlStat;
     })
+    $scope.change = function (type){
+       $scope.type=type
+    }
 })

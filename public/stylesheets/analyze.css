@@ -20,3 +20,9 @@
 .analyze .content .table tr > td {
   text-align: center;
 }
+.analyze .content {
+  margin-left: 0px;
+}
+.analyze .btn.active {
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.125);
+}
