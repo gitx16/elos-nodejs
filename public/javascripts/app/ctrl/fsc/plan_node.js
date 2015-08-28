@@ -42,7 +42,7 @@ angular.module('fscApp', [
             getAnalysis:{method:'get',params:{type:'papers',analysis:"analysis"}}
         })
     }
-}).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location) {
+}).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location,msg) {
     $scope.suuid = window.location.search.split("=")[1]
     var resourceNode = resourcePool.planNode
     var nodeTypeMap ={
@@ -62,7 +62,11 @@ angular.module('fscApp', [
         getLinks()
     })
     $scope.analyze = function(workId,paperId){
-        $location.path('/' + workId+'/'+paperId+"/analyze");
+        if(paperId){
+            $location.path('/' + workId+'/'+paperId+"/analyze");
+        }else{
+            msg.error('您没有权限查看，请先登录');
+        }
     }
     var getLinks = function(){
         if( $scope.node.knowlList){
