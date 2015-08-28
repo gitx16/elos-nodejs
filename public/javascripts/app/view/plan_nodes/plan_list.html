@@ -31,7 +31,7 @@
             <div ng-include="'/node_static/javascripts/app/view/plan_nodes/menu-recursion.html'" ng-init="submenu = links"></div>
         </div>
     </div>
-    <div ng-if="node.nodeType==1" class="form-group">
+    <div ng-if="node.nodeType==1" class="form-group row">
         <div class="col-xs-4 control-label text-right">内容：</div>
         <div class="col-xs-8 control-label text-left">
             <ul class="nav nav-pills nav-stacked">
@@ -42,19 +42,24 @@
             </ul>
         </div>
     </div>
-    <div ng-if="node.nodeType==4" class="form-group">
-        <div class="col-xs-4 control-label text-right">图片：</div>
-        <div class="col-xs-8 row"><img ng-repeat="pic in picture track by $index" src="{{pic}}" class="col-xs-4"></div>
+        <div ng-if="node.nodeType==4" class="form-group row">
+            <div class="col-xs-4 control-label text-right">图片：</div>
+            <div class="col-xs-8 control-label text-left">
+                <p ng-if="!picture">暂无图片</p>
+                <img ng-repeat="pic in picture track by $index" src="{{pic}}">
+            </div>
+        </div>
+    <div ng-if="node.nodeType==4" class="form-group row">
+        <div class="col-xs-4 control-label text-right">语音：</div>
+        <div class="col-xs-8 control-label text-left">
+            <p ng-if="!node.voice">语音</p>
+            <audio ng-if="node.voice" controls="controls" src="{{node.voice}}"></audio>
+        </div>
     </div>
     <div ng-if="node.nodeType==4" class="form-group">
-        <div class="col-xs-4 control-label text-right">语音：</div>
-        <div class="col-xs-8">
-            <audio controls="controls" src="{{node.voice}}"></audio>
-        </div>
-        <div ng-if="node.nodeType==4" class="form-group"></div>
         <div class="col-xs-4 control-label text-right">内容：</div>
         <div class="col-xs-8 control-label text-left">
-            <p ng-bind="node.imgText"></p>
+            {{node.imgText}}
         </div>
     </div>
     <div ng-if="node.nodeType==4" class="col-xs-12 bottom-btn fix">
