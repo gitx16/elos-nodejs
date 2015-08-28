@@ -1,0 +1,132 @@
+@import '_variable.less';
+.paper-wrapper{
+  padding:10px 0 150px 0;
+  .question-nav{
+    width: 100%;
+    background: #fff;
+    padding-top:10px;
+    //    border-top:3px solid @base-border-clr;
+    .type-nav,.num-nav{
+      overflow: auto;
+    }
+    .nav{
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .nav-tabs > li{
+      float:none;
+      display: inline-block;
+    }
+    .tab-content{
+      overflow: auto;
+    }
+    .tab-pane{
+      padding: 20px 10px;
+      white-space: nowrap;
+      //      max-width: 9999px;
+    }
+    .q-num{
+      display: inline-block;
+      width:30px;
+      height:30px;
+      line-height: 26px;
+      border-radius: 30px;
+      margin-right:15px;
+      text-align: center;
+      color:@help-text-clr;
+      //      background: #777;
+      border:2px solid @help-text-clr;
+      cursor: pointer;
+      //      &:hover{
+      //        background: @help-text-clr - 50;
+      //      }
+    }
+    .q-num:hover{
+      background: @help-text-clr + 50;
+    }
+    .q-num.active{
+      color:#fff;
+      background: @help-text-clr;
+    }
+    .q-num.right{
+      border-color: @success;
+      color:@success;
+    }
+    .q-num.right:hover{
+      background: @success + 50;
+    }
+    .q-num.right.active{
+      color:#fff;
+      background: @success;
+    }
+    .q-num.wrong{
+      border-color: @danger;
+      color:@danger;
+    }
+    .q-num.wrong:hover{
+      background: @danger + 50;
+    }
+    .q-num.wrong.active{
+      color:#fff;
+      background: @danger;
+    }
+  }
+  .MathTable {
+    border: 0 none;
+    direction: ltr;
+    display: inline;
+    float: none;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    text-indent: 0;
+    text-transform: none;
+    //    white-space: nowrap;
+    word-spacing: normal;
+    word-wrap: normal;
+    table {
+      border-collapse: collapse;
+      margin: 0;
+      padding: 1px;
+      text-align: center;
+      vertical-align: middle;
+      line-height: normal;
+      font-size: inherit;
+      font-style: normal;
+      font-weight: normal;
+      border: 0;
+      float: none;
+      display: inline-block;
+      zoom: 0
+    }
+    div, span {
+      border: 0 none;
+      height: auto;
+      line-height: normal;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+      white-space: normal;
+      vertical-align: baseline;
+    }
+    table td {
+      border: 0 none;
+      font-size: inherit;
+      line-height: normal;
+      padding: 0;
+      //      white-space: nowrap;
+      width: auto;
+    }
+  }
+}
+.panel{
+  width: 100%;
+}
+.panel-fix{
+  bottom: 20px;
+}

@@ -1,0 +1,38 @@
+<div class="paper-wrapper">
+    <div class="panel panel-success">
+        <div ng-click="curQuestion.expand.question = !curQuestion.expand.question" class="panel-heading">
+            <h3 class="panel-title">题目</h3>
+        </div>
+        <div ng-show="curQuestion.expand.question" ng-bind-html="curQuestion.question" class="panel-body"></div>
+    </div>
+    <div ng-if="analysis" class="panel panel-success fix panel-fix">
+        <div class="panel-heading">
+            <h3 class="panel-title">答案/解析</h3>
+        </div>
+        <div class="panel-body">
+            <div ng-bind-html="curQuestion.answer"></div>
+            <div ng-bind-html="curQuestion.analysis"></div>
+        </div>
+    </div>
+    <div ng-if="!analysis" class="panel panel-success fix panel-fix">
+        <div class="panel-heading">
+            <h3 class="panel-title">题目列表</h3>
+        </div>
+        <div class="panel-body">
+            <div class="question-nav">
+                <div class="type-nav">
+                    <ul class="nav nav-tabs">
+                        <li ng-repeat="qGroup in questionGroups" ng-click="selectQuesType($index)">
+                            <a>{{qGroup.quesType}}</a>
+                            <span ng-repeat="q in qGroup.quesList" ng-class="{'active':q.quesId ==curQuestion.id }" ng-click="selectQuesNum(q,qGroup)" class="q-num">{{$index + 1}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 bottom-btn fix">
+        <div class="col-xs-6 bottom-btn"><a ng-click="changeShow(1)" ng-class="{'active':(analysis)}" class="btn btn-default btn-block col-xs-6">答案解析</a></div>
+        <div class="col-xs-6 bottom-btn"><a ng-click="changeShow(2)" ng-class="{'active':(!analysis)}" class="btn btn-default btn-block col-xs-6">题目列表</a></div>
+    </div>
+</div>

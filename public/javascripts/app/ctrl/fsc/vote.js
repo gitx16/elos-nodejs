@@ -7,90 +7,156 @@
  * # HomeCtrl
  * Controller of the elmApp
  */
-angular.module('fscApp', [])
-    .controller('VoteCtrl', function ($scope, $http,msg) {
-        $scope.hasLoding = false;
-        $http({
-            url: "/open/vote/"+$scope.voteId+".json"
-        }).success(function (res, status, headers, config) {
-            var stat = res.stat;
-            if (stat == "OK") {
-                $scope.vote = res.data.model;
-            }
-            $scope.hasLoding = true;
-        }).error(function (res, status, headers, config) {
-            $log.log('请求失败：' + res);
+angular.module('fscApp', [
+    'ngRoute',
+    'ngTouch',
+    'infinite-scroll'
+]).config(function ($routeProvider) {
+    var viewPath = "/node_static/javascripts/app/";
+    $routeProvider
+        .when('/self', {
+            templateUrl: viewPath + 'view/vote/vote_list.html',
+            controller: 'VoteSelfCtrl'
+        })
+        .when('/:voteId', {
+            templateUrl: viewPath + 'view/vote/vote_detail.html',
+            controller: 'VoteDetailCtrl'
+        })
+        .otherwise({
+            templateUrl: viewPath + 'view/vote/vote_list.html',
+            controller: 'VoteListCtrl'
         });
+}).run(function ($rootScope, resourcePool) {
+    $rootScope.backUrl = "#/";
+    resourcePool.session.get({}, false, function (data) {
+        $rootScope.isLogin = data.isLogin;
+    });
+}).factory('resourcePool', function (resource) {
+    var rc = resource.create;
+    return {
+        session: rc('/open/session'),
+        vote: rc('/open/votes/{voteId}'),
+        voteSelf: rc('/el/votes/self'),
+        voteAnswer: rc('/el/votes/{voteId}/answer')
+    }
+}).factory('global', function ($rootScope, resourcePool) {
+    return {
+        votes:[],
+        currentPage:1,
+        noMore:false
+    }
+}).controller('VoteListCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
+    $rootScope.showBack = false;
+    $rootScope.inSelf = false;
+    $rootScope.backUrl = "#/";
+    $scope.noMore = global.noMore;
 
-        $scope.itemClick = function (voteQues, voteQuesItem) {
-            if ($scope.vote.dataStatus != 1) {
-                return;
+    var Vote = resourcePool.vote;
+    var doRequire = false;
+    var doLoadData = function(){
+        doRequire = true;
+        Vote.query({currentPage:global.currentPage}, function (data) {
+            global.votes = global.votes.concat(data);
+            $scope.votes = global.votes;
+            global.currentPage+=1;
+            if(data.length<10){
+                global.noMore = true;
+                $scope.noMore = global.noMore;
             }
-            if (voteQues.checkType == 1) {
-                for (var i = 0; i < voteQues.voteQuesItemList.length; i++) {
-                    var obj = voteQues.voteQuesItemList[i];
-                    obj.isChecked = false;
+            doRequire = false;
+        });
+    };
+
+    if (global.votes.length>0) {
+        $scope.votes = global.votes;
+    }
+
+    $scope.showVote = function (vote) {
+        $rootScope.backUrl = "#/";
+        $location.path('/' + vote.id);
+    };
+    $scope.loadData = function(){
+        if(!doRequire){
+            doLoadData();
+        }
+    }
+}).controller('VoteSelfCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
+    $rootScope.backUrl = "#/";
+    $rootScope.loading = true;
+    $rootScope.showBack = false;
+    $rootScope.inSelf = true;
+
+    var VoteSelf = resourcePool.voteSelf;
+    VoteSelf.query({}, function (data) {
+        $scope.votes = data;
+        $rootScope.loading = false;
+    });
+    $scope.showVote = function (vote) {
+        $rootScope.backUrl = "#/self";
+        $location.path('/' + vote.id);
+    }
+}).controller('VoteDetailCtrl', function ($scope, $routeParams, $rootScope, resourcePool, msg) {
+    $scope.voteId = $routeParams.voteId;
+    $rootScope.loading = true;
+    $rootScope.showBack = true;
+    $rootScope.inSelf = false;
+
+    var Vote = resourcePool.vote;
+    Vote.get({}, {voteId: $scope.voteId}, function (data) {
+        $scope.vote = data.model;
+        $rootScope.loading = false;
+    });
+
+    /**
+     * 选择
+     * @param voteQues
+     * @param voteQuesItem
+     */
+    $scope.itemClick = function (voteQues, voteQuesItem) {
+        if ($scope.vote.dataStatus != 1) {
+            return;
+        }
+        if (voteQues.checkType == 1) {
+            for (var i = 0; i < voteQues.voteQuesItemList.length; i++) {
+                var obj = voteQues.voteQuesItemList[i];
+                obj.isChecked = false;
+            }
+            voteQuesItem.isChecked = true;
+        } else {
+            voteQuesItem.isChecked = !voteQuesItem.isChecked;
+        }
+    };
+
+    var VoteAnswer = resourcePool.voteAnswer;
+
+    $scope.doSubmit = false;
+    $scope.submitVote = function () {
+        $scope.doSubmit = true;
+        var selectItem = [];
+        for (var i = 0; i < $scope.vote.voteQuesList.length; i++) {
+            var ques = $scope.vote.voteQuesList[i];
+            var doSelect = false;
+            for (var j = 0; j < ques.voteQuesItemList.length; j++) {
+                var item = ques.voteQuesItemList[j];
+                if (item.isChecked) {
+                    selectItem.push({
+                        voteId: $scope.vote.id,
+                        quesId: ques.id,
+                        itemId: item.id
+                    });
+                    doSelect = true;
                 }
-                voteQuesItem.isChecked = true;
-            } else {
-                voteQuesItem.isChecked = !voteQuesItem.isChecked;
             }
-        };
-        $scope.doSubmit = false;
-        /**
-         *
-         */
-        $scope.submitVote = function () {
-            $scope.doSubmit = true;
-            /**
-             * [
-             *  {
-             *      voteId:"",
-             *      quesId:"",
-             *      itemId:""
-             *  }
-             * ]
-             */
-            var selectItem = [];
-            for (var i = 0; i < $scope.vote.voteQuesList.length; i++) {
-                var ques = $scope.vote.voteQuesList[i];
-                for (var j = 0; j < ques.voteQuesItemList.length; j++) {
-                    var item = ques.voteQuesItemList[j];
-                    if (item.isChecked) {
-                        selectItem.push({
-                            voteId: $scope.vote.id,
-                            quesId: ques.id,
-                            itemId: item.id
-                        });
-                    }
-                }
-            }
-            if(selectItem.length==0){
+            if (!doSelect) {
                 msg.error('请选择投票项');
                 $scope.doSubmit = false;
-            }else{
-                $http({
-                    url: "/el/vote/"+$scope.voteId+"/answer.json?_method=post",
-                    method: "POST",
-                    headers: {
-                        contentType: 'application/json; charset=utf-8'
-                    },
-                    data: JSON.stringify(selectItem)
-                }).success(function (res, status, headers, config) {
-                    var stat = res.stat;
-                    if(stat=="OK"){
-                        $scope.vote.dataStatus = 3;
-                        msg.error('投票成功');
-                    }else{
-                        if(res.errors&&res.errors.length>0){
-                            msg.error(res.errors[0].msg);
-                        }
-                    }
-                    $scope.doSubmit = false;
-                }).error(function (res, status, headers, config) {
-                    $scope.doSubmit = false;
-                    msg.error('投票成功');
-                });
+                return;
             }
         }
-    });
+        VoteAnswer.create({voteId: $scope.voteId}, selectItem, function (data) {
+            $scope.vote.dataStatus = 3;
+            $scope.doSubmit = false;
+            $scope.vote.voteNum += 1;
+        });
+    }
+})

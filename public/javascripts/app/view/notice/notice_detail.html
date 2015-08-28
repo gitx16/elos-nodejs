@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="notice-title" ng-bind="notice.title"></div>
+            <div class="notice-tip">{{notice.noticeType}} {{notice.createdDate}}</div>
+            <div class="notice-desc" ng-bind-html="to_trusted(notice.content)"></div>
+        </div>
+    </div>
+</div>

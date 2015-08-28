@@ -1,61 +1,53 @@
-.activity{
-  img{
+@import 'vote-act.less';
+
+.activity {
+  img {
     display: block;
     max-width: 100%;
   }
-  .activity-content{
-    margin-bottom:100px;
-  }
-  .vote{
+  .status-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding:10px 15px;
-    background-color: rgba(66,66,74,0.96);
-    color:#fff;
-    z-index: 1000;
-  }
-  label{
-    display: block;
-  }
-  .fa{
-    color:#ddd;
-  }
-  .alert {
     padding: 10px 15px;
-    margin: 0;
-  }
+    background-color: rgba(66, 66, 74, 0.96);
+    color: #fff;
+    z-index: 1000;
 
-  .alert-disabled {
-    background-color: #dcdcdc;
-    color: #000;
+    .alert {
+      padding: 10px 15px;
+      margin: 0;
+    }
+
+    .alert-disabled {
+      background-color: #dcdcdc;
+      color: #000;
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
   }
-  .active{
-    background:#428bca;
-    color:#fff;
-  }
-  .active .fa{
-    color:#fff;
-  }
-  .active .glyphicon-ok{
-    display: block;
-  }
-  .radio,.checkbox{
-    padding:10px 10px 10px 0;
+  .act-content {
+    margin-bottom: 100px;
+    img{
+      max-width: 100% !important;
+      clear: both;
+      display: block;
+      margin:auto;
+    }
   }
 
   .loading {
     width: 100%;
-    position:absolute;
-    top:50%;
+    position: absolute;
+    top: 50%;
     text-align: center;
-  }
-  .fa-spinner{
-    font-size: 40px;
+
+    .fa-spinner {
+      font-size: 40px;
+    }
   }
 }
-
 
 @notifyTop: -52px;
 .notify {
@@ -90,7 +82,4 @@
   .messages.show {
     top: 52px;
   }
-}
-[ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important;
 }

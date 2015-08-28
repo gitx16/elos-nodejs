@@ -1,0 +1,72 @@
+.va-list {
+  .hover {
+    background-color: #ccc;
+  }
+  .va-list-item {
+    padding: 10px;
+    border-bottom: 1px solid #dfdfdf;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    .item-content{
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      .item-name {
+        font-size: 16px;
+        padding-left: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .item-date {
+        font-size: 12px;
+        color: #b4b3b1;
+        padding-left: 10px;
+        padding-top: 10px;
+      }
+    }
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+
+@notifyTop: -52px;
+.notify {
+  position: fixed;
+  top: @notifyTop;
+  z-index: 2000;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  border-radius: 0 0 4px 4px;
+  text-align: center;
+  .alert {
+    border-radius: 0 0 4px 4px;
+  }
+  .loading {
+    position: relative;
+    top: 52px;
+    display: none;
+  }
+  .loading.show {
+    display: block;
+  }
+  .messages {
+    position: relative;
+    top: 0px;
+    -webkit-transition: top 0.4s;
+    -moz-transition: top 0.4s;
+    -ms-transition: top 0.4s;
+    -o-transition: top 0.4s;
+    transition: top 0.4s;
+  }
+  .messages.show {
+    top: 52px;
+  }
+}

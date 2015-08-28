@@ -1,0 +1,67 @@
+.va-list .hover {
+  background-color: #ccc;
+}
+.va-list .va-list-item {
+  padding: 10px;
+  border-bottom: 1px solid #dfdfdf;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.va-list .va-list-item .item-content {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.va-list .va-list-item .item-content .item-name {
+  font-size: 16px;
+  padding-left: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.va-list .va-list-item .item-content .item-date {
+  font-size: 12px;
+  color: #b4b3b1;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.va-list .va-list-item img {
+  width: 50px;
+  height: 50px;
+}
+.notify {
+  position: fixed;
+  top: -52px;
+  z-index: 2000;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  border-radius: 0 0 4px 4px;
+  text-align: center;
+}
+.notify .alert {
+  border-radius: 0 0 4px 4px;
+}
+.notify .loading {
+  position: relative;
+  top: 52px;
+  display: none;
+}
+.notify .loading.show {
+  display: block;
+}
+.notify .messages {
+  position: relative;
+  top: 0px;
+  -webkit-transition: top 0.4s;
+  -moz-transition: top 0.4s;
+  -ms-transition: top 0.4s;
+  -o-transition: top 0.4s;
+  transition: top 0.4s;
+}
+.notify .messages.show {
+  top: 52px;
+}
