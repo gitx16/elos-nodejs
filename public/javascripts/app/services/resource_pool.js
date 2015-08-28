@@ -19,6 +19,7 @@ angular.module('fscApp')
             sessionUsers:rc('/im_fsc/sessions/{sessionId}/users'),
             sessionReader:rc('/im_fsc/sessions/{sessionId}/reader'),
             classStudents:rc('/im_fsc/classes/{classId}/students'),
+            sessionUser:rc('/im_fsc/classes/user/{id}'),
             classParents:rc('/im_fsc/classes/{classId}/parents'),
             parentsStudents:rc('/im_fsc/parents/{parentId}/students'),
             teachers:rc('/im_fsc/teachers'),

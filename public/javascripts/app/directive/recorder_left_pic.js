@@ -11,13 +11,14 @@
  * Factory in the elmApp.
  */
 angular.module('fscApp')
-    .directive('recorderLeftPic', function(global,dialog) {
+    .directive('recorderLeftPic', function(global,dialog,resourcePool,$q,msgRegister,sync,constants) {
         return {
             restrict: 'E',
             templateUrl: '/node_static/javascripts/app/view/directive/recorder_left_pic.html',
             replace: true,
             scope: {
-                recorder: '='
+                recorder: '=',
+                session:'='
             },
             link: function (scope, element, attrs) {
                 scope.resUrl = global.cache.resUrl;
@@ -32,9 +33,12 @@ angular.module('fscApp')
                                 dialogScope.resUrl = scope.resUrl;
                                 dialogScope.closePhoto = function(){
                                     modalInstance.close();
-                                }
+                                };
                             }
                         })
+                };
+                scope.openLinkman = function(){
+                    sync.openLinkman(scope.recorder,scope.session,scope.resUrl);
                 };
             }
         }

@@ -31,6 +31,7 @@ angular.module('fscApp')
             msgCode: {
                 SESSION_UPDATE: "SESSION_UPDATE",
                 SESSION_POST: "SESSION_POST",
+                SESSION_SHOW: "SESSION_SHOW",
                 USER_UPDATE: "USER_UPDATE"
             },
             rCode: {

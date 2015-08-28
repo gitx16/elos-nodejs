@@ -29,11 +29,10 @@ angular.module('fscApp')
         $scope.selectParent = function (parent) {
             ParentsStudents.query({parentId: parent.id}, function (parentStudent) {
                 $scope.selectUser.parentStudents = parentStudent;
-            })
+            });
             $scope.selectUser = parent;
             global.pageStatus.linkman.selectUser = parent;
         };
-
         $scope.headerClick = function (code, index) {
             if (code == "class") {
                 var class_ = $scope.classes[index];
@@ -77,83 +76,43 @@ angular.module('fscApp')
         };
 
         var Sessions = resourcePool.sessions;
-        $scope.goSession = function (userId) {
+        $scope.goSession = function(userId){
             var sessions = global.cache.sessions;
-            if (userId) {
-                if (sessions) {
-                    var sessionExists = false;
-                    for (var i = 0; i < sessions.length; i++) {
-                        var session = sessions[i];
-                        if (session.type == constants.session.user) {
-                            if (session.msId == userId) {
-                                global.pageStatus.session.selectSession = session;
-                                global.pageStatus.session.toTop = true;
-                                global.pageStatus.session.selectSession.show = true;
-                                $location.path('/session');
-                                sessionExists = true;
-                            }
+            var selectUserId=userId?userId:$scope.selectUser.id;
+            if(sessions){
+                var sessionExists = false;
+                for (var i = 0; i < sessions.length; i++) {
+                    var session = sessions[i];
+                    if(session.type==constants.session.user){
+                        if(session.msId== selectUserId){
+                            global.pageStatus.session.selectSession = session;
+                            global.pageStatus.session.toTop = true;
+                            global.pageStatus.session.selectSession.show = true;
+                            $location.path('/session');
+                            sessionExists = true;
                         }
-                    }
-                    if (!sessionExists) {
-                        $scope.isGoing = true;
-                        Sessions.create({linkmanId: userId}, {}, function (data) {
-                            socket.emit("notify", {userIdArray: [userId], reqCode: "NOTIFY_PULL_FSC_LINKMAN_ACCEPT"})
-                            sync.syncSessions(function (sessions) {
-                                for (var i = 0; i < sessions.length; i++) {
-                                    var session = sessions[i];
-                                    if (session.type == constants.session.user) {
-                                        if (session.msId == userId) {
-                                            global.pageStatus.session.selectSession = session;
-                                            global.pageStatus.session.toTop = true;
-                                            global.pageStatus.session.selectSession.show = true;
-                                            $location.path('/session');
-                                            sessionExists = true;
-                                        }
-                                    }
-                                }
-                                $scope.isGoing = false;
-                            });
-                        });
                     }
                 }
-            }
-            else {
-                if (sessions) {
-                    var sessionExists = false;
-                    for (var i = 0; i < sessions.length; i++) {
-                        var session = sessions[i];
-                        if (session.type == constants.session.user) {
-                            if (session.msId == $scope.selectUser.id) {
-                                global.pageStatus.session.selectSession = session;
-                                global.pageStatus.session.toTop = true;
-                                $location.path('/session');
-                                sessionExists = true;
-                            }
-                        }
-                    }
-                    if (!sessionExists) {
-                        $scope.isGoing = true;
-                        Sessions.create({linkmanId: $scope.selectUser.id}, {}, function (data) {
-                            socket.emit("notify", {
-                                userIdArray: [$scope.selectUser.id],
-                                reqCode: "NOTIFY_PULL_FSC_LINKMAN_ACCEPT"
-                            })
-                            sync.syncSessions(function (sessions) {
-                                for (var i = 0; i < sessions.length; i++) {
-                                    var session = sessions[i];
-                                    if (session.type == constants.session.user) {
-                                        if (session.msId == $scope.selectUser.id) {
-                                            global.pageStatus.session.selectSession = session;
-                                            global.pageStatus.session.toTop = true;
-                                            $location.path('/session');
-                                            sessionExists = true;
-                                        }
+                if(!sessionExists){
+                    $scope.isGoing = true;
+                        Sessions.create({linkmanId: selectUserId}, {}, function (data) {
+                            socket.emit("notify", {userIdArray: [selectUserId], reqCode: "NOTIFY_PULL_FSC_LINKMAN_ACCEPT"})
+                            sync.syncSessions(function(sessions){
+                            for (var i = 0; i < sessions.length; i++) {
+                                var session = sessions[i];
+                                if(session.type==constants.session.user){
+                                    if(session.msId== selectUserId){
+                                        global.pageStatus.session.selectSession = session;
+                                        global.pageStatus.session.toTop = true;
+                                        global.pageStatus.session.selectSession.show = true;
+                                        $location.path('/session');
+                                        sessionExists = true;
                                     }
                                 }
-                                $scope.isGoing = false;
-                            });
+                            }
+                            $scope.isGoing = false;
                         });
-                    }
+                    });
                 }
             }
         };

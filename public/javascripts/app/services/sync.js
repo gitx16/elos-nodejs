@@ -9,7 +9,7 @@
  */
 angular.module('fscApp')
     .factory('sync', function (resourcePool,constants,
-                               global,utils,msgRegister) {
+                               global,utils,msgRegister,socket,$q,dialog) {
         return {
             /**
              * 同步群组
@@ -19,6 +19,40 @@ angular.module('fscApp')
                 Groups.query({code: code}, function (groups) {
                     utils.procGroups(groups, code);
                 });
+            },
+            /**
+             * 同步用户会话
+             */
+            syncUserSession:function(userId,cb){
+                var Sessions = resourcePool.sessions;
+                var sessions = global.cache.sessions;
+                var self = this;
+                if(sessions){
+                    var sessionExists = false;
+                    for (var i = 0; i < sessions.length; i++) {
+                        var session = sessions[i];
+                        if(session.type==constants.session.user){
+                            if(session.msId== userId){
+                                    cb(session);
+                            }
+                        }
+                    }
+                    if(!sessionExists){
+                        Sessions.create({linkmanId:userId},{},function(data){
+                            socket.emit("notify", {userIdArray: [userId], reqCode: "NOTIFY_PULL_FSC_LINKMAN_ACCEPT"})
+                            self.syncSessions(function(sessions){
+                                for (var i = 0; i < sessions.length; i++) {
+                                    var session = sessions[i];
+                                    if(session.type==constants.session.user){
+                                        if(session.msId== userId){
+                                            cb(session);
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    }
+                }
             },
             /**
              * 同步会话
@@ -67,6 +101,41 @@ angular.module('fscApp')
                 var index=utils.getSessionIndex(session.id);
                 sessions.splice(index,1);
                 sessions.splice(0,0,session);
+            },
+            openLinkman : function(recorder,session,resUrl){
+                var self = this;
+                var deferred = $q.defer(); // 声明延后执行，表示要去监控后面的执行
+                var sessionUser = resourcePool.sessionUser;
+                var userTemp;
+                sessionUser.query({id:recorder.createdBy},function(user) {
+                    userTemp =user[0];
+                    if(session.type!=1){
+                        userTemp.unGoSession=false;
+                    }
+                    deferred.resolve();
+                });
+                var open =  function(){
+                    dialog.complexBox(
+                        {
+                            templateUrl: '/node_static/javascripts/app/view/menus/linkman-menu.html',
+                            size:'sm',
+                            onComplete: function (dialogScope,modalInstance) {
+                                dialogScope.user = userTemp;
+                                dialogScope.recorder = recorder;
+                                dialogScope.resUrl = resUrl;
+                                dialogScope.closeMenu = function(){
+                                    modalInstance.close();
+                                };
+                                dialogScope.goSession = function(userId){
+                                    self.syncUserSession(userId,function(session){
+                                        msgRegister.dispatchMsg(constants.msgCode.SESSION_SHOW,session);
+                                    });
+                                    modalInstance.close();
+                                };
+                            }
+                        })
+                };
+                deferred.promise.then(open);
             }
         }
     });
