@@ -8,8 +8,7 @@
                  ng-click="showSession(session)"
                  ng-repeat="session in sessionList | filter:keywords"
                  ng-mouseenter="sessionRemove(session)" ng-mouseleave="sessionNotRemove(session)"
-                 ng-if="session.show==true"
-                    >
+                 ng-if="session.show==true">
                 <div class="display-inline">
                      <span>
                          <i ng-click="removeFromSession(session)" ng-if="session.removeSession==true" class="fa fa-close"></i>
@@ -18,7 +17,7 @@
                 <div class="display-inline" >
                      <span class="session-portrait{{session.portraitArray.length}}">
                         <span class="session-portrait-{{$index}}" ng-repeat="portrait in session.portraitArray track by $index">
-                            <img ng-src="{{portrait}}"/>
+                            <img  ng-src="{{portrait}}"/>
                         </span>
                     </span>
                     <span class="session-label">
@@ -62,16 +61,16 @@
                         </div>
                         <div ng-if="recorder.isLeft">
                             <div ng-if="recorder.type!='2'&&recorder.type!='3'&&recorder.type!='9'">
-                                <recorder_left_msg recorder="recorder"></recorder_left_msg>
+                                <recorder_left_msg recorder="recorder" session="selectSession"></recorder_left_msg>
                             </div>
                             <div ng-if="recorder.type=='3'">
-                                <recorder_left_pic recorder="recorder"></recorder_left_pic>
+                                <recorder_left_pic recorder="recorder" session="selectSession"></recorder_left_pic>
                             </div>
                             <div ng-if="recorder.type=='2'">
-                                <recorder_left_vol recorder="recorder"></recorder_left_vol>
+                                <recorder_left_vol recorder="recorder" session="selectSession"></recorder_left_vol>
                             </div>
                             <div ng-if="recorder.type=='9'">
-                                <recorder_left_doc recorder="recorder"></recorder_left_doc>
+                                <recorder_left_doc recorder="recorder" session="selectSession"></recorder_left_doc>
                             </div>
                         </div>
                     </div>

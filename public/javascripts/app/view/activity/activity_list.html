@@ -1,8 +1,6 @@
 <div class="va-list">
     <div infinite-scroll="loadData()" infinite-scroll-disabled='noMore'>
-        <div ng-class="{'va-list-item clearfix':true,'hover':activity.hover}"
-             ng-touchstart="activity.hover=true"
-             ng-touchend="activity.hover=false"
+        <div class="va-list-item clearfix"
              ng-click="showAct(activity)"
              ng-repeat="activity in activities">
             <div>
@@ -17,6 +15,8 @@
             <img class="pull-right" ng-src="{{'/node_static/images/'+activity.statusImg}}"/>
         </div>
     </div>
-    <div class="text-center" ng-show="!noMore"><i class="fa fa-spinner fa-pulse"></i> 数据加载中...</div>
-    <div class="text-center" ng-show="noMore"><i class="fa fa-frown-o"></i> 没有更多数据</div>
+    <div ng-hide="inSelf">
+        <div class="text-center" ng-show="!noMore"><i class="fa fa-spinner fa-pulse"></i> 数据加载中...</div>
+        <div class="text-center" ng-show="noMore"><i class="fa fa-frown-o"></i> 没有更多数据</div>
+    </div>
 </div>

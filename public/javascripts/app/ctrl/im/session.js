@@ -47,7 +47,7 @@ angular.module('fscApp')
             Recorders.query(params, function (data) {
                 doReorder(data, firstLoad);
             });
-        }
+        };
         var Recorders = resourcePool.recorders;
         var SessionUsers = resourcePool.sessionUsers;
         var SessionReader = resourcePool.sessionReader;
@@ -99,7 +99,7 @@ angular.module('fscApp')
                     socket.emit("notify", {userIdArray: userIdArray, reqCode: "NOTIFY_PULL_FSC_SESSION"});
                     userIdArray = [];
                 });
-                sync.syncSessionToTop($scope.selectSession)
+                sync.syncSessionToTop($scope.selectSession);
             }
         };
 
@@ -220,10 +220,16 @@ angular.module('fscApp')
             doSelectSession();
         };
 
+        var sessionShowHandler = function (fscSession) {
+            $scope.showSession(fscSession);
+            sync.syncSessionToTop(fscSession);
+        };
+
         $scope.$on('$viewContentLoaded', function () {
             doSelectSession();
             msgRegister.registerMsg(constants.msgCode.SESSION_UPDATE, sessionUpdateHandler);
             msgRegister.registerMsg(constants.msgCode.SESSION_POST, sessionPostHandler);
+            msgRegister.registerMsg(constants.msgCode.SESSION_SHOW, sessionShowHandler);
         });
 
         $scope.$on("$destroy", function () {

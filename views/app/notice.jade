@@ -3,10 +3,10 @@ html(ng-app='fscApp')
     head
         meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
         title= title
-        link(rel='stylesheet', href='/node_static/stylesheets/vote.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/notice.css')
         link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/3.3.5/css/bootstrap.min.css')
         link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
-    body.vote
+    body.notice
         .notify
             div(class="messages alert alert-{{ROOT_messageData.globalMsg.type}} {{ROOT_messageData.globalMsg.show ? 'show' : ''}}")
                 p(ng-repeat="item in ROOT_messageData.globalMsg.messages" ng-bind="item.msg")
@@ -28,7 +28,7 @@ html(ng-app='fscApp')
         script(src='/node_static/bower_components/angular-route/angular-route.min.js')
         script(src='/node_static/bower_components/angular-touch/angular-touch.min.js')
         script(src='/node_static/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js')
-        script(src='/node_static/javascripts/app/ctrl/fsc/vote.js')
+        script(src='/node_static/javascripts/app/ctrl/fsc/notice.js')
         script(src='/node_static/javascripts/app/services/loading.js')
         script(src='/node_static/javascripts/app/services/ajax.js')
         script(src='/node_static/javascripts/app/services/resource.js')
