@@ -56,19 +56,18 @@
     </div>
     <div ng-if="node.nodeType==4" class="form-group">
         <div class="col-xs-4 control-label text-right">内容：</div>
-        <div class="col-xs-8 control-label text-left">
-            {{node.imgText}}
+        <div class="col-xs-8 control-label text-left" ng-bind-html="node.imgText">
         </div>
     </div>
     <div ng-if="node.nodeType==4" class="col-xs-12 bottom-btn fix">
-        <div class="col-xs-12 bottom-btn"><a ng-click="over()" class="btn btn-default btn-block col-xs-6">已完成</a></div>
+        <div class="col-xs-12 bottom-btn"><a ng-click="over()" class="btn btn-default btn-block col-xs-6" ng-disabled="node.isFinish">已完成</a></div>
     </div>
     <div ng-if="node.nodeType==2||node.nodeType==3" class="col-xs-12 bottom-btn fix">
         <div class="col-xs-6 bottom-btn"><a href="#/{{node.nodeType}}/{{node.resId}}/view" class="btn btn-default btn-block col-xs-6">查看作业</a></div>
         <div class="col-xs-6 bottom-btn"><a ng-click="analyze(node.nodeType,node.resId,node.paperId)" class="btn btn-default btn-block col-xs-6">分析作业</a></div>
     </div>
     <div ng-if="node.nodeType==5" class="col-xs-12 bottom-btn fix">
-        <div class="col-xs-6 bottom-btn"><a ng-click="collectWork()" class="btn btn-default btn-block col-xs-6">收藏</a></div>
+        <div class="col-xs-6 bottom-btn"><a ng-click="collectWork()" class="btn btn-default btn-block col-xs-6">{{node.isEnshrine?'取消收藏':'收藏'}}</a></div>
         <div class="col-xs-6 bottom-btn"><a href="/oss/plan_nodes/{{nodeId}}/download" class="btn btn-default btn-block col-xs-6">下载</a></div>
     </div>
 </form>

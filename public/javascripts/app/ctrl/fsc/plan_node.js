@@ -42,7 +42,7 @@ angular.module('fscApp', [
             getAnalysis:{method:'get',params:{type:'papers',analysis:"analysis"}}
         })
     }
-}).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location,msg) {
+}).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location,msg,$sce) {
     $scope.suuid = window.location.search.split("=")[1]
     var resourceNode = resourcePool.planNode
     var nodeTypeMap ={
@@ -59,6 +59,7 @@ angular.module('fscApp', [
         if( $scope.node.picture){
             $scope.picture =  $scope.node.picture.split(",")
         }
+        $scope.node.imgText = $sce.trustAsHtml( $scope.node.imgText)
         getLinks()
     })
     $scope.analyze = function(type,workId,paperId){
@@ -70,12 +71,18 @@ angular.module('fscApp', [
     }
     $scope.over = function(){
         resourceNode.save({nodeId:$scope.nodeId,map:"submit"},{},function(){
+            $scope.node.isFinish = true;
             msg.success("修改成功")
         })
     }
     $scope.collectWork = function(){
         resourceNode.save({nodeId:$scope.nodeId,map:"enshrine"},{},function(){
-            msg.success("已收藏")
+            if( $scope.node.isEnshrine){
+                msg.success("取消收藏成功")
+            }else{
+                msg.success("收藏成功")
+            }
+            $scope.node.isEnshrine = !$scope.node.isEnshrine;
         })
     }
     var getLinks = function(){
