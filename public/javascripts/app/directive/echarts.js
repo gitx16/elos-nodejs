@@ -89,7 +89,7 @@ angular.module('fscApp')
 //                                    fontFamily:"Microsoft Yahei"
                                 },
                                 subtextStyle:{
-                                    color:'#727272',
+                                    color:'#727272'
 //                                    fontFamily:"Microsoft Yahei"
                                 }
                             },
@@ -204,7 +204,7 @@ angular.module('fscApp')
                     var highestList = [];
                     var averageList = [];
                     var xAxisdata = [];
-                    initData.eachKnowlStat.forEach(function (knowlStat) {
+                    initData.forEach(function (knowlStat) {
                         lowestList.push(knowlStat.knowlStu);
                         highestList.push(knowlStat.knowlHighest);
                         averageList.push(knowlStat.knowlAverage);
@@ -246,7 +246,8 @@ angular.module('fscApp')
                         yAxis: [
                             {
                                 type: 'value',
-                                max: 1
+                                max: 1,
+                                min:0
                             }
                         ],
                         series: [

@@ -1,33 +1,14 @@
 <div class="analyze">
-    <div class="row category">
-        <div ng-repeat="cat in categories" class="col-xs-4 text-center" ng-class="{'active':curCat === cat.id}" ng-click="changeCat(cat)">{{cat.name}}</div>
-    </div>
     <div class="content mrgt10">
-        <div ng-if="curCat === 'kw'">
-            <echarts-force init-nodes="knEchartsNodes"></echarts-force>
+        <div ng-if="type===2">
+            <echarts-bar init-data="eachKnowlStat"></echarts-bar>
         </div>
-        <div ng-if="curCat === 'st'">
-            <echarts-bar init-data="stEchartsData"></echarts-bar>
-        </div>
-        <div ng-show="curCat === 'ra'">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <td>排名</td>
-                    <td>班级</td>
-                    <td>姓名</td>
-                    <td>成绩</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="row in rankRows">
-                    <td>{{row.rank}}</td>
-                    <td>{{row.className}}</td>
-                    <td>{{row.studentName}}</td>
-                    <td>{{row.studentScore}}</td>
-                </tr>
-                </tbody>
-            </table>
+        <div ng-if="type===1">
+            <echarts-force init-nodes="knowlStat"></echarts-force>
         </div>
     </div>
+</div>
+<div class="col-xs-12 bottom-btn fix">
+    <div class="col-xs-6 bottom-btn"><a ng-click="change(1)" ng-class="{'active':(type==1)}" class="btn btn-default btn-block col-xs-6">知识点结构</a></div>
+    <div class="col-xs-6 bottom-btn"><a ng-click="change(2)" ng-class="{'active':(type==2)}" class="btn btn-default btn-block col-xs-6">知识点统计</a></div>
 </div>
