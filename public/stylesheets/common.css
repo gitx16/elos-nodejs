@@ -802,3 +802,23 @@ audio {
 .linkman-open-btn button {
   width: 200px;
 }
+.position-name {
+  display: flex;
+  margin-top: -25px;
+  color: white;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 132px;
+  padding-left: 7px;
+}
+.position-pic img:hover {
+  cursor: pointer;
+}
+.allmap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  font-family: "微软雅黑";
+}

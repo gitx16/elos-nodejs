@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div ng-if="recorder.isLeft">
-                            <div ng-if="recorder.type!='2'&&recorder.type!='3'&&recorder.type!='9'">
+                            <div ng-if="recorder.type!='2'&&recorder.type!='3'&&recorder.type!='9'&&recorder.type!='10'">
                                 <recorder_left_msg recorder="recorder" session="selectSession"></recorder_left_msg>
                             </div>
                             <div ng-if="recorder.type=='3'">
@@ -71,6 +71,9 @@
                             </div>
                             <div ng-if="recorder.type=='9'">
                                 <recorder_left_doc recorder="recorder" session="selectSession"></recorder_left_doc>
+                            </div>
+                            <div ng-if="recorder.type=='10'">
+                                <recorder_left_pos recorder="recorder" session="selectSession"></recorder_left_pos>
                             </div>
                         </div>
                     </div>
