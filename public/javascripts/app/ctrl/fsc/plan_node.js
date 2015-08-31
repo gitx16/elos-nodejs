@@ -13,11 +13,11 @@ angular.module('fscApp', [
 ]).config(function ($routeProvider) {
     var viewPath = "/node_static/javascripts/app/";
     $routeProvider
-        .when('/:workId/view', {
+        .when('/:typeId/:workId/view', {
             templateUrl: viewPath + 'view/plan_nodes/plan_view.html',
             controller: 'PlanViewCtrl'
         })
-        .when('/:workId/:paperId/analyze', {
+        .when('/:typeId/:workId/:paperId/analyze', {
             templateUrl: viewPath + 'view/plan_nodes/plan_analyze.html',
             controller: 'PlanAnalyzeCtrl'
         })
@@ -34,7 +34,7 @@ angular.module('fscApp', [
     var rc = resource.create;
     return {
         session: rc('/open/session'),
-        planNode:rc('/open/plan_nodes/{nodeId}'),
+        planNode:rc('/open/plan_nodes/{nodeId}/{map}'),
         works:rc('/open/works/{workId}/{type}/{qid}/{analysis}',null,{
             getAnalysis:{method:'get',params:{type:'papers',analysis:"analysis"}}
         }),
@@ -61,12 +61,22 @@ angular.module('fscApp', [
         }
         getLinks()
     })
-    $scope.analyze = function(workId,paperId){
+    $scope.analyze = function(type,workId,paperId){
         if(paperId){
-            $location.path('/' + workId+'/'+paperId+"/analyze");
+            $location.path('/' + type+'/' + workId+'/'+paperId+"/analyze");
         }else{
             msg.error('您没有权限查看，请先登录');
         }
+    }
+    $scope.over = function(){
+        resourceNode.save({nodeId:$scope.nodeId,map:"submit"},{},function(){
+            msg.success("修改成功")
+        })
+    }
+    $scope.collectWork = function(){
+        resourceNode.save({nodeId:$scope.nodeId,map:"enshrine"},{},function(){
+            msg.success("已收藏")
+        })
     }
     var getLinks = function(){
         if( $scope.node.knowlList){
@@ -96,7 +106,11 @@ angular.module('fscApp', [
     }
 }).controller('PlanViewCtrl', function ($scope, resourcePool, $routeParams, $sce) {
     $scope.workId = $routeParams.workId;
-    var ResourceSc = resourcePool.works
+    var typeMap = {
+        2:"works",
+        3:"exam"
+    }
+    var ResourceSc = resourcePool[typeMap[$routeParams.typeId]]
     ResourceSc.query({workId:$scope.workId,type:"ques"},function(data){
         $scope.questionGroups = data
         $scope.selectQuesNum(data[0].quesList[0])
@@ -127,7 +141,11 @@ angular.module('fscApp', [
 }).controller('PlanAnalyzeCtrl', function ($scope, $routeParams, $rootScope, resourcePool, msg) {
     $scope.workId = $routeParams.workId;
     $scope.paperId = $routeParams.paperId;
-    var ResourceSc = resourcePool.works
+    var typeMap = {
+        2:"works",
+        3:"exam"
+    }
+    var ResourceSc = resourcePool[typeMap[$routeParams.typeId]]
     $scope.type = 1
     ResourceSc.getAnalysis({workId:$scope.workId,qid: $scope.paperId},function(data){
         var resource = data.model

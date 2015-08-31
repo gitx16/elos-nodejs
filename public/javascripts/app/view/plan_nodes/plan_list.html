@@ -1,19 +1,17 @@
 <div class="row plan-info">
-    <div class="col-xs-7">
-        <div class="col-xs-6"><img src="/assets/img/index/ic_launcher.png"></div>
-        <div class="col-xs-6">
-            <div ng-bind="node.teacherName" class="mrgb25"></div>
-            <div ng-bind="node.nodeTypeName"></div>
-        </div>
+    <div class="col-xs-4 text-right"><img src="/assets/img/index/ic_launcher.png"></div>
+    <div class="col-xs-4">
+        <div ng-bind="node.teacherName" class="mrgb25"></div>
+        <div ng-bind="node.nodeTypeName"></div>
     </div>
-    <div class="col-xs-5">
+    <div class="col-xs-4">
         <div ng-bind="node.subjectName" class="mrgb25"></div>
         <div ng-bind="node.nodeTime"></div>
     </div>
 </div>
 <p class="halving-line"></p>
 <form class="form-horizontal mrgt20">
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-xs-4 control-label text-right">名称：</div>
         <div class="col-xs-8 control-label text-left">
             <p ng-bind="node.nodeName"></p>
@@ -28,7 +26,7 @@
     <div ng-if="node.nodeType==2||node.nodeType==3" class="form-group">
         <div class="col-xs-4 control-label text-right">内容：</div>
         <div class="col-xs-8 control-label text-left">
-            <div ng-include="'/node_static/javascripts/app/view/plan_nodes/menu-recursion.html'" ng-init="submenu = links"></div>
+            <div style="margin-left: -15px" ng-include="'/node_static/javascripts/app/view/plan_nodes/menu-recursion.html'" ng-init="submenu = links"></div>
         </div>
     </div>
     <div ng-if="node.nodeType==1" class="form-group row">
@@ -66,8 +64,8 @@
         <div class="col-xs-12 bottom-btn"><a ng-click="over()" class="btn btn-default btn-block col-xs-6">已完成</a></div>
     </div>
     <div ng-if="node.nodeType==2||node.nodeType==3" class="col-xs-12 bottom-btn fix">
-        <div class="col-xs-6 bottom-btn"><a href="#/{{node.resId}}/view" class="btn btn-default btn-block col-xs-6">查看作业</a></div>
-        <div class="col-xs-6 bottom-btn"><a ng-click="analyze(node.resId,node.paperId)" class="btn btn-default btn-block col-xs-6">分析作业</a></div>
+        <div class="col-xs-6 bottom-btn"><a href="#/{{node.nodeType}}/{{node.resId}}/view" class="btn btn-default btn-block col-xs-6">查看作业</a></div>
+        <div class="col-xs-6 bottom-btn"><a ng-click="analyze(node.nodeType,node.resId,node.paperId)" class="btn btn-default btn-block col-xs-6">分析作业</a></div>
     </div>
     <div ng-if="node.nodeType==5" class="col-xs-12 bottom-btn fix">
         <div class="col-xs-6 bottom-btn"><a ng-click="collectWork()" class="btn btn-default btn-block col-xs-6">收藏</a></div>
