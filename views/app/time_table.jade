@@ -1,0 +1,21 @@
+doctype html
+html(ng-app='fscApp' ng-init="workId=#{workId}")
+    head
+        meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
+        title= title
+        link(rel='stylesheet', href='/node_static/stylesheets/common.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
+    body
+        .notify
+            div(class="messages alert alert-{{ROOT_messageData.globalMsg.type}} {{ROOT_messageData.globalMsg.show ? 'show' : ''}}")
+                p(ng-repeat="item in ROOT_messageData.globalMsg.messages" ng-bind="item.msg")
+            div(ng-hide="loading" ng-view)
+        script(src='/node_static/bower_components/angular/angular.min.js')
+        script(src='/node_static/bower_components/angular-route/angular-route.min.js')
+        script(src='/node_static/bower_components/angular-touch/angular-touch.min.js')
+        script(src='/node_static/javascripts/app/ctrl/fsc/time_table.js')
+        script(src='/node_static/javascripts/app/services/loading.js')
+        script(src='/node_static/javascripts/app/services/ajax.js')
+        script(src='/node_static/javascripts/app/services/resource.js')
+        script(src='/node_static/javascripts/app/services/msg.js')

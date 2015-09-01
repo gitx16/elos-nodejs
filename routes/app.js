@@ -13,4 +13,7 @@ router.get('/notices', function (req, res) {
 router.get('/plan_nodes/:id', function (req, res) {
     res.render('app/plan_nodes', { nodeId: req.params.id });
 });
+router.get('/time_table/:id', function (req, res) {
+    res.render('app/time_table', { stuId: req.params.id });
+});
 module.exports = router;

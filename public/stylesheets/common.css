@@ -820,3 +820,37 @@ li a {
   margin: 0;
   font-family: "微软雅黑";
 }
+.top-label {
+  height: 65px;
+  line-height: 65px;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: left;
+}
+.top-label span {
+  margin-left: 20px;
+}
+.white {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+.success {
+  background-color: #8CBF26 !important;
+  color: #ffffff !important;
+}
+.table > tbody > tr > td {
+  border: 5px solid #ffffff;
+  background-color: #C3C3C3;
+  color: #ffffff;
+}
+.table > thead > tr > th {
+  border: 5px solid #ffffff;
+  background-color: #9B9B9B;
+  color: #ffffff;
+  text-align: center;
+}
+.timetable {
+  padding-right: 30px;
+  padding-left: 30px;
+  margin-top: 60px;
+}
