@@ -1,0 +1,11 @@
+<div class="recorder-row clearfix2">
+    <div class="recorder-left pull-left">
+        <img ng-click="openLinkman()" class="recorder-portrait" ng-src="{{recorder.portrait}}"/>
+    </div>
+    <div class="pull-left recorder-left mrgl10">
+        <div recorder-name>
+            <div class="position-pic" ng-click="goMap(recorder)"><img ng-src="/node_static/images/position.png"/></a></div>
+            <span recorder-name class="position-name"  title="{{recorder.message.locationAddress}}">{{recorder.message.locationAddress}}</span>
+        </div>
+    </div>
+</div>
