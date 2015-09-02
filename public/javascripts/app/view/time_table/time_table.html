@@ -1,0 +1,26 @@
+<div class="timetable">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>一</th>
+            <th>二</th>
+            <th>三</th>
+            <th>四</th>
+            <th>五</th>
+            <th>六</th>
+            <th>日</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat = "time in timedata">
+                <td ng-click="touch(time.monSubject)" ng-class="time.monSubject==currentType?'success':''">{{time.monSubject}}</td>
+                <td ng-click="touch(time.tueSubject)" ng-class="time.tueSubject==currentType?'success':''">{{time.tueSubject}}</td>
+                <td ng-click="touch(time.wedSubject)" ng-class="time.wedSubject==currentType?'success':''">{{time.wedSubject}}</td>
+                <td ng-click="touch(time.thuSubject)" ng-class="time.thuSubject==currentType?'success':''">{{time.thuSubject}}</td>
+                <td ng-click="touch(time.friSubject)" ng-class="time.friSubject==currentType?'success':''">{{time.friSubject}}</td>
+                <td ng-click="touch(time.satSubject)" ng-class="time.satSubject==currentType?'success':''">{{time.satSubject}}</td>
+                <td ng-click="touch(time.sunSubject)" ng-class="time.sunSubject==currentType?'success':''">{{time.sunSubject}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
