@@ -26,16 +26,13 @@ angular.module('fscApp', [
 }).factory('resourcePool', function (resource) {
     var rc = resource.create;
     return {
-        notice: rc('/open/notices/{noticeId}')
+        timeTable: rc('/open/timetable/{classId}')
     }
 }).controller('TimeTableCtrl', function ($scope, resourcePool) {
-    $scope.timedata = [{"monSubject":'数学',"tueSubject":'数学',"wedSubject":'数学',"thuSubject":'数学',"friSubject":'数学'},
-                {"monSubject":'数学',"tueSubject":'数学',"wedSubject":'数学',"thuSubject":'数学',"friSubject":'数学'},
-                {"monSubject":'数学',"tueSubject":'数学',"wedSubject":'数学',"thuSubject":'数学',"friSubject":'数学'},
-                {"monSubject":'数学',"tueSubject":'数学',"wedSubject":'数学',"thuSubject":'数学',"friSubject":'数学'},
-                {"monSubject":'数学',"tueSubject":'数学',"wedSubject":'数学',"thuSubject":'数学',"friSubject":'数学'},
-                {"monSubject":'数学',"tueSubject":'数学',"wedSubject":'数学',"thuSubject":'数学',"friSubject":'数学'},
-                {"monSubject":'数学',"tueSubject":'数学',"wedSubject":'数学',"thuSubject":'数学',"friSubject":'数学'}]
+    var timeTable = resourcePool.timeTable
+    timeTable.query({classId:$scope.classId},function(data){
+        $scope.timedata = data
+    })
     $scope.currentType = "no"
     $scope.touch = function(type){
         $scope.currentType = type
