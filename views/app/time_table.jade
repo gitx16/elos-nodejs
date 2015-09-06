@@ -10,7 +10,7 @@ html(ng-app='fscApp' ng-init="classId=#{classId}")
         .notify
             div(class="messages alert alert-{{ROOT_messageData.globalMsg.type}} {{ROOT_messageData.globalMsg.show ? 'show' : ''}}")
                 p(ng-repeat="item in ROOT_messageData.globalMsg.messages" ng-bind="item.msg")
-            div(ng-hide="loading" ng-view)
+        div(ng-hide="loading" ng-view)
         script(src='/node_static/bower_components/angular/angular.min.js')
         script(src='/node_static/bower_components/angular-route/angular-route.min.js')
         script(src='/node_static/bower_components/angular-touch/angular-touch.min.js')
