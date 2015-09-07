@@ -22,6 +22,9 @@ angular.module('fscApp')
                 },
                 sx: {
                     socketUrl: "http://183.203.18.61:41922"
+                },
+                prod: {
+                    socketUrl: "http://183.203.28.194:41032"
                 }
             },
             resServer: "http://res.tourerp.cn/",
