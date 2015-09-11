@@ -48,7 +48,7 @@ angular.module('fscApp', [
             for (var i = 0; i < actList.length; i++) {
                 var obj = actList[i];
                 if(obj.actStatus==1){
-                    obj.statusImg = "act_status_apply.png";
+                    obj.statusImg = "vote_status_apply.png";
                 }else if(obj.actStatus==2){
                     obj.statusImg = "act_status_apply_end.png";
                 }else if(obj.actStatus==3){

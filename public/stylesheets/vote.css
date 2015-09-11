@@ -74,20 +74,50 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 10px 15px;
-  background-color: rgba(66, 66, 74, 0.96);
+  background-color: #505A66;
   color: #fff;
   z-index: 1000;
 }
-.vote .status-bar .alert {
-  padding: 10px 15px;
-  margin: 0;
+.vote .status-bar p {
+  margin-top: 10px;
 }
-.vote .status-bar .alert-disabled {
+.vote .status-bar .img-list {
+  border: 1px solid #EAEAEA;
+  background-color: #FFFFFF;
+  margin-top: -10px;
+  padding: 10px;
+}
+.vote .status-bar .img-list p {
+  padding: 5px;
+  background-color: #2878BF;
+  width: 70px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.vote .status-bar .img-list img {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  border-radius: 45px;
+  margin-right: 10px;
+}
+.vote .status-bar .btn {
+  border-radius: 0px;
+  color: #ffffff;
+  background-color: #2878BF;
+  font-size: 20px;
+  border-color: #2878bf;
+}
+.vote .status-bar .btn-half {
+  width: 50%;
+}
+.vote .status-bar .col-back {
+  background-color: #FB9030;
+  border-color: #fb9030;
+}
+.vote .status-bar .col-end {
   background-color: #dcdcdc;
-  color: #000;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  border-color: #dcdcdc;
 }
 .vote .vote-content {
   margin-bottom: 100px;
@@ -99,11 +129,10 @@
   color: #ddd;
 }
 .vote .vote-content .active {
-  background: #428bca;
-  color: #fff;
+  background: #EEF7FE;
 }
 .vote .vote-content .active .fa {
-  color: #fff;
+  color: #3EB838;
 }
 .vote .vote-content .active .glyphicon-ok {
   display: block;
@@ -153,4 +182,11 @@
 }
 .notify .messages.show {
   top: 52px;
+}
+.vote-status {
+  margin-top: -10px;
+  margin-right: -10px;
+}
+.vote-list {
+  background: #CBE7FF;
 }

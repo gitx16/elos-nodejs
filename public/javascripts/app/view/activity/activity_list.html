@@ -7,12 +7,12 @@
                 <img ng-src="{{activity.coverImg?activity.coverImg:'/node_static/images/img_default.png'}}"/>
             </div>
             <div class="item-content">
-                <div class="item-name">{{activity.actName}}</div>
+                <div class="item-name">{{activity.actName}}{{activity.statusImg}}</div>
                 <div class="item-date"><i class="fa fa-eye"></i>&nbsp;&nbsp;{{activity.readCount}} &nbsp;&nbsp;&nbsp; <i
                         class="fa fa-clock-o"></i>&nbsp;&nbsp;{{activity.deadline}}
                 </div>
             </div>
-            <img class="pull-right" ng-src="{{'/node_static/images/'+activity.statusImg}}"/>
+            <img class="pull-right vote-status" ng-src="{{'/node_static/images/'+activity.statusImg}}"/>
         </div>
     </div>
     <div ng-hide="inSelf">

@@ -111,19 +111,20 @@ angular.module('fscApp', [
             })
         }
     }
-}).controller('PlanViewCtrl', function ($scope, resourcePool, $routeParams, $sce) {
+}).controller('PlanViewCtrl', function ($scope, resourcePool, $routeParams, $sce,rootDataService) {
     $scope.workId = $routeParams.workId;
+    var ROOT_loginData = rootDataService.data('ROOT_loginData');
     var typeMap = {
         2:"works",
         3:"exam"
     }
     var ResourceSc = resourcePool[typeMap[$routeParams.typeId]]
-    ResourceSc.query({workId:$scope.workId,type:"ques"},function(data){
+    ResourceSc.query({workId:$scope.workId,type:"ques",nodeId:"880",suuid:"f5aa88c4-8ccb-11e4-a4d0-a4fb000a34e4"},function(data){
         $scope.questionGroups = data
         $scope.selectQuesNum(data[0].quesList[0])
     })
     $scope.curQuestion = {};
-    $scope.selectQuesNum = function(q,qGroup){
+    $scope.selectQuesNum = function(q){
         ResourceSc.get({workId:$scope.workId,type:"ques",qid: q.quesId},function(data){
             var resource = data.model;
             resource.question = $sce.trustAsHtml(resource.question)
@@ -140,9 +141,17 @@ angular.module('fscApp', [
     }
     $scope.changeShow = function(type){
         if(type==1){
-            $scope.analysis = true
+            $scope.answer = true
+            $scope.quesList = false
+            ROOT_loginData.set("isBackdrop",true)
+        }else if(type==2){
+            $scope.answer = false
+            $scope.quesList = true
+            ROOT_loginData.set("isBackdrop",true)
         }else{
-            $scope.analysis = false
+            $scope.answer = false
+            $scope.quesList = false
+            ROOT_loginData.set("isBackdrop",false)
         }
     }
 }).controller('PlanAnalyzeCtrl', function ($scope, $routeParams, $rootScope, resourcePool, msg) {

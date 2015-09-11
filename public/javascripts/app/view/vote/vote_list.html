@@ -12,7 +12,7 @@
                         class="fa fa-clock-o"></i>&nbsp;&nbsp;{{vote.deadline}}
                 </div>
             </div>
-            <img ng-src="{{vote.voteStatus==1?'/node_static/images/vote_status_apply.png':'/node_static/images/act_status_end.png'}}"/>
+            <img class="vote-status" ng-src="{{vote.voteStatus==1?'/node_static/images/vote_status_apply.png':'/node_static/images/act_status_end.png'}}"/>
         </div>
     </div>
     <div ng-hide="inSelf">

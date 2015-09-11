@@ -1,6 +1,5 @@
 @import '_variable.less';
 .paper-wrapper{
-  padding:10px 0 150px 0;
   .question-nav{
     width: 100%;
     background: #fff;
@@ -47,28 +46,22 @@
     .q-num.active{
       color:#fff;
       background: @help-text-clr;
+      border-color: @help-text-clr !important;
     }
     .q-num.right{
-      border-color: @success;
-      color:@success;
-    }
-    .q-num.right:hover{
-      background: @success + 50;
-    }
-    .q-num.right.active{
+      border-color: #18C63D;
       color:#fff;
-      background: @success;
+      background: #18C63D;
     }
     .q-num.wrong{
-      border-color: @danger;
-      color:@danger;
-    }
-    .q-num.wrong:hover{
-      background: @danger + 50;
-    }
-    .q-num.wrong.active{
+      border-color: #F44D7B;
       color:#fff;
-      background: @danger;
+      background: #F44D7B;
+    }
+    .q-num.half{
+      border-color: #FB9032;
+      color:#fff;
+      background: #FB9032;
     }
   }
   .MathTable {
@@ -129,7 +122,98 @@
 }
 .panel-fix{
   bottom: 20px;
+  z-index: 2001;
+  min-height: 60%;
+  .panel-body {
+    padding: 15px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    li {
+      padding-left: 0px;
+    }
+  }
 }
 .btn.active {
   box-shadow: inset 0 0px 0px rgba(0,0,0,.125);
+}
+.phone-body{
+  background: #F0EFF5;
+  font-family: 'Microsoft Yahei', sans-serif, Simsun, Arial
+}
+.display-table{
+  display: table;
+  width: 100%;
+  min-height: 20em;
+}
+.plan-info{
+  margin-top: 20px;
+  display: -webkit-box;
+  img{
+    width: 64px;
+    height:64px;
+    border-radius: 40px;
+  }
+}
+.label-grey{
+  color: #A0A0A0;
+}
+.plan-btn-list{
+  z-index: 2001;
+  .btn{
+    border-radius: 0px;
+    color: #ffffff;
+    background-color: #949CA7;
+    font-size: 20px;
+  }
+  .border-left-2{
+    border-left: 1px solid #87909A;
+  }
+  .btn:hover,.btn:focus,.btn:active{
+    border-radius: 0px;
+    color: #ffffff;
+    background-color: #2878BF;
+    font-size: 20px;
+  }
+}
+.view{
+  height: 100%;
+  .paper-wrapper{
+    height: 100%;
+    .panel-blue{
+      .panel-heading{
+        background-color: #EEF7FE;
+        border-color: #EEF7FE;
+        .close{
+          position: absolute;
+          right: 15px;
+          top: -3px;
+          border: 0;
+          font-size: 46px;
+        }
+      }
+    }
+    .ques{
+      height: 95%;
+      padding: 0px;
+      border: 0px;
+      padding-top: 20px;
+    }
+  }
+}
+.label-blue{
+  color: #2878BF;
+}
+.global-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2000;
+  background: #000;
+  opacity: 0.5;
+}
+h3, .h3 {
+  font-size: 24px !important;
+  font-family: 'Microsoft Yahei', sans-serif, Simsun, Arial !important;;
 }

@@ -30,6 +30,7 @@ angular.module('fscApp', [
     $rootScope.backUrl = "#/";
     resourcePool.session.get({}, false, function (data) {
         $rootScope.isLogin = data.isLogin;
+        $rootScope.resServer = data.resServer+"/";
     });
 }).factory('resourcePool', function (resource) {
     var rc = resource.create;
@@ -100,7 +101,6 @@ angular.module('fscApp', [
     $rootScope.loading = true;
     $rootScope.showBack = true;
     $rootScope.inSelf = false;
-
     var Vote = resourcePool.vote;
     Vote.get({}, {voteId: $scope.voteId}, function (data) {
         $scope.vote = data.model;

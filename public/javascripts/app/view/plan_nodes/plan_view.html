@@ -1,38 +1,45 @@
 <div class="paper-wrapper">
-    <div class="panel panel-success">
-        <div ng-click="curQuestion.expand.question = !curQuestion.expand.question" class="panel-heading">
-            <h3 class="panel-title">题目</h3>
+    <div class="panel ques">
+        <div class="panel-body ques">
+            <div class="panel panel-blue" ng-swipe-left="changeShow(1)"  ng-swipe-right="changeShow(2)">
+                <div class="panel-heading">
+                    <h3 class="panel-title">题目</h3>
+                </div>
+                <div  ng-bind-html="curQuestion.question" class="panel-body"></div>
+            </div>
         </div>
-        <div ng-show="curQuestion.expand.question" ng-bind-html="curQuestion.question" class="panel-body"></div>
-    </div>
-    <div ng-if="analysis" class="panel panel-success fix panel-fix" >
-        <div class="panel-heading" ng-click="curQuestion.expand.answer = !curQuestion.expand.answer">
-            <h3 class="panel-title">答案/解析</h3>
+        <div ng-if="answer" class="panel panel-blue fix panel-fix" >
+            <div class="panel-heading">
+                <h3 class="panel-title">答案/解析</h3>
+                <button type="button" class="close ng-scope" ng-click="changeShow()">×</button>
+            </div>
+            <div class="panel-body" >
+                <div ng-bind-html="curQuestion.analysis"></div>
+                <p class="halving-line" ng-if="curQuestion.analysis"></p>
+                <div class="text-left">正确答案：<a ng-bind-html="curQuestion.answer"></a></div>
+            </div>
         </div>
-        <div class="panel-body" ng-show="!curQuestion.expand.answer">
-            <div ng-bind-html="curQuestion.answer">{{curQuestion.answer}}</div>
-            <div ng-bind-html="curQuestion.analysis"></div>
-        </div>
-    </div>
-    <div ng-if="!analysis" class="panel panel-success fix panel-fix">
-        <div class="panel-heading"  ng-click="curQuestion.expand.questionGroups = !curQuestion.expand.questionGroups">
-            <h3 class="panel-title">题目列表</h3>
-        </div>
-        <div class="panel-body" ng-show="!curQuestion.expand.questionGroups">
-            <div class="question-nav">
-                <div class="type-nav">
-                    <ul class="nav nav nav-pills">
-                        <li ng-repeat="qGroup in questionGroups">
-                            {{qGroup.quesType}}：
-                            <span ng-repeat="q in qGroup.quesList" ng-class="{'active':q.quesId ==curQuestion.id }" ng-click="selectQuesNum(q,qGroup)" class="q-num">{{$index + 1}}</span>
-                        </li>
-                    </ul>
+        <div ng-if="quesList" class="panel panel-blue fix panel-fix">
+            <div class="panel-heading"  >
+                <h3 class="panel-title">题目列表</h3>
+                <button type="button" class="close ng-scope" ng-click="changeShow()">×</button>
+            </div>
+            <div class="panel-body" >
+                <div class="question-nav">
+                    <div class="type-nav">
+                        <ul class="nav nav nav-pills">
+                            <li ng-repeat="qGroup in questionGroups">
+                                {{qGroup.quesType}}：
+                                <span ng-repeat="q in qGroup.quesList" ng-class="{'active':q.quesId ==curQuestion.id,'wrong':q.status==0,'right':q.status==1,'half':q.status==2}" ng-click="selectQuesNum(q,qGroup)" class="q-num">{{$index + 1}}</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-xs-12 bottom-btn fix">
-        <div class="col-xs-6 bottom-btn"><a ng-click="changeShow(1)" ng-class="{'active':(analysis)}" class="btn btn-default btn-block col-xs-6">答案解析</a></div>
-        <div class="col-xs-6 bottom-btn"><a ng-click="changeShow(2)" ng-class="{'active':(!analysis)}" class="btn btn-default btn-block col-xs-6">题目列表</a></div>
+        <div class="col-xs-12 bottom-btn fix plan-btn-list">
+            <div class="col-xs-6 bottom-btn"><a ng-click="changeShow(1)"  class="btn btn-block col-xs-6">答案解析</a></div>
+            <div class="col-xs-6 bottom-btn"><a ng-click="changeShow(2)"  class="btn  btn-block col-xs-6">题目列表</a></div>
+        </div>
     </div>
 </div>

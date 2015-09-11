@@ -11,14 +11,6 @@ html(ng-app='fscApp')
             div(class="messages alert alert-{{ROOT_messageData.globalMsg.type}} {{ROOT_messageData.globalMsg.show ? 'show' : ''}}")
                 p(ng-repeat="item in ROOT_messageData.globalMsg.messages" ng-bind="item.msg")
 
-        nav.navbar.navbar-default
-            div.container-fluid
-                div.navbar-header
-                    a(class="navbar-brand pull-right" href="#/self" ng-show="isLogin&&!inSelf")
-                        i.fa.fa-user
-                    a(class="navbar-brand" href="{{backUrl}}")
-                        i(ng-class="{'fa fa-chevron-left':showBack,'fa fa-home':!showBack}")
-
         div(ng-hide="loading" ng-view)
         div.loading(ng-show="loading")
             i.fa.fa-spinner.fa-pulse
