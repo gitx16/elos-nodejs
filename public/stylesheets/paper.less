@@ -5,6 +5,9 @@
     background: #fff;
     padding-top:10px;
     //    border-top:3px solid @base-border-clr;
+    .col-xs-3,.col-xs-9{
+      padding: 0px;
+    }
     .type-nav,.num-nav{
       overflow: auto;
     }
@@ -36,6 +39,7 @@
       //      background: #777;
       border:2px solid @help-text-clr;
       cursor: pointer;
+      margin-bottom: 10px;
       //      &:hover{
       //        background: @help-text-clr - 50;
       //      }
@@ -123,11 +127,14 @@
 .panel-fix{
   bottom: 20px;
   z-index: 2001;
-  min-height: 60%;
+  height: 60%;
   .panel-body {
     padding: 15px;
     font-size: 20px;
     margin-bottom: 20px;
+    height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
     li {
       padding-left: 0px;
     }
