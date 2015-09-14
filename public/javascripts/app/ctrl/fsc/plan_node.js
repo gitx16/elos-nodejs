@@ -42,8 +42,10 @@ angular.module('fscApp', [
             getAnalysis:{method:'get',params:{type:'papers',analysis:"analysis"}}
         })
     }
-}).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location,msg,$sce) {
+}).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location,msg,$sce,rootDataService) {
     $scope.suuid = window.location.search.split("=")[1]
+    var ROOT_loginData = rootDataService.data('ROOT_loginData');
+    ROOT_loginData.set("isBackdrop",false)
     var resourceNode = resourcePool.planNode
     var nodeTypeMap ={
         1:"课件",
