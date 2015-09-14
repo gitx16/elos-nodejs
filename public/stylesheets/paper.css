@@ -157,6 +157,16 @@
   background-color: #949CA7;
   font-size: 20px;
 }
+.plan-btn-list .btn-active {
+  border-radius: 0px;
+  color: #ffffff;
+  background-color: #2878BF;
+  font-size: 20px;
+}
+.plan-btn-list .col-back {
+  background-color: #FB9030;
+  border-color: #fb9030;
+}
 .plan-btn-list .border-left-2 {
   border-left: 1px solid #87909A;
 }
@@ -208,4 +218,8 @@ h3,
 .h3 {
   font-size: 24px !important;
   font-family: 'Microsoft Yahei', sans-serif, Simsun, Arial !important;
+}
+.analyze {
+  height: 100%;
+  background-color: white;
 }

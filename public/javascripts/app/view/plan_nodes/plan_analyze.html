@@ -8,7 +8,14 @@
         </div>
     </div>
 </div>
-<div class="col-xs-12 bottom-btn fix">
-    <div class="col-xs-6 bottom-btn"><a ng-click="change(1)" ng-class="{'active':(type==1)}" class="btn btn-default btn-block col-xs-6">知识点结构</a></div>
-    <div class="col-xs-6 bottom-btn"><a ng-click="change(2)" ng-class="{'active':(type==2)}" class="btn btn-default btn-block col-xs-6">知识点统计</a></div>
+<div class="col-xs-12 bottom-btn fix plan-btn-list">
+    <div class="col-xs-4 bottom-btn">
+        <a ng-click="change(1)" ng-class="{'btn-active':(type==1)}" class="btn btn-default btn-block col-xs-6">知识点结构</a>
+    </div>
+    <div class="col-xs-4 bottom-btn">
+        <a ng-click="change(2)" ng-class="{'btn-active':(type==2)}" class="btn btn-default btn-block col-xs-6">知识点统计</a>
+    </div>
+    <div class="col-xs-4 bottom-btn">
+        <a href="javascript:history.back(-1)"  class="btn  btn-block col-xs-6 col-back">返回列表</a>
+    </div>
 </div>
