@@ -73,7 +73,7 @@
         <div class="col-xs-12 bottom-btn"><a ng-click="over()" class="btn  btn-block col-xs-6" ng-disabled="node.isFinish">已完成</a></div>
     </div>
     <div ng-if="node.nodeType==2||node.nodeType==3" class="col-xs-12 bottom-btn fix">
-        <div class="col-xs-6 bottom-btn"><a href="#/{{node.nodeType}}/{{node.resId}}/view" class="btn  btn-block col-xs-6">查看作业</a></div>
+        <div class="col-xs-6 bottom-btn"><a href="#/{{node.nodeType}}/{{nodeId}}/{{node.resId}}/view" class="btn  btn-block col-xs-6">查看作业</a></div>
         <div class="col-xs-6 bottom-btn"><a ng-click="analyze(node.nodeType,node.resId,node.paperId)" class="btn  btn-block col-xs-6 border-left-2">分析作业</a></div>
     </div>
     <div ng-if="node.nodeType==5" class="col-xs-12 bottom-btn fix">

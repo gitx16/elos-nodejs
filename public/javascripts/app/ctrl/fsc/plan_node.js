@@ -13,7 +13,7 @@ angular.module('fscApp', [
 ]).config(function ($routeProvider) {
     var viewPath = "/node_static/javascripts/app/";
     $routeProvider
-        .when('/:typeId/:workId/view', {
+        .when('/:typeId/:nodeId/:workId/view', {
             templateUrl: viewPath + 'view/plan_nodes/plan_view.html',
             controller: 'PlanViewCtrl'
         })
@@ -120,8 +120,9 @@ angular.module('fscApp', [
         2:"works",
         3:"exam"
     }
+    $scope.suuid = window.location.search.split("=")[1]
     var ResourceSc = resourcePool[typeMap[$routeParams.typeId]]
-    ResourceSc.query({workId:$scope.workId,type:"ques",nodeId:"880",suuid:"f5aa88c4-8ccb-11e4-a4d0-a4fb000a34e4"},function(data){
+    ResourceSc.query({workId:$scope.workId,type:"ques",nodeId:$routeParams.nodeId,suuid: $scope.suuid},function(data){
         $scope.questionGroups = data
         $scope.selectQuesNum(data[0].quesList[0])
     })
