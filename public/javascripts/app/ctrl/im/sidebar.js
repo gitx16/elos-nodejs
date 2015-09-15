@@ -34,6 +34,8 @@ angular.module('fscApp')
                     size:'md',
                     onComplete: function (dialogScope,modalInstance) {
                         selectUserIdMap = {};
+                        dialogScope.checkPersonCount = 0;
+                        dialogScope.checkPersonTips = "请勾选需要添加的联系人";
                         dialogScope.selectGroup = [];
                         dialogScope.selectUsers= [];
                         dialogScope.classes = global.cache.classes;
@@ -112,28 +114,33 @@ angular.module('fscApp')
                                     }
                                 }
                             }
+                            dialogScope.checkPersonCount--;
                         };
 
-                        dialogScope.classClick = function (class_) {
+                        dialogScope.classClick = function (class_,index) {
+                            if(!dialogScope.classes){
+                                dialogScope.classes = []
+                            }
                             if (!class_.students) {
                                 ClassStudents.query({classId: class_.id}, function (students) {
                                     utils.procStudents(students);
                                     class_.students = students;
                                     dialogScope.groupUsers = students;
                                     userSelectCheck(dialogScope.groupUsers);
+                                    var open = dialogScope.classes[index];
+                                    open.open = !open.open;
                                 });
                             } else {
                                 dialogScope.groupUsers = class_.students;
                                 userSelectCheck(dialogScope.groupUsers);
+                                var open = dialogScope.classes[index];
+                                open.open = !open.open;
                             }
                             dialogScope.selectGroup = class_;
+                            dialogScope.groupUsers;
                         };
 
                         dialogScope.groupClick = function (type, group) {
-                            if (group.users) {
-                                dialogScope.groupUsers = group.users;
-                                userSelectCheck(dialogScope.groupUsers);
-                            } else {
                                 if (type == "teacher") {
                                     Teachers.query({}, function (teachers) {
                                         utils.procTeachers(teachers);
@@ -142,6 +149,7 @@ angular.module('fscApp')
                                         dialogScope.groupUsers = group.users;
                                         userSelectCheck(dialogScope.groupUsers);
                                     });
+                                    dialogScope.groups[type].open = !dialogScope.groups[type].open;
                                 } else if (type == "dean") {
                                     Deans.query({}, function (deans) {
                                         utils.procTeachers(deans);
@@ -150,8 +158,8 @@ angular.module('fscApp')
                                         dialogScope.groupUsers = group.users;
                                         userSelectCheck(dialogScope.groupUsers);
                                     });
+                                    dialogScope.groups[type].open = !dialogScope.groups[type].open;
                                 }
-                            }
                             dialogScope.selectGroup = group;
                         };
 
@@ -168,6 +176,7 @@ angular.module('fscApp')
                                             delete selectUserIdMap[obj.id];
                                             dialogScope.removeMember(obj);
                                             flag = true;
+                                            dialogScope.checkPersonCount--;
                                             break;
                                         }
                                     }
@@ -175,8 +184,8 @@ angular.module('fscApp')
                                         user.checked = true;
                                         dialogScope.selectUsers.push(user);
                                     }
-                                }
-                                else {
+                                    dialogScope.checkPersonCount++;
+                                }else {
                                     dialogScope.removeMember(user);
                                 }
                         };

@@ -1,7 +1,12 @@
 <div class="group frame">
     <div class="frame-left">
         <div class="frame-left-header">
-            <input class="form-control" type="text" ng-model="keywords"/>
+            <div class="input-group input-placeholder">
+                <span class="input-group-addon input-group-search">
+                    <i class="fa fa-search fa-find"></i>
+                </span>
+                <input class="form-control frame-left-header-input" type="text" ng-model="keywords" placeholder="搜索"/>
+            </div>
         </div>
         <div class="group-gs" resize style="height:{{winHeight-90}}px">
             <div class="group-g" ng-repeat="(code, group) in groups">
@@ -34,27 +39,30 @@
             <i class="fa fa-weixin"></i>
         </div>
         <div class="group-detail" ng-show="selectGroup">
-            <div class="group-detail-portrait">
-                <img ng-src="{{selectGroup.portrait}}"/>
-            </div>
-            <div class="group-detail-name">
-                {{ selectGroup.name | limitTo: 20 }}{{selectGroup.name.length > 20 ? '...' : ''}}
-            </div>
+            <div class="group-detail-header">{{selectGroup.name}}</div>
+            <!--<div class="group-detail-portrait">-->
+                <!--<img ng-src="{{selectGroup.portrait}}"/>-->
+            <!--</div>-->
+            <!--<div class="group-detail-name">-->
+                <!--{{ selectGroup.name | limitTo: 20 }}{{selectGroup.name.length > 20 ? '...' : ''}}-->
+            <!--</div>-->
             <div class="group-detail-users clearfix">
-                <div class="group-detail-user">
-                    <div class="group-detail-user-img">
-                    <span class="group-detail-user-fa"><i class="fa fa-plus-square-o" ng-click="openGroup(users)"></i></span>
-                </div>
-                    <div class="group-detail-user-add">
-                        添加
-                    </div>
-                </div>
                 <div class="group-detail-user" ng-repeat="user in users">
                     <div class="group-detail-user-img">
                         <img ng-src="{{user.portrait}}"/>
                     </div>
                     <div class="group-detail-user-name" tooltip="{{user.name}}">
                         {{ user.name | limitTo: 3 }}{{user.name.length > 3 ? '...' : ''}}
+                    </div>
+                </div>
+                <div class="group-detail-user">
+                    <div class="group-detail-user-add">
+                        <div class="group-detail-user-fa-bg">
+                            <span class="group-detail-user-fa"><i class="fa fa-plus" ng-click="openGroup(users)"></i></span>
+                        </div>
+                    </div>
+                    <div class="group-detail-user-add-name">
+                        添加
                     </div>
                 </div>
             </div>

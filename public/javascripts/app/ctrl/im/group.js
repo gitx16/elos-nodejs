@@ -34,6 +34,7 @@ angular.module('fscApp')
                     size:'md',
                     onComplete: function (dialogScope,modalInstance) {
                         selectUserIdMap = {};
+                        dialogScope.checkPersonCount = 0;
                         dialogScope.selectGroup = [];
                         dialogScope.selectUsers= [];
                         dialogScope.classes = global.cache.classes;
@@ -91,7 +92,7 @@ angular.module('fscApp')
                             }
                         };
 
-                        dialogScope.classClick = function (class_) {
+                        dialogScope.classClick = function (class_,index) {
                             if (!class_.students) {
                                 ClassStudents.query({classId: class_.id}, function (students) {
                                     utils.procStudents(students);
@@ -99,36 +100,36 @@ angular.module('fscApp')
                                     dialogScope.groupUsers = students;
                                     userSelectCheck(dialogScope.groupUsers);
                                 });
+                                dialogScope.classes[index].open = !dialogScope.classes[index].open;
                             } else {
                                 dialogScope.groupUsers = class_.students;
                                 userSelectCheck(dialogScope.groupUsers);
+                                dialogScope.classes[index].open = !dialogScope.classes[index].open;
                             }
                             dialogScope.selectGroup = class_;
+                            dialogScope.classes;
+                            debugger
                         };
 
                         dialogScope.groupClick = function (type, group) {
-                            group = [];
-                            if (group.users) {
-                                dialogScope.groupUsers = group.users;
-                                userSelectCheck($scope.groupUsers);
-                            } else {
-                                if (type == "teacher") {
-                                    Teachers.query({}, function (teachers) {
-                                        utils.procTeachers(teachers);
-                                        global.cache.teachers = teachers;
-                                        group.users = teachers;
-                                        dialogScope.groupUsers = group.users;
-                                        userSelectCheck(dialogScope.groupUsers);
-                                    });
-                                } else if (type == "dean") {
-                                    Deans.query({}, function (deans) {
-                                        utils.procTeachers(deans);
-                                        global.cache.deans = deans;
-                                        group.users = deans;
-                                        dialogScope.groupUsers = group.users;
-                                        userSelectCheck(dialogScope.groupUsers);
-                                    });
-                                }
+                            if (type == "teacher") {
+                                Teachers.query({}, function (teachers) {
+                                    utils.procTeachers(teachers);
+                                    global.cache.teachers = teachers;
+                                    group.users = teachers;
+                                    dialogScope.groupUsers = group.users;
+                                    userSelectCheck(dialogScope.groupUsers);
+                                });
+                                dialogScope.groups[type].open = !dialogScope.groups[type].open;
+                            } else if (type == "dean") {
+                                Deans.query({}, function (deans) {
+                                    utils.procTeachers(deans);
+                                    global.cache.deans = deans;
+                                    group.users = deans;
+                                    dialogScope.groupUsers = group.users;
+                                    userSelectCheck(dialogScope.groupUsers);
+                                });
+                                dialogScope.groups[type].open = !dialogScope.groups[type].open;
                             }
                             dialogScope.selectGroup = group;
                         };
@@ -158,6 +159,7 @@ angular.module('fscApp')
                                     }
                                 }
                             }
+                            dialogScope.checkPersonCount--;
                         };
 
                         dialogScope.updateClick=function(user) {
@@ -181,6 +183,7 @@ angular.module('fscApp')
                                             delete selectUserIdMap[obj.id];
                                             dialogScope.removeMember(obj);
                                             flag = true;
+                                            dialogScope.checkPersonCount--;
                                             break;
                                         }
                                     }
@@ -188,11 +191,14 @@ angular.module('fscApp')
                                         user.checked = true;
                                         dialogScope.selectUsers.push(user);
                                     }
+                                    dialogScope.checkPersonCount++;
                                 }
                                 else {
                                     scope.removeMember(user);
                                 }
                             }
+                            dialogScope.selectUsers;
+                            debugger
                         };
 
                         dialogScope.cancel=function(){

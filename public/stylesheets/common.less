@@ -65,15 +65,14 @@ html, body {
 .sidebar {
   width: 65px;
   height: 100%;
-  border-right: 1px solid #1ba7d8;
-  background-color: #1ba7d8;
+  border-right: 1px solid #3d84c6;
+  background-color: #3d84c6;
   padding: 12px;
   .bar-portrait{
-    height: 100px;
-    margin-top: 20px;
+    height: 80px;
     img{
       width: 40px;
-      border-radius: 50%
+      border-radius: 10%
     }
   }
   .item-icon {
@@ -119,20 +118,49 @@ html, body {
 .frame {
   height: 100%;
   .frame-left {
-    width: 200px;
+    width: 260px;
     height: 100%;
     float: left;
-    background: #f4f4f4;
+    background: #e7f3ff;
     border-right: 1px solid #dfdfdf;
     .frame-left-header {
       height: 55px;
       padding: 10px;
       margin-bottom: 10px;
-      border-bottom: 1px solid #dfdfdf;
-    }
-    .group-icon {
-      width: 10px;
-      height: 10px;
+      border-bottom: 1px solid #9dc3e7;
+      .input-placeholder{
+        input::-webkit-input-placeholder{
+          color: #FFFFFF;
+        }
+        input:-moz-placeholder{
+          color: #FFFFFF;
+        }
+        input::-moz-placeholder{
+          color: #FFFFFF;
+        }
+        input:-ms-input-placeholder{
+          color: #FFFFFF;
+        }
+      }
+      .input-group-search{
+        background-color:#3d84c6;
+        padding: 6px 0px;
+        width: 25px;
+        .fa-find{
+          color:#FFFFFF;
+          font-size: 15px;
+        }
+      }
+      .frame-left-header-input{
+        width:210px;
+        border-color: #cccccc;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding-left: 0px;
+        border-left: 0px;
+        background-color: #3d84c6;
+        color:#FFFFFF;
+      }
     }
     .frame-left-item-loading{
       margin-left: 10px;
@@ -141,14 +169,15 @@ html, body {
       background: #dcdcdc;
     }
     .frame-left-item {
+      height: 65px;
       cursor: pointer;
       padding: 5px 5px 5px 10px;
       &:hover {
         background: #dcdcdc;
       }
       img{
-        width: 30px;
-        height: 30px;
+        width: 50px;
+        height: 50px;
       }
     }
   }
@@ -242,10 +271,12 @@ html, body {
   .session-chat {
     height: 100%;
     .chat-header {
+      background-color: #FFFFFF;
       height: 55px;
       padding: 10px;
       margin-bottom: 10px;
       border-bottom: 1px solid #dfdfdf;
+      text-align: center;
       .chat-header-name {
         font-size: 20px;
         cursor: default;
@@ -257,8 +288,9 @@ html, body {
       .recorder-row {
         padding: 0px 10px 10px 10px;
         .recorder-portrait {
-          width: 30px;
-          height: 30px;
+          width: 50px;
+          height: 50px;
+          border-radius: 10%;
           &:hover{
             cursor:pointer;
           }
@@ -268,11 +300,15 @@ html, body {
           font-size: 12px;
         }
         .recorder-msg {
-          padding: 10px;
+          color: #000000;
+          padding:5px 10px;
           border-radius: 5px;
-          background: #d7ebfe;
-          border: 1px #b7d4ef solid;
+          background: #FFFFFF;
+          border: 1px #FFFFFF solid;
           max-width: 700px;
+        }
+        .recorder-msg-right{
+          color: #FFFFFF;
         }
         .recorder-msg img{
           width:25px;
@@ -309,9 +345,11 @@ html, body {
             text-align: right;
           }
           .recorder-msg {
-            padding: 10px;
+            //color:#000000;
+            //background-color: #FFFFFF;
+            padding:5px 10px;
             border-radius: 5px;
-            background: #e0e0e0;
+            background: #3d84c6;
             border: 1px #e0e0e0 solid;
             max-width: 700px;
           }
@@ -324,7 +362,7 @@ html, body {
         margin-top: 5px;
         span{
           border: 1px solid #e4e7f8;
-          background: #f8f9fe;
+          background: #e6f3ff;
           color: #808080;
           font-size: 12px;
           padding: 5px;
@@ -334,10 +372,18 @@ html, body {
     .chat-input {
       border-top: 1px solid #dfdfdf;
       padding: 10px;
+      margin-left: 50px;
+      .form-control{
+        border: 0px;
+        //border-color: #cccccc;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        background-color:#fafafa;
+      }
       .img-preview{
         background: #BCBCBC;
         height: 128px;
-        margin-top:0px;
+        margin-top:45px;
         .img-preview-img{
           img{
             width: 100px;
@@ -355,10 +401,14 @@ html, body {
       position: relative;
       float: left;
       width: 100px;
+      margin-left: 30px;
       .input-widget-face {
         font-size: 25px;
         margin-top: 5px;
         float: left;
+        .fa-face{
+          color:#679fd2;
+        }
         &:hover {
           cursor: pointer;
         }
@@ -368,6 +418,9 @@ html, body {
         margin-top: 5px;
         margin-left: 15px;
         float: left;
+        .fa-pic{
+          color:#9999a0;
+        }
         &:hover {
           cursor: pointer;
         }
@@ -414,10 +467,24 @@ html, body {
       .group-g-header {
         padding-left: 10px;
         cursor: pointer;
+        .group-icon {
+          width: 10px;
+          height: 10px;
+        }
       }
     }
   }
   .group-detail{
+    .group-detail-header{
+      margin: 0px auto 10px auto;
+      width: 160px;
+      padding: 10px 10px 14px 10px;
+      text-align: center;
+      display:block;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
     .group-detail-portrait{
       text-align: center;
       padding-top: 60px;
@@ -433,41 +500,56 @@ html, body {
       cursor: default;
     }
     .group-detail-user{
-
+      margin-top: 10px;
     }
     .group-detail-users{
-      max-width: 450px;
-      margin: 10px auto;
+      border-top: 1px solid #e1e1e1;
+      max-width: 900px;
+      padding: 0px;
+      margin: 0px;
       overflow: auto;
       .group-detail-add-img{
         font-size: 45px;
       }
       .group-detail-user{
-        width: 50px;
-        height: 55px;
+        width: 100px;
+        height: 105px;
         float: left;
         font-size: 12px;
         .group-detail-user-img{
           text-align: center;
           img{
-            width: 30px;
-            height: 30px;
+            width: 80px;
+            height: 80px;
           }
+        }
+        .group-detail-user-add{
+          text-align: center;
           i{
-            font-size: 30px;
+            font-size: 80px;
             color:#dcdcdc;
           }
         }
-        .group-detail-user-fa{
-          cursor: pointer;
+        .group-detail-user-fa-bg{
+          width: 80px;
+          height: 80px;
+          margin-left: 10px;
+          background-color: #f2f2f2;
+          .group-detail-user-fa{
+            cursor: pointer;
+            margin: 0px;
+            padding: 0px;
+          }
         }
-        .group-detail-user-add{
+        .group-detail-user-add-name{
+          margin-top: 10px;
           text-align: center;
           cursor: pointer;
         }
         .group-detail-user-name{
           text-align: center;
           cursor: default;
+          margin-top: 10px;
         }
       }
     }
@@ -476,6 +558,7 @@ html, body {
       text-align: center;
       button{
         width: 250px;
+        background-color:#fa9a05;
       }
     }
   }
@@ -490,23 +573,29 @@ html, body {
       .linkman-group-header {
         padding-left: 10px;
         cursor:pointer;
+        .group-icon {
+          width: 10px;
+          height: 10px;
+        }
       }
     }
   }
   .linkman-detail{
+    padding-top: 120px;
     .linkman-detail-portrait{
       text-align: center;
       padding-top: 60px;
       img{
-        width: 80px;
-        height: 80px;
+        width: 140px;
+        height: 140px;
       }
     }
     .linkman-detail-name{
       text-align: center;
-      font-size: 30px;
-      margin-top: 10px;
+      font-size: 25px;
+      margin-top: 20px;
       cursor: default;
+      font-weight: bold;
     }
     .linkman-detail-parentSon{
       margin-left: 10px;
@@ -516,11 +605,12 @@ html, body {
     }
     .linkman-detail-other{
       cursor: default;
-      width: 300px;
+      width: 250px;
       margin: 20px auto;
       .linkman-detail-other-item{
         margin-bottom: 10px;
         .linkman-detail-other-label{
+          padding-left: 70px;
           color: #b4b3b1;
         }
         .linkman-detail-other-value{
@@ -533,6 +623,7 @@ html, body {
       text-align: center;
       button{
         width: 250px;
+        background-color:#fa9a05;
       }
     }
   }
@@ -617,20 +708,75 @@ html, body {
       color:#aaaaaa;
     }
     .modal-body {
+      padding: 0px;
       background-color: #e0e0e0;
       height:auto!important;
       min-height:100px;
-      //width: 566px;
       .modal-new-left {
+        border: 0px;
+        padding-left: 15px;
+        padding-right: 0px;
         border-style: groove;
-        background-color: #ffffff;
+        background-color: #e0e0e0;
         float: left;
-        width: 200px;
-        height:230px;
-        .modal-new-left-class {
-          &:hover {
-            cursor:pointer;
-            background: #dcdcdc;
+        height:431px;
+        //width:200px;
+        overflow-y:auto;
+        .modal-new-left-head {
+          padding: 0px;
+          margin-top: 10px;
+          .input-group-span {
+            background-color: #FFFFFF;
+            .fa-modal-find {
+              background-color: #FFFFFF;
+              color:#93929a;
+            }
+          }
+          .input-group-find{
+            width: 220px;
+            border-left: 0px;
+            border-color: #cccccc;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            padding: 0px;
+          }
+        }
+        .modal-new-left-content{
+          margin-top: 50px;
+          .modal-new-left-class {
+            &:hover {
+              cursor:pointer;
+              background: #dcdcdc;
+            }
+            .group-icon {
+              width: 10px;
+              height: 15px;
+            }
+            .modal-new-right-member {
+              margin-bottom: 10px;
+              &:hover {
+                cursor:pointer;
+                background: #dcdcdc;
+              }
+              img{
+                width: 40px;
+                height: 40px;
+                border-radius:10%;
+              }
+              .circle-o{
+                color: #cdcdcd;
+                float: right;
+                font-size: 20px;
+                margin-top: 10px;
+                margin-right: 20px;
+              }
+              .circlr-x{
+                color: #00FF00;
+              }
+              .member-width{
+                padding-left: 8px;
+              }
+            }
           }
         }
         .class-select{
@@ -644,42 +790,66 @@ html, body {
             cursor:pointer ;
             background: #dcdcdc;
           }
+          .modal-new-right-member {
+            margin-bottom: 10px;
+            &:hover {
+              cursor: pointer;
+              background: #dcdcdc;
+            }
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 10%;
+            }
+            .circle-o {
+              color: #cdcdcd;
+              float: right;
+              font-size: 20px;
+              margin-top: 10px;
+              margin-right: 20px;
+            }
+            .circlr-x {
+              color: #00FF00;
+            }
+            .member-width {
+              padding-left: 8px;
+            }
+          }
         }
-        img{
-          width: 10px;
-          height: 10px;
-        }
+        //img{
+        //  width: 10px;
+        //  height: 10px;
+        //}
       }
       .modal-new-right {
+        border: 0px;
+        padding-left: 0px;
         border-style: groove;
         background-color: #ffffff;
         float: right;
-        height:230px;
-        width:200px;
+        height:370px;
         overflow-y:auto;
         .modal-new-right-name{
-          padding-left: 48px;
-          border-bottom: 1px solid #e5e5e5;
-        }
-        .modal-new-right-member {
-          &:hover {
-            cursor:pointer;
-            background: #dcdcdc;
+          color:#7a7a7a;
+          padding-left: 10px;
+          margin-top: 5px;
+          font-size: 5px;
+          .modal-new-right-tip{
+            width: 200px;
+            float: left;
+            margin-top: 30px;
           }
-          img{
+          .modal-new-right-delete{
+            float: right;
+            font-size: 25px;
             width: 20px;
-            height: 20px;
-          }
-          .circle-o{
-            color: #B5AEAE;
-          }
-          .circle-x{
-            color: #00FF00;
+            margin-top: 20px;
+            &:hover{
+              cursor: pointer;
+            }
           }
         }
-        .member-width{
-          padding-left: 8px;
-        }
+
         .modal-new-right-group{
           img{
             width: 20px;
@@ -689,29 +859,42 @@ html, body {
       }
     }
     .modal-new-selected{
-      background-color: #e0e0e0;
-      padding-left: 14px;
-      padding-right: 14px;
+      background-color: #FFFFFF;
       cursor: default;
-    }
-    .modal-new-name{
-      border-bottom: 1px solid #e5e5e5;
-      background-color: #ffffff;
-    }
-    .modal-update-down-edit{
-      background-color: #ffffff;
-      &:hover {
-        background: #dcdcdc;
-        cursor:pointer;
-      }
-      img{
-        width: 20px;
-        height: 20px;
+      margin-top: 70px;
+      .modal-update-down-edit{
+        background-color: #ffffff;
+        margin-left: 10px;
+        &:hover {
+          background: #dcdcdc;
+          cursor:pointer;
+        }
+        img{
+          width: 40px;
+          height: 40px;
+          border-radius: 10%;
+        }
+        .modal-new-width{
+          margin-left: 10px;
+        }
+        hr{
+          margin-top: 5px;
+          margin-bottom: 5px;
+        }
+        .modal-new-delete{
+          float: right;
+          margin-right: 20px;
+          font-size: 20px;
+          margin-top: 10px;
+          color: #cdcdcd;
+          &:hover{
+            color: #ed0528;
+          }
+        }
       }
     }
     .modal-new-down{
       background-color: #e0e0e0;
-      width:578px;
       height:auto!important;
       float: inherit;
       overflow-y: auto;
@@ -721,7 +904,16 @@ html, body {
       }
     }
     .modal-footer{
-      background-color: #e0e0e0;
+      background-color: #FFFFFF;;
+      border: 0px;
+      margin: 0px;
+      padding:0px 15px;
+      .btn-style{
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 10px;
+        width: 90px;
+      }
     }
   }
 .form-horizontal .control-label {
@@ -787,8 +979,14 @@ li{
 }
 .modal-sm .modal-content .modal-header{
   width:inherit;
-  background-color: dimgrey;
+  background-color: #FFFFFF;
   height: 25px;
+  font-size: 25px;
+  i{
+    &:hover{
+      cursor: pointer;
+    }
+  }
 }
 .linkman-open-content{
   padding-left: 20px;
@@ -796,14 +994,18 @@ li{
 .linkman-open-other-item{
   margin-bottom: 8px;
   padding-left: 53px;
+  .linkman-open-other-label-color{
+    color: #a8a8a8;
+  }
 }
 .linkman-open-other-value{
   padding-left: 20px;
+  color: #444444;
 }
 
 .linkman-open-name {
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 .linkman-open-btn{
@@ -821,12 +1023,13 @@ li{
 
 .modal-sm .modal-content{
   height: inherit;
-  width:inherit;
+  width:260px;
 }
 .modal-sm .modal-content .modal-header{
   width:inherit;
-  background-color: dimgrey;
+  background-color: #FFFFFF;
   height: 25px;
+  border-bottom: #FFFFFF;
 }
 .linkman-open-content{
   padding-left: 20px;
@@ -841,8 +1044,14 @@ li{
 
 .linkman-open-name {
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 10px;
+  img{
+    width:110px;
+    height: 110px;
+    border-radius: 5%;
+    margin-left: 35px;
+  }
 }
 .linkman-open-btn{
   margin-bottom: 20px;
@@ -850,6 +1059,10 @@ li{
   text-align: center;
   button{
     width: 200px;
+    background-color: #FFFFFF;
+    border: 1px solid #dcdcdc;
+    color: #000000;
+    color: #000000;
   }
 }
 .position-name{
@@ -910,4 +1123,39 @@ li{
 .timetable{
  padding-right: 1em;
   padding-left: 1em;
+}
+.modal-backdrop.in{
+  opacity:0!important;
+}
+.recorder-pic-big{
+  margin: 20px auto 0px auto;
+  width: 100%;
+  height: 390px;
+  .recorder-pic-big-ul{
+    list-style-type: none;
+    width: 100%;
+    height: 390px;
+    padding-left: 0px;
+    .recorder-pic-btn-left{
+      float: left;
+      margin-top:150px;
+      font-size: 60px;
+      margin-left: 20px;
+      padding-left: 0px;
+      color: #e9e9e9;
+    }
+    .recorder-pic-btn-img{
+      float: left;
+      margin-left: 20px;
+    }
+    .recorder-pic-btn-right{
+      float: right;
+      margin-top:150px;
+      font-size: 60px;
+      margin-right: 20px;
+      color: #e9e9e9;
+    }
+  }
+}
+
 }

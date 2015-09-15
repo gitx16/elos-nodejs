@@ -34,6 +34,7 @@ angular.module('fscApp')
             global.pageStatus.linkman.selectUser = parent;
         };
         $scope.headerClick = function (code, index) {
+            debugger
             if (code == "class") {
                 var class_ = $scope.classes[index];
                 class_.open = (!class_.open);

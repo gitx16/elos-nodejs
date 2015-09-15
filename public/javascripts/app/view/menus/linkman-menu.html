@@ -1,5 +1,7 @@
 <div>
-<div class="modal-header "><i ng-click="closeMenu()" class="fa fa-close pull-right" style="padding-right: 4px;padding-top: 1px;"></i></div>
+    <div class="modal-header ">
+        <i ng-click="closeMenu()" class="fa fa-close pull-right" style="padding-right: 4px;padding-top: 1px;"></i>
+    </div>
     <div class="linkman-open" ng-show="user">
         <div class="linkman-open-name">
             <img ng-src="{{recorder.portrait}}"/>
@@ -32,23 +34,23 @@
 
         <div class="linkman-open-other" ng-if="user.userType==1">
             <div class="linkman-open-other-item">
-                <span class="linkman-open-other-label">工号</span>
+                <span class="linkman-open-other-label linkman-open-other-label-color">工号&nbsp;:</span>
                 <span class="linkman-open-other-value">{{user.tid}}</span>
             </div>
             <div class="linkman-open-other-item">
-                <span class="linkman-open-other-label">手机</span>
+                <span class="linkman-open-other-label linkman-open-other-label-color">手机&nbsp;:</span>
                 <span class="linkman-open-other-value">{{user.mobile}}</span>
             </div>
             <div class="linkman-open-other-item">
-                <span class="linkman-open-other-label">学科</span>
+                <span class="linkman-open-other-label linkman-open-other-label-color">学科&nbsp;:</span>
                 <span class="linkman-open-other-value">{{user.subjectName}}</span>
             </div>
             <div class="linkman-open-other-item">
-                <span class="linkman-open-other-label">地址</span>
+                <span class="linkman-open-other-label linkman-open-other-label-color">地址&nbsp;:</span>
                 <span class="linkman-open-other-value">{{user.address?user.address:"无"}}</span>
             </div>
             <div class="linkman-open-other-item">
-                <span class="linkman-open-other-label">邮件</span>
+                <span class="linkman-open-other-label linkman-open-other-label-color">邮件&nbsp;:</span>
                 <span class="linkman-open-other-value">{{user.email?user.email:"无"}}</span>
             </div>
         </div>
@@ -84,7 +86,7 @@
         </div>
 
         <div class="linkman-open-btn">
-            <button class="btn btn-warning" ng-if="user.unGoSession==false"    ng-click="goSession(user.userId)">{{isGoing?'发起中':'发起会话'}}</button>
+            <button class="btn btn-dialog-color" ng-if="user.unGoSession==false"    ng-click="goSession(user.userId)">{{isGoing?'发起中':'发起会话'}}</button>
         </div>
     </div>
 </div>

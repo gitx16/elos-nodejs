@@ -34,6 +34,7 @@ angular.module('fscApp')
                                 dialogScope.closePhoto = function(){
                                     modalInstance.close();
                                 };
+                                dialogScope.jmdc = "123";
                             }
                         })
                 };

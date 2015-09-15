@@ -1,7 +1,12 @@
 <div class="session frame">
     <div class="frame-left">
         <div class="frame-left-header">
-            <input class="form-control" type="text" ng-model="keywords"/>
+            <div class="input-group input-placeholder">
+                <span class="input-group-addon input-group-search">
+                    <i class="fa fa-search fa-find"></i>
+                </span>
+                <input class="form-control frame-left-header-input" type="text" ng-model="keywords" placeholder="搜索"/>
+            </div>
         </div>
         <div class="session-list" resize style="height:{{winHeight-90}}px">
             <div ng-class="{'session-list-item':true,'item-select':session.id==selectSession.id}" class="session-list-item clearfix"
@@ -35,11 +40,11 @@
         <div class="session-chat" ng-show="selectSession">
             <div class="chat-header">
                 <span class="chat-header-name">
-                    {{ selectSession.msName| limitTo: 30}}{{selectSession.msName.length > 30 ? '...' : ''}}
+                    {{ selectSession.msName| limitTo: 10}}{{selectSession.msName.length > 10 ? '...' : ''}}
                 </span>
             </div>
             <!--<div  class="chat-content" resize style="height:{{winHeight-272+ToNumber(viewHeight)}}px;word-break:break-all;">-->
-            <div  class="chat-content" resize ng-style="{height:(winHeight-viewHeight-90)+'px','word-break':'break-all'}">
+            <div  class="chat-content" resize ng-style="{height:(winHeight-viewHeight-180)+'px','word-break':'break-all'}">
                 <div ng-repeat="recorder in selectSession.recorders">
                     <div ng-if="recorder.type=='5'">
                         <recorder_tip recorder="recorder"></recorder_tip>
@@ -80,6 +85,17 @@
                 </div>
             </div>
             <div class="chat-input">
+                <div class="input-widget">
+                    <!--表情-->
+                    <span class="input-widget-face" ng-click="faceOn()"><i class="fa fa-smile-o fa-face"></i></span>
+                    <!--图片上传-->
+                    <span class="input-widget-pic" ngf-select ng-model="file" ngf-multiple="false"><i class="fa fa-file-image-o fa-pic"></i></span>
+                    <div class="emotion" ng-if="click">
+                        <table>
+                            <tr ng-repeat="items in emojiArray"><td ng-repeat="item in items"><img ng-src="/node_static/images/emoji/{{item.img}}" ng-click="faceLable(item.label,blur())"></td></tr>
+                        </table>
+                    </div>
+                </div>
                 <div>
                     <input id="chat-input" ng-show="!view" type="text" class="form-control" ng-model="msg" placeholder="输入..." ng-keypress="send($event)" ng-blur="blur()" ng-focus="focu()">
                     <div class="img-preview" ng-show="view">
@@ -91,17 +107,6 @@
                             <button type="button" class="btn btn-danger btn-xs" ng-click="imgDelete()">删除</button>
                             <!--//删除按钮-->
                         </div>
-                    </div>
-                </div>
-                <div class="input-widget">
-                    <!--表情-->
-                    <span class="input-widget-face" ng-click="faceOn()"><i class="fa fa-smile-o"></i></span>
-                    <!--图片上传-->
-                    <span class="input-widget-pic" ngf-select ng-model="file" ngf-multiple="false"><i class="fa fa-file-image-o"></i></span>
-                    <div class="emotion" ng-if="click">
-                        <table>
-                            <tr ng-repeat="items in emojiArray"><td ng-repeat="item in items"><img ng-src="/node_static/images/emoji/{{item.img}}" ng-click="faceLable(item.label,blur())"></td></tr>
-                        </table>
                     </div>
                 </div>
                 <div class="input-send">
