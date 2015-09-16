@@ -51,9 +51,10 @@ angular.module('fscApp')
         var Recorders = resourcePool.recorders;
         var SessionUsers = resourcePool.sessionUsers;
         var SessionReader = resourcePool.sessionReader;
-        var userIdArray = [];
+        var userIdArray;
         var recorderList = [];
         $scope.showSession = function (session) {
+            userIdArray=[];
             $scope.selectSession = session;
             recorderList = session.recorders;
             global.pageStatus.session.selectSession = $scope.selectSession;
@@ -97,7 +98,6 @@ angular.module('fscApp')
                     var lastRecorder = recorderList[recorderList.length - 1];
                     loadNewMsg($scope.selectSession.id, lastRecorder ? lastRecorder.timestamp : 0, null);
                     socket.emit("notify", {userIdArray: userIdArray, reqCode: "NOTIFY_PULL_FSC_SESSION"});
-                    userIdArray = [];
                 });
                 sync.syncSessionToTop($scope.selectSession);
             }
