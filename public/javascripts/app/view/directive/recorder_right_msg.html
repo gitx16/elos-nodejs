@@ -3,7 +3,6 @@
         <img class="recorder-portrait" ng-src="{{recorder.portrait}}"/>
     </div>
     <div class="pull-right recorder-right mrgr10">
-        <!--<div class="recorder-name">{{recorder.createdName}}</div>-->
-        <div class="recorder-msg recorder-msg-right">{{recorder.message}}</div>
+        <div class="recorder-msg recorder-msg-right" ng-bind-html="recorder.message"></div>
     </div>
 </div>

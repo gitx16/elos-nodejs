@@ -75,8 +75,8 @@ angular.module('fscApp')
             })
         };
         $scope.send = function (ev) {
-            if (ev.keyCode !== 13) return;
-            $scope.doSend();
+            if (ev.ctrlKey&&ev.keyCode == 10)
+                $scope.doSend();
         };
         $scope.doSend = function () {
             var msg = $scope.msg.trim();
@@ -138,12 +138,10 @@ angular.module('fscApp')
         $scope.blur = function(){
             $scope.flag = 1;
             var pos;
-            var el = $('#chat-input').get(0);
+            var el = $('#chat-input').get(0);//id获取
             if ('selectionStart' in el) {
-                //debugger
                 pos = el.selectionStart;
             }else if ('selection' in document) {
-                //debugger
                 el.focus();
                 var Sel = document.selection.createRange();
                 var SelLength = document.selection.createRange().text.length;
@@ -179,10 +177,9 @@ angular.module('fscApp')
         }
         $scope.emojiArray = global.emojiCache;
 
-        //��ӱ����ǩ
         $scope.faceLable = function(label,blur){
             var str = $('#chat-input').val();
-            if($scope.flag == true){ //flagΪ1��ʾ����Ϊ�����Ľ��
+            if($scope.flag == true){
                 blur = $scope.blurFirst;
             }
             str = str.substr(0,blur) + label + str.substr(blur,str.length);
@@ -247,8 +244,7 @@ angular.module('fscApp')
                             file: file
                         }).success(function (data, status, headers, config) {
                             $timeout(function() {
-                                //$scope.log = 'file: ' + config.file.name + 'Response: ' + JSON.stringify(data) + '\n' + $scope.log;
-                                $scope.file.filePath = $scope.resUrl+'/'+data.data.url;//�ϴ�ͼƬ�ĵ�ַ
+                                $scope.file.filePath = $scope.resUrl+'/'+data.data.url;
                                 $scope.jmdc = data.data.url;
                                 $scope.view = true;
                                 $scope.viewHeight = 182;

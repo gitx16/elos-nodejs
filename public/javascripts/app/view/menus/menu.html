@@ -1,11 +1,4 @@
-<!--<div class="modal-header">-->
-    <!--<h3 class="modal-title">创建群</h3>-->
-<!--</div>-->
-<!--<div class="modal-between">-->
-    <!--添加群成员-->
-<!--</div>-->
 <div class="modal-body ng-scope clearfix">
-
     <div class="modal-new-left col-md-6">
         <div class="modal-new-left-head">
             <div class="input-group">
@@ -39,11 +32,6 @@
             </div>
         </div>
 
-
-
-
-
-
         <div class="modal-new-left-group"
              ng-class=" {'modal-new-left-group':true,'group-select':group.name==selectGroup.name}"
              ng-repeat="(code, group) in groups">
@@ -66,9 +54,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="modal-new-right col-md-6">
         <div class="modal-new-right-name">
             <div class="modal-new-right-tip">{{checkPersonCount == 0?"请勾选需要添加的联系人":"新添加了"+checkPersonCount+"个联系人"}}</div>
@@ -76,7 +61,6 @@
         </div>
         <div class="modal-new-selected">
             <div  class="modal-update-down-edit" ng-repeat="user in selectUsers">
-                <!--ng-class="{'modal-new-down':user.lock==true,'modal-update-down-edit':user.lock==false}"-->
                 <span>
                     <img ng-src="{{user.portrait}}"/>
                 </span>
@@ -86,12 +70,11 @@
                 <span class="modal-new-delete" ng-click="removeMember(user)" ng-if="!user.lock">
                      <i class="fa fa-times-circle"></i>
                 </span>
-                <hr>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-style"   ng-click="ok()">确定</button>
-        <button type="button" class="btn btn-default btn-style" ng-click="cancel()">取消</button>
+        <button type="button" class="btn btn-primary"   ng-click="ok()">确定</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
     </div>
 </div>

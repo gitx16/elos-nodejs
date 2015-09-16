@@ -8,7 +8,7 @@
                 <input class="form-control frame-left-header-input" type="text" ng-model="keywords" placeholder="搜索"/>
             </div>
         </div>
-        <div class="group-gs" resize style="height:{{winHeight-90}}px">
+        <div class="group-gs" resize ng-style="{height:(winHeight-90)+'px'}">
             <div class="group-g" ng-repeat="(code, group) in groups">
                 <div class="group-g-header" ng-click="headerClick(code)">
                      <span>

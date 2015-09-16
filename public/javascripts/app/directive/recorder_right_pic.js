@@ -22,8 +22,15 @@ angular.module('fscApp')
                     dialog.complexBox(
                         {
                             templateUrl: '/node_static/javascripts/app/view/menus/photo-menu.html',
+                            windowClass:'modal-content-opacity',
                             size:'md',
                             onComplete: function (dialogScope,modalInstance) {
+                                setTimeout(function(){
+                                    dialogScope.$apply(function() {
+                                        var imgHeight = $(".recorder-pic-img").height()
+                                        dialogScope.imgStytle = {height:imgHeight+'px','line-height':imgHeight+'px'}
+                                    });
+                                },100)
                                 dialogScope.message = message;
                                 dialogScope.resUrl = scope.resUrl;
                                 dialogScope.closePhoto = function(){

@@ -1,14 +1,10 @@
-<div>
-    <div  class="recorder-pic-big-close pull-right">
-        <i ng-click="closePhoto()" class="fa fa-close" style="padding-right: 5px"></i>
-    </div>
-</div>
-<div>
-    <div class="recorder-pic-big">
-        <ul class="recorder-pic-big-ul">
-            <li class="recorder-pic-btn-left"><i class="fa fa-arrow-circle-o-left"></i></li>
-            <li class="recorder-pic-btn-img"><img ng-src="{{resUrl}}/{{message}}" style="width: 380px;height: 390px"/></li>
-            <li class="recorder-pic-btn-right"><i class="fa fa-arrow-circle-o-right"></i></li>
-        </ul>
-    </div>
+<button type="button" class="close" ng-click="closePhoto()">×</button>
+<div class="recorder-pic">
+     <div class="recorder-pic-btn text-left" ng-style="imgStytle">
+         <i class="fa fa-angle-left"></i>
+     </div>
+     <div class="recorder-pic-img text-center"><img ng-src="{{resUrl}}/{{message}}"/></div>
+     <div class="recorder-pic-btn text-right" ng-style="imgStytle">
+         <i class="fa fa-angle-right"></i>
+     </div>
 </div>
