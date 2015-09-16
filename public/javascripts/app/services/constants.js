@@ -14,14 +14,11 @@ angular.module('fscApp')
                 dev: {
                     socketUrl: "http://localhost:3000"
                 },
-                intranet: {
+                lan: {
                     socketUrl: "http://192.168.1.253:41932"
                 },
-                outernet: {
-                    socketUrl: "http://115.231.93.40:41922"
-                },
-                sx: {
-                    socketUrl: "http://183.203.18.61:41922"
+                wan: {
+                    socketUrl: "http://183.203.18.48:41032"
                 },
                 prod: {
                     socketUrl: "http://183.203.28.194:41032"
