@@ -1,0 +1,17 @@
+<div class="login-box">
+    <form>
+        <h3>用户登录</h3>
+        <div class="alert alert-danger ellipsis login-err" ng-show="errMsg">{{errMsg}}</div>
+        <div ng-class="{'form-group':true,'has-error':!username&&okClick}" class="form-group">
+            <span class="glyphicon glyphicon-user"></span>
+            <input type="text" class="form-control" ng-model="username" placeholder="请输入用户名"/>
+            <div ng-show="!username&&okClick" class="error"><i class="fa fa-remove"></i> 用户名不能为空</div>
+        </div>
+        <div ng-class="{'form-group':true,'has-error':!password&&okClick}">
+            <span class="glyphicon glyphicon-lock"></span>
+            <input type="password" class="form-control" ng-model="password" placeholder="请输入密码"/>
+            <div ng-show="!password&&okClick" class="error"><i class="fa fa-remove"></i> 密码不能为空</div>
+        </div>
+        <button ng-click="ok()" class="btn btn-primary btn-block login-btn">登 录</button>
+    </form>
+</div>

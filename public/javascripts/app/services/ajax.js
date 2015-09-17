@@ -6,7 +6,7 @@
  * Factory in the elmApp.
  */
 angular.module('fscApp')
-    .factory('ajax', function ($q, $http, $log, msg,loading) {
+    .factory('ajax', function ($q, $http, $log, msg,loading,dialog,global) {
         var REST = {
             'post': 'POST',
             'patch': 'PATCH',
@@ -39,6 +39,44 @@ angular.module('fscApp')
                     switch(stat){
                         case 'OK':
                             deferred.resolve(res.data);
+                            break;
+                        case 'AUTHC_TIMEOUT':
+                            if(!global.loginBoxShow){
+                                global.loginBoxShow = true;
+                                dialog.complexBox({
+                                    templateUrl: '/node_static/javascripts/app/view/login.html',
+                                    size:'sm',
+                                    onComplete: function (dialogScope,modalInstance) {
+                                        dialogScope.errMsg = "会话已经过期，请重新登陆";
+                                        dialogScope.ok = function(){
+                                            dialogScope.errMsg = "";
+                                            dialogScope.okClick = true;
+                                            var username = dialogScope.username;
+                                            var password = dialogScope.password;
+                                            if(username&&password){
+                                                global.loginBoxShow = false;
+                                                $http({
+                                                    url:"/login.json",
+                                                    method:"POST",
+                                                    headers:{
+                                                        contentType: 'application/json; charset=utf-8'
+                                                    },
+                                                    params:{
+                                                        username:username,
+                                                        password:password
+                                                    }
+                                                }).success(function (res, status, headers, config) {
+                                                    if(res.stat=="OK"){
+                                                        window.location.reload();
+                                                    }else{
+                                                        dialogScope.errMsg = res.errors[0].msg;
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+                                });
+                            }
                             break;
                         default:
                             $log.error('错误：' ,res.errors);
