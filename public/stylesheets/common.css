@@ -1044,6 +1044,7 @@ li a {
 }
 .recorder-pic {
   display: flex;
+  width: 100%;
 }
 .recorder-pic .recorder-pic-btn {
   font-size: 60px;
@@ -1057,7 +1058,7 @@ li a {
   width: 100%;
 }
 .modal-content-opacity .modal-content {
-  background: rgba(0, 0, 0, 0.2) none repeat scroll !important;
+  background: rgba(0, 0, 0, 0.45) none repeat scroll !important;
   /*实现FF背景透明，文字不透明*/
   background: #000;
   filter: alpha(opacity=20);
@@ -1070,9 +1071,13 @@ li a {
   font-size: 32px;
   margin-top: -20px;
   margin-right: -15px;
+  width: 100%;
+  text-align: right;
 }
-.modal-content-opacity .modal-content p {
+.modal-content-opacity .modal-content img {
   position: relative;
+  background-color: #ffffff;
+  /* IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂，但解析为透明 */
 }
 .login-box form {
   min-height: 230px;
