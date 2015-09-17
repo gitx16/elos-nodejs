@@ -27,7 +27,7 @@ angular.module('fscApp')
                             onComplete: function (dialogScope,modalInstance) {
                                 setTimeout(function(){
                                     dialogScope.$apply(function() {
-                                        var imgHeight = $(".recorder-pic-img").height()
+                                        var imgHeight = $(".recorder-pic.ng-scope").height()
                                         dialogScope.imgStytle = {height:imgHeight+'px','line-height':imgHeight+'px'}
                                     });
                                 },100)
