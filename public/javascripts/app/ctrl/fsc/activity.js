@@ -111,7 +111,8 @@ angular.module('fscApp', [
         $rootScope.backUrl = "#/self";
         $location.path('/' + activity.id);
     }
-}).controller('ActivityDetailCtrl', function ($scope, $sce,$routeParams, $rootScope, resourcePool, msg) {
+}).controller('ActivityDetailCtrl', function ($scope, $sce,$routeParams, $rootScope, resourcePool, msg,rootDataService) {
+    var ROOT_messageData = rootDataService.data('ROOT_messageData');
     $scope.actId = $routeParams.actId;
     $rootScope.loading = true;
     $rootScope.showBack = true;
@@ -124,6 +125,7 @@ angular.module('fscApp', [
     var Activity = resourcePool.activity;
     Activity.get({}, {actId: $scope.actId}, function (data) {
         $scope.activity = data.model;
+        ROOT_messageData.title = data.model.title
         $rootScope.loading = false;
     });
 

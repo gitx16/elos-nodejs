@@ -69,7 +69,8 @@ angular.module('fscApp', [
             doLoadData();
         }
     }
-}).controller('NoticeDetailCtrl', function ($scope, $sce,$routeParams, $rootScope, resourcePool, msg) {
+}).controller('NoticeDetailCtrl', function ($scope, $sce,$routeParams, $rootScope, resourcePool, rootDataService) {
+    var ROOT_messageData = rootDataService.data('ROOT_messageData');
     $scope.noticeId = $routeParams.noticeId;
     $rootScope.loading = true;
     $rootScope.showBack = true;
@@ -81,6 +82,7 @@ angular.module('fscApp', [
     var Notice = resourcePool.notice;
     Notice.get({}, {noticeId: $scope.noticeId}, function (data) {
         $scope.notice = data.notice;
+        ROOT_messageData.title = data.model.actName
         $scope.notice.noticeType = data.noticeType;
         $rootScope.loading = false;
     });

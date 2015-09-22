@@ -96,7 +96,8 @@ angular.module('fscApp', [
         $rootScope.backUrl = "#/self";
         $location.path('/' + vote.id);
     }
-}).controller('VoteDetailCtrl', function ($scope, $routeParams, $rootScope, resourcePool, msg) {
+}).controller('VoteDetailCtrl', function ($scope, $routeParams, $rootScope, resourcePool, msg,rootDataService) {
+    var ROOT_messageData = rootDataService.data('ROOT_messageData');
     $scope.voteId = $routeParams.voteId;
     $rootScope.loading = true;
     $rootScope.showBack = true;
@@ -104,6 +105,7 @@ angular.module('fscApp', [
     var Vote = resourcePool.vote;
     Vote.get({}, {voteId: $scope.voteId}, function (data) {
         $scope.vote = data.model;
+        ROOT_messageData.title = data.model.voteName
         $rootScope.loading = false;
     });
 

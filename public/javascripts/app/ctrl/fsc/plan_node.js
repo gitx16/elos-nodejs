@@ -44,6 +44,7 @@ angular.module('fscApp', [
         })
     }
 }).controller('PlanListCtrl', function ($scope, resourcePool, $rootScope,$location,msg,$sce,rootDataService) {
+    var ROOT_messageData = rootDataService.data('ROOT_messageData');
     $scope.suuid = window.location.search.split("=")[1]
     var ROOT_loginData = rootDataService.data('ROOT_loginData');
     ROOT_loginData.set("isBackdrop",false)
@@ -58,6 +59,7 @@ angular.module('fscApp', [
     $scope.links = []
     resourceNode.get({nodeId:$scope.nodeId,suuid:$scope.suuid},function(data){
         $scope.node= data.model;
+        ROOT_messageData.title = data.model.nodeName
         if( $scope.node.teacherPortrait){
             $scope.node.teacherPortrait = $rootScope.resServer+'/'+ $scope.node.teacherPortrait
         }
