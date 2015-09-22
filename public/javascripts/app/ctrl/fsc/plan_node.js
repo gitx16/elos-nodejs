@@ -29,6 +29,7 @@ angular.module('fscApp', [
     $rootScope.backUrl = "#/";
     resourcePool.session.get({}, false, function (data) {
         $rootScope.isLogin = data.isLogin;
+        $rootScope.resServer = data.resServer
     });
 }).factory('resourcePool', function (resource) {
     var rc = resource.create;
@@ -57,6 +58,9 @@ angular.module('fscApp', [
     $scope.links = []
     resourceNode.get({nodeId:$scope.nodeId,suuid:$scope.suuid},function(data){
         $scope.node= data.model;
+        if( $scope.node.teacherPortrait){
+            $scope.node.teacherPortrait = $rootScope.resServer+'/'+ $scope.node.teacherPortrait
+        }
         $scope.node.nodeTypeName =  nodeTypeMap[$scope.node.nodeType]
         if( $scope.node.picture){
             $scope.picture =  $scope.node.picture.split(",")

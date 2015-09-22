@@ -1,6 +1,6 @@
 <ul class="nav nav-pills nav-stacked">
     <li ng-repeat="link in submenu">
-        <a>{{link.name}}</a>
+        {{link.name}}
         <div ng-switch on="link.submenu.length &gt; 0">
             <div ng-switch-when="true">
                 <div ng-init="submenu = link.submenu;" ng-include="'/node_static/javascripts/app/view/plan_nodes/menu-recursion.html'"></div>
