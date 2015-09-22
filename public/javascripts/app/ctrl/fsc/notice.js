@@ -82,7 +82,7 @@ angular.module('fscApp', [
     var Notice = resourcePool.notice;
     Notice.get({}, {noticeId: $scope.noticeId}, function (data) {
         $scope.notice = data.notice;
-        ROOT_messageData.title = data.model.actName
+        ROOT_messageData.title = data.notice.title
         $scope.notice.noticeType = data.noticeType;
         $rootScope.loading = false;
     });
