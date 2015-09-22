@@ -128,7 +128,7 @@ angular.module('fscApp', [
     })
     $scope.curQuestion = {};
     $scope.selectQuesNum = function(q){
-        ResourceSc.get({workId:$scope.workId,type:"ques",qid: q.quesId,suuid: $scope.suuid},function(data){
+        ResourceSc.get({workId:$scope.workId,type:"ques",qid: q.quesId,suuid: $scope.suuid,nodeId:$routeParams.nodeId},function(data){
             var resource = data.model;
             resource.question = $sce.trustAsHtml(resource.question)
             resource.answer = $sce.trustAsHtml(resource.answer)
