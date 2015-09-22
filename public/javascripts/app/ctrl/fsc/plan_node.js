@@ -117,7 +117,7 @@ angular.module('fscApp', [
             })
         }
     }
-}).controller('PlanViewCtrl', function ($scope, resourcePool, $routeParams, $sce,rootDataService) {
+}).controller('PlanViewCtrl', function ($scope, resourcePool, $routeParams, $sce,rootDataService,msg) {
     $scope.workId = $routeParams.workId;
     var ROOT_loginData = rootDataService.data('ROOT_loginData');
     var typeMap = {
@@ -128,10 +128,49 @@ angular.module('fscApp', [
     var ResourceSc = resourcePool[typeMap[$routeParams.typeId]]
     ResourceSc.query({workId:$scope.workId,type:"ques",nodeId:$routeParams.nodeId,suuid: $scope.suuid},function(data){
         $scope.questionGroups = data
-        $scope.selectQuesNum(data[0].quesList[0])
+        $scope.selectQuesNum(data[0].quesList[0],0,0)
     })
     $scope.curQuestion = {};
-    $scope.selectQuesNum = function(q){
+    $scope.next = function(){
+        var index = $scope.curGroupIndex,
+        parentIndex = $scope.curParentIndex,
+        next = true
+       if($scope.questionGroups[parentIndex].quesList.length-1== index){
+           parentIndex = parentIndex+1;
+           index = 0
+           if(parentIndex >= $scope.questionGroups.length){
+               msg.error("已经是最后一题")
+               next = false
+           }
+       }else{
+           index = index+1
+       }
+        if(next){
+            $scope.selectQuesNum($scope.questionGroups[parentIndex].quesList[index],index,parentIndex)
+        }
+    }
+    $scope.last = function(){
+        var index = $scope.curGroupIndex,
+            parentIndex = $scope.curParentIndex,
+            last = true
+        if(index==0){
+            parentIndex = parentIndex-1;
+            if(parentIndex < 0){
+                msg.error("已经是第一题")
+                last = false
+            }else{
+                index = $scope.questionGroups[parentIndex].length-1
+            }
+        }else{
+            index = index-1
+        }
+        if(last){
+            $scope.selectQuesNum($scope.questionGroups[parentIndex].quesList[index],index,parentIndex)
+        }
+    }
+    $scope.selectQuesNum = function(q,index,parentIndex){
+        $scope.curGroupIndex = index;
+        $scope.curParentIndex = parentIndex
         ResourceSc.get({workId:$scope.workId,type:"ques",qid: q.quesId,suuid: $scope.suuid,nodeId:$routeParams.nodeId},function(data){
             var resource = data.model;
             resource.question = $sce.trustAsHtml(resource.question)

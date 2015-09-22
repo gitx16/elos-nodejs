@@ -1,10 +1,9 @@
-<div class="paper-wrapper">
+<div class="paper-wrapper" ng-swipe-left="next()"  ng-swipe-right="last()">
     <div class="panel ques">
         <div class="panel-body ques">
-            <!--<div class="panel panel-blue" ng-swipe-left="changeShow(1)"  ng-swipe-right="changeShow(2)">-->
             <div class="panel panel-blue">
                 <div class="panel-heading">
-                    <h3 class="panel-title">题目</h3>
+                    <h3 class="panel-title">题目({{questionGroups[curParentIndex].quesType}} :{{curGroupIndex+1}} /{{questionGroups[curParentIndex].quesList.length}})</h3>
                 </div>
                 <div  ng-bind-html="curQuestion.question" class="panel-body"></div>
             </div>
@@ -35,7 +34,7 @@
                                     {{qGroup.quesType}}：
                                 </div>
                                 <div class="col-xs-9">
-                                    <span ng-repeat="q in qGroup.quesList" ng-class="{'active':q.quesId ==curQuestion.id,'wrong':q.status==0,'right':q.status==1,'half':q.status==2}" ng-click="selectQuesNum(q,qGroup)" class="q-num">{{$index + 1}}</span>
+                                    <span ng-repeat="q in qGroup.quesList" ng-class="{'active':q.quesId ==curQuestion.id,'wrong':q.status==0,'right':q.status==1,'half':q.status==2}" ng-click="selectQuesNum(q,$index,$parent.$index)" class="q-num">{{$index + 1}}</span>
                                 </div>
                             </div>
                     </div>
