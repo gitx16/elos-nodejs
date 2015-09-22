@@ -13,6 +13,7 @@ angular.module('fscApp')
         return {
             init:rc('/im_fsc/init'),
             sessions:rc('/im_fsc/sessions'),
+            login:rc('/login'),
             sessionClasses:rc('/im_fsc/sessions/classes'),
             sessionSync:rc('/im_fsc/sessions/sync'),
             recorders:rc('/im_fsc/recorders'),

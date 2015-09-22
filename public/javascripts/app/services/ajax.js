@@ -6,7 +6,7 @@
  * Factory in the elmApp.
  */
 angular.module('fscApp')
-    .factory('ajax', function ($q, $http, $log, msg,loading) {
+    .factory('ajax', function ($q, $http, $log, msg,loading,msgRegister,constants) {
         var REST = {
             'post': 'POST',
             'patch': 'PATCH',
@@ -39,6 +39,9 @@ angular.module('fscApp')
                     switch(stat){
                         case 'OK':
                             deferred.resolve(res.data);
+                            break;
+                        case 'AUTHC_TIMEOUT':
+                            msgRegister.dispatchMsg(constants.msgCode.AUTHC_TIMEOUT);
                             break;
                         default:
                             $log.error('错误：' ,res.errors);

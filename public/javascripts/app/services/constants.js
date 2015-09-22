@@ -29,6 +29,7 @@ angular.module('fscApp')
                 NOTIFY_PULL_FSC_SESSION: "NOTIFY_PULL_FSC_SESSION"
             },
             msgCode: {
+                AUTHC_TIMEOUT: "AUTHC_TIMEOUT",
                 SESSION_UPDATE: "SESSION_UPDATE",
                 SESSION_POST: "SESSION_POST",
                 SESSION_SHOW: "SESSION_SHOW",

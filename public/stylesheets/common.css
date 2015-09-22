@@ -1079,3 +1079,42 @@ li a {
   background-color: #ffffff;
   /* IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂，但解析为透明 */
 }
+.login-box form {
+  min-height: 230px;
+  padding: 20px;
+  background: #f3f3f3;
+  border-radius: 4px;
+}
+.login-box form h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #428bca;
+}
+.login-box form .help-block {
+  margin: 10px 0 0 0;
+  text-align: right;
+}
+.login-box form .form-group {
+  position: relative;
+}
+.login-box form .form-group .glyphicon {
+  position: absolute;
+  left: 10px;
+  top: 9px;
+  color: #428bca;
+}
+.login-box form .form-group label {
+  left: 31px;
+}
+.login-box form .form-group input {
+  padding-left: 30px;
+}
+.has-error div.error {
+  display: block;
+  margin-top: 10px;
+  color: #a94442;
+}
+.has-error .cke,
+.has-error .edui-default .edui-editor {
+  border-color: #a94442;
+}
