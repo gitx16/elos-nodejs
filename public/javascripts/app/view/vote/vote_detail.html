@@ -30,12 +30,12 @@
                  <a class="btn btn-half col-xs-6" ng-show="vote.dataStatus==1" ng-click="submitVote()" ng-disabled="doSubmit">
                      提&nbsp;&nbsp;&nbsp;&nbsp;交
                  </a>
-                 <a href="javascript:history.back(-1)" class="btn  btn-half col-xs-6  col-back" ng-show="vote.dataStatus==1">返回列表</a>
+                 <a href="#/" class="btn  btn-half col-xs-6  col-back" ng-show="vote.dataStatus==1">返回列表</a>
              </div>
             <div>
                 <a class="btn btn-half col-xs-6 col-end" ng-show="vote.dataStatus==2||vote.dataStatus==3" ng-bind="vote.dataStatus==2?'已截止':'已投票'">
                 </a>
-                <a href="javascript:history.back(-1)" ng-show="vote.dataStatus==2||vote.dataStatus==3"  class="btn  btn-half col-xs-6  col-back"><i class="fa fa-chevron-circle-left">&nbsp;返回列表</i></a>
+                <a href="#/" ng-show="vote.dataStatus==2||vote.dataStatus==3"  class="btn  btn-half col-xs-6  col-back"><i class="fa fa-chevron-circle-left">&nbsp;返回列表</i></a>
             </div>
     </div>
 </div>
