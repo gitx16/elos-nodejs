@@ -1,64 +1,73 @@
 @import 'vote-act.less';
+
 .vote {
   img {
     display: block;
     max-width: 100%;
   }
   .status-bar {
-       position: fixed;
-       bottom: 0;
-       left: 0;
-       width: 100%;
-       background-color: #505A66;
-       color: #fff;
-       z-index: 1000;
-      p{
-        margin-top: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #505A66;
+    color: #fff;
+    z-index: 1000;
+    p {
+      margin-top: 10px;
+    }
+    .img-list {
+      border: 1px solid #EAEAEA;
+      background-color: #FFFFFF;
+      margin-top: -10px;
+      padding: 10px;
+      p {
+        padding: 5px;
+        background-color: #2878BF;
+        width: 70px;
+        display: inline-block;
+        margin-right: 10px;
       }
-      .img-list{
-        border: 1px solid #EAEAEA;
-        background-color: #FFFFFF;
-        margin-top: -10px;
-        padding: 10px;
-        p{
-          padding: 5px;
-          background-color: #2878BF;
-          width: 70px;
-          display: inline-block;
-          margin-right: 10px;
-        }
-        img{
-          display: inline-block;
-          width: 45px;
-          height: 45px;
-          border-radius: 45px;
-          margin-right: 10px;
-        }
+      img {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        border-radius: 45px;
+        margin-right: 10px;
       }
-       .btn{
-         border-radius: 0px;
-         color: #ffffff;
-         background-color: #2878BF;
-         font-size: 20px;
-         border-color:#2878BF
-       }
-       .btn-half{
-         width: 50%;
-       }
-       .col-back{
-         background-color: #FB9030;
-         border-color:#FB9030
-       }
-       .col-end {
-         background-color: #dcdcdc;
-         border-color:#dcdcdc
-       }
-     }
+    }
+    .btn {
+      border-radius: 0px;
+      color: #ffffff;
+      background-color: #2878BF;
+      font-size: 20px;
+      border-color: #2878BF
+    }
+    .btn-half {
+      width: 50%;
+    }
+    .col-back {
+      background-color: #FB9030;
+      border-color: #FB9030
+    }
+    .col-end {
+      background-color: #dcdcdc;
+      border-color: #dcdcdc
+    }
+  }
   .vote-content {
+    .col-xs-12 {
+      padding: 0px;
+    }
     margin-bottom: 100px;
     label {
       display: block;
       padding-left: 10px;
+    }
+    .vote-list {
+      background: #CBE7FF;
+      font-size: 18px;
+      padding: 10px 10px 10px 15px;
     }
     .fa {
       color: #ddd;
@@ -73,7 +82,7 @@
       }
     }
     .radio, .checkbox {
-      padding: 10px 10px 10px 0;
+      padding: 8px 8px 8px 22px;
     }
   }
 
@@ -123,15 +132,12 @@
     top: 52px;
   }
 }
-.vote-status{
+
+.vote-status {
   margin-top: -10px;
   margin-right: -10px;
 }
-.vote-list{
-  background: #CBE7FF;
-  font-size: 18px;
-}
 
-.pt-0{
+.pt-0 {
   padding-top: 0px !important;
 }

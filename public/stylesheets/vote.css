@@ -122,9 +122,17 @@
 .vote .vote-content {
   margin-bottom: 100px;
 }
+.vote .vote-content .col-xs-12 {
+  padding: 0px;
+}
 .vote .vote-content label {
   display: block;
   padding-left: 10px;
+}
+.vote .vote-content .vote-list {
+  background: #CBE7FF;
+  font-size: 18px;
+  padding: 10px 10px 10px 15px;
 }
 .vote .vote-content .fa {
   color: #ddd;
@@ -140,7 +148,7 @@
 }
 .vote .vote-content .radio,
 .vote .vote-content .checkbox {
-  padding: 10px 10px 10px 0;
+  padding: 8px 8px 8px 22px;
 }
 .vote .loading {
   width: 100%;
@@ -187,10 +195,6 @@
 .vote-status {
   margin-top: -10px;
   margin-right: -10px;
-}
-.vote-list {
-  background: #CBE7FF;
-  font-size: 18px;
 }
 .pt-0 {
   padding-top: 0px !important;

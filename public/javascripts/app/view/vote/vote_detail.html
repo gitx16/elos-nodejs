@@ -10,7 +10,7 @@
                     <div ng-repeat="voteQuesItem in voteQues.voteQuesItemList"
                          ng-init="itemIndex = $index"
                          ng-click="itemClick(voteQues,voteQuesItem)"
-                         ng-class="{radio:voteQues.checkType==1,checkbox:voteQues.checkType!=1,active:voteQuesItem.isChecked}">
+                         ng-class="{radio:voteQues.checkType==1,checkbox:voteQues.checkType!=1,active:voteQuesItem.isChecked,'vote-item':true}">
                         <label>
                             <span ng-bind="(itemIndex+1)+'.'+voteQuesItem.title"></span>
                             <i ng-class="{'fa pull-right':true,'fa-check-circle-o':!voteQuesItem.isChecked,'fa-check-circle':voteQuesItem.isChecked}"></i>
