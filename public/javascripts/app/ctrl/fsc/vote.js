@@ -105,6 +105,9 @@ angular.module('fscApp', [
     var Vote = resourcePool.vote;
     Vote.get({}, {voteId: $scope.voteId}, function (data) {
         $scope.vote = data.model;
+        if(!$scope.vote.osVoteUsers){
+            $scope.vote.osVoteUsers = [];
+        }
         ROOT_messageData.title = data.model.voteName
         $rootScope.loading = false;
     });
@@ -159,6 +162,7 @@ angular.module('fscApp', [
             $scope.vote.dataStatus = 3;
             $scope.doSubmit = false;
             $scope.vote.voteNum += 1;
+            $scope.vote.osVoteUsers.push(data.model);
         });
     }
 })
