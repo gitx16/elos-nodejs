@@ -172,12 +172,13 @@ angular.module('fscApp', [
     }
     $scope.selectQuesNum = function(q,index,parentIndex){
         $scope.curGroupIndex = index;
-        $scope.curParentIndex = parentIndex
+        $scope.curParentIndex = parentIndex;
         ResourceSc.get({workId:$scope.workId,type:"ques",qid: q.quesId,suuid: $scope.suuid,nodeId:$routeParams.nodeId},function(data){
             var resource = data.model;
-            resource.question = $sce.trustAsHtml(resource.question)
-            resource.answer = $sce.trustAsHtml(resource.answer)
-            resource.analysis = $sce.trustAsHtml(resource.analysis)
+            resource.question = $sce.trustAsHtml(resource.question);
+            resource.answer = $sce.trustAsHtml(resource.answer);
+            resource.analysis = $sce.trustAsHtml(resource.analysis);
+            resource.stuAnswer = $sce.trustAsHtml(resource.stuAnswer);
             $scope.curQuestion = resource;
             $scope.curQuestion.expand = {};
             angular.extend($scope.curQuestion.expand,{

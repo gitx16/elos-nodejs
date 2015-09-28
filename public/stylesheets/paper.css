@@ -39,26 +39,32 @@
   cursor: pointer;
   margin-bottom: 10px;
 }
-.paper-wrapper .question-nav .q-num:hover {
-  background: #a4a4a4;
-}
 .paper-wrapper .question-nav .q-num.active {
   color: #fff;
   background: #727272;
-  border-color: #727272 !important;
+  border-color: #727272;
 }
 .paper-wrapper .question-nav .q-num.right {
   border-color: #18C63D;
+  color: #18C63D;
+}
+.paper-wrapper .question-nav .q-num.right.active {
   color: #fff;
   background: #18C63D;
 }
 .paper-wrapper .question-nav .q-num.wrong {
   border-color: #F44D7B;
+  color: #F44D7B;
+}
+.paper-wrapper .question-nav .q-num.wrong.active {
   color: #fff;
   background: #F44D7B;
 }
 .paper-wrapper .question-nav .q-num.half {
   border-color: #FB9032;
+  color: #FB9032;
+}
+.paper-wrapper .question-nav .q-num.half.active {
   color: #fff;
   background: #FB9032;
 }

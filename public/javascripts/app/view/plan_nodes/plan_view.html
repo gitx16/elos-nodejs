@@ -7,6 +7,15 @@
                 </div>
                 <div  ng-bind-html="curQuestion.question" class="panel-body"></div>
             </div>
+
+            <div class="panel panel-blue" ng-show="curQuestion.stuAnswer">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        学生答案
+                    </h3>
+                </div>
+                <div  ng-bind-html="curQuestion.stuAnswer" class="panel-body"></div>
+            </div>
         </div>
         <div ng-if="answer" class="panel panel-blue fix panel-fix" >
             <div class="panel-heading">
