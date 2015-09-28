@@ -1,7 +1,7 @@
 <div class="va-list">
     <div infinite-scroll="loadData()" infinite-scroll-disabled='noMore'>
         <div class="va-list-item clearfix"
-             ng-click="showNotice(notice)"
+             ng-click="showNotice($event,notice)"
              ng-repeat="notice in notices">
             <div>
                 <img ng-src="{{notice.coverImg?notice.coverImg:'/node_static/images/img_default.png'}}"/>

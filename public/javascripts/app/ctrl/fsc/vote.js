@@ -44,7 +44,8 @@ angular.module('fscApp', [
     return {
         votes:[],
         currentPage:1,
-        noMore:false
+        noMore:false,
+        offsetTop:0
     }
 }).controller('VoteListCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
     $rootScope.showBack = false;
@@ -70,9 +71,13 @@ angular.module('fscApp', [
 
     if (global.votes.length>0) {
         $scope.votes = global.votes;
+        setTimeout(function(){
+            window.scrollTo(0,global.offsetTop);
+        },10);
     }
 
     $scope.showVote = function (vote) {
+        global.offsetTop = window.scrollY;
         $rootScope.backUrl = "#/";
         $location.path('/' + vote.id);
     };

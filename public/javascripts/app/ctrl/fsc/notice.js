@@ -31,24 +31,26 @@ angular.module('fscApp', [
     }
 }).factory('global', function ($rootScope, resourcePool) {
     return {
-        notices:[],
-        currentPage:1,
-        noMore:false
+        notices: [],
+        currentPage: 1,
+        noMore: false,
+        offsetTop:0
     }
-}).controller('NoticeListCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
+}).controller('NoticeListCtrl', function ($scope, resourcePool, $window, $location, $rootScope, global) {
+
     $rootScope.showBack = false;
     $rootScope.backUrl = "#/";
     $scope.noMore = global.noMore;
 
     var Notice = resourcePool.notice;
     var doRequire = false;
-    var doLoadData = function(){
+    var doLoadData = function () {
         doRequire = true;
-        Notice.query({currentPage:global.currentPage}, function (data) {
+        Notice.query({currentPage: global.currentPage}, function (data) {
             global.notices = global.notices.concat(data);
             $scope.notices = global.notices;
-            global.currentPage+=1;
-            if(data.length<10){
+            global.currentPage += 1;
+            if (data.length < 15) {
                 global.noMore = true;
                 $scope.noMore = global.noMore;
             }
@@ -56,20 +58,24 @@ angular.module('fscApp', [
         });
     };
 
-    if (global.notices.length>0) {
+    if (global.notices.length > 0) {
         $scope.notices = global.notices;
+        setTimeout(function(){
+            window.scrollTo(0,global.offsetTop);
+        },10);
     }
 
-    $scope.showNotice = function (notice) {
+    $scope.showNotice = function ($event, notice) {
+        global.offsetTop = window.scrollY;
         $rootScope.backUrl = "#/";
         $location.path('/' + notice.id);
     };
-    $scope.loadData = function(){
-        if(!doRequire){
+    $scope.loadData = function () {
+        if (!doRequire) {
             doLoadData();
         }
     }
-}).controller('NoticeDetailCtrl', function ($scope, $sce,$routeParams, $rootScope, resourcePool, rootDataService) {
+}).controller('NoticeDetailCtrl', function ($scope, $sce, $routeParams, $rootScope, resourcePool, rootDataService) {
     var ROOT_messageData = rootDataService.data('ROOT_messageData');
     $scope.noticeId = $routeParams.noticeId;
     $rootScope.loading = true;
