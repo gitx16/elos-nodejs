@@ -61,7 +61,7 @@ angular.module('fscApp', [
             global.votes = global.votes.concat(data);
             $scope.votes = global.votes;
             global.currentPage+=1;
-            if(data.length<10){
+            if(data.length<25){
                 global.noMore = true;
                 $scope.noMore = global.noMore;
             }

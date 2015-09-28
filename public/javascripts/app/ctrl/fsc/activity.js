@@ -75,7 +75,7 @@ angular.module('fscApp', [
             global.activities = global.activities.concat(data);
             $scope.activities = global.activities;
             global.currentPage+=1;
-            if(data.length<10){
+            if(data.length<25){
                 global.noMore = true;
                 $scope.noMore = global.noMore;
             }
