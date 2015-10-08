@@ -27,7 +27,7 @@
                             <img ng-src="{{g.portrait}}"/>
                         </span>
                         <span class="session-label">
-                            {{ g.name | limitTo: 8 }}{{g.name.length > 8 ? '...' : ''}}
+                            {{ g.name | limitTo: 10 }}{{g.name.length > 10 ? '...' : ''}}
                         </span>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         <img ng-src="{{user.portrait}}"/>
                     </div>
                     <div class="group-detail-user-name" tooltip="{{user.name}}">
-                        {{ user.name | limitTo: 3 }}{{user.name.length > 3 ? '...' : ''}}
+                        {{ user.name | limitTo: 10 }}{{user.name.length > 10 ? '...' : ''}}
                     </div>
                 </div>
                 <div class="group-detail-user">
