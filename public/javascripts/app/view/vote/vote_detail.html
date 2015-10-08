@@ -10,7 +10,7 @@
                     <div ng-repeat="voteQuesItem in voteQues.voteQuesItemList"
                          ng-init="itemIndex = $index"
                          ng-click="itemClick(voteQues,voteQuesItem)"
-                         ng-class="{radio:voteQues.checkType==1,checkbox:voteQues.checkType!=1,active:voteQuesItem.isChecked}">
+                         ng-class="{radio:voteQues.checkType==1,checkbox:voteQues.checkType!=1,active:voteQuesItem.isChecked,'vote-item':true}">
                         <label>
                             <span ng-bind="(itemIndex+1)+'.'+voteQuesItem.title"></span>
                             <i ng-class="{'fa pull-right':true,'fa-check-circle-o':!voteQuesItem.isChecked,'fa-check-circle':voteQuesItem.isChecked}"></i>
@@ -23,19 +23,22 @@
     <div class="status-bar" ng-show="vote.dataStatus!=0">
             <div class="img-list" ng-show="vote.dataStatus==2||vote.dataStatus==3">
                 <p><i class="fa fa-heart-o"></i>已投票</p>
-                <img src="{{user.portrait? resServer+user.portrait:'/assets/img/index/ic_launcher.png'}}" ng-repeat="user in vote.osVoteUsers"/>
+                <img ng-src="{{user.portrait? resServer+user.portrait:'/assets/img/index/ic_launcher.png'}}" ng-repeat="user in vote.osVoteUsers"/>
             </div>
             <p ng-bind="'投票截止时间:'+vote.deadline+',已有'+vote.voteNum+'人参与投票'"></p>
              <div>
                  <a class="btn btn-half col-xs-6" ng-show="vote.dataStatus==1" ng-click="submitVote()" ng-disabled="doSubmit">
                      提&nbsp;&nbsp;&nbsp;&nbsp;交
                  </a>
-                 <a href="javascript:history.back(-1)" class="btn  btn-half col-xs-6  col-back" ng-show="vote.dataStatus==1">返回列表</a>
+                 <a href="#/" class="btn  btn-half col-xs-6  col-back" ng-show="vote.dataStatus==1">返回列表</a>
              </div>
             <div>
                 <a class="btn btn-half col-xs-6 col-end" ng-show="vote.dataStatus==2||vote.dataStatus==3" ng-bind="vote.dataStatus==2?'已截止':'已投票'">
                 </a>
-                <a href="javascript:history.back(-1)" ng-show="vote.dataStatus==2||vote.dataStatus==3"  class="btn  btn-half col-xs-6  col-back"><i class="fa fa-chevron-circle-left">&nbsp;返回列表</i></a>
+                <a href="#/" ng-show="vote.dataStatus==2||vote.dataStatus==3"  class="btn  btn-half col-xs-6  col-back"><i class="fa fa-chevron-circle-left">&nbsp;返回列表</i></a>
             </div>
+    </div>
+    <div class="status-bar pt-0" ng-show="vote.dataStatus==0">
+        <a href="#/"  class="btn btn-block col-back"><i class="fa fa-chevron-circle-left">&nbsp;返回列表</i></a>
     </div>
 </div>

@@ -44,7 +44,8 @@ angular.module('fscApp', [
     return {
         votes:[],
         currentPage:1,
-        noMore:false
+        noMore:false,
+        offsetTop:0
     }
 }).controller('VoteListCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
     $rootScope.showBack = false;
@@ -60,7 +61,7 @@ angular.module('fscApp', [
             global.votes = global.votes.concat(data);
             $scope.votes = global.votes;
             global.currentPage+=1;
-            if(data.length<10){
+            if(data.length<25){
                 global.noMore = true;
                 $scope.noMore = global.noMore;
             }
@@ -70,9 +71,13 @@ angular.module('fscApp', [
 
     if (global.votes.length>0) {
         $scope.votes = global.votes;
+        setTimeout(function(){
+            window.scrollTo(0,global.offsetTop);
+        },10);
     }
 
     $scope.showVote = function (vote) {
+        global.offsetTop = window.scrollY;
         $rootScope.backUrl = "#/";
         $location.path('/' + vote.id);
     };
@@ -105,6 +110,9 @@ angular.module('fscApp', [
     var Vote = resourcePool.vote;
     Vote.get({}, {voteId: $scope.voteId}, function (data) {
         $scope.vote = data.model;
+        if(!$scope.vote.osVoteUsers){
+            $scope.vote.osVoteUsers = [];
+        }
         ROOT_messageData.title = data.model.voteName
         $rootScope.loading = false;
     });
@@ -159,6 +167,7 @@ angular.module('fscApp', [
             $scope.vote.dataStatus = 3;
             $scope.doSubmit = false;
             $scope.vote.voteNum += 1;
+            $scope.vote.osVoteUsers.push(data.model);
         });
     }
 })

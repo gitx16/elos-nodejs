@@ -75,6 +75,9 @@
   text-align: center;
   margin-bottom: 10px;
 }
+.notice .notice-desc {
+  padding-bottom: 50px;
+}
 .notice .notice-desc img {
   max-width: 100% !important;
   clear: both;

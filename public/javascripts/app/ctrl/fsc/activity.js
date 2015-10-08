@@ -57,7 +57,8 @@ angular.module('fscApp', [
                     obj.statusImg = "act_status_end.png";
                 }
             }
-        }
+        },
+        offsetTop:0
     }
 }).controller('ActivityListCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
     $rootScope.showBack = false;
@@ -74,7 +75,7 @@ angular.module('fscApp', [
             global.activities = global.activities.concat(data);
             $scope.activities = global.activities;
             global.currentPage+=1;
-            if(data.length<10){
+            if(data.length<25){
                 global.noMore = true;
                 $scope.noMore = global.noMore;
             }
@@ -84,9 +85,13 @@ angular.module('fscApp', [
 
     if (global.activities) {
         $scope.activities = global.activities;
+        setTimeout(function(){
+            window.scrollTo(0,global.offsetTop);
+        },10);
     }
 
     $scope.showAct = function (activity) {
+        global.offsetTop = window.scrollY;
         $rootScope.backUrl = "#/";
         $location.path('/' + activity.id);
     }
