@@ -47,7 +47,9 @@ angular.module('fscApp', [
         noMore:false,
         offsetTop:0
     }
-}).controller('VoteListCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
+}).controller('VoteListCtrl', function ($scope, resourcePool, $location, $rootScope, global,rootDataService) {
+    var ROOT_messageData = rootDataService.data('ROOT_messageData');
+    ROOT_messageData.title = data.notice.title = "投票列表"
     $rootScope.showBack = false;
     $rootScope.inSelf = false;
     $rootScope.backUrl = "#/";

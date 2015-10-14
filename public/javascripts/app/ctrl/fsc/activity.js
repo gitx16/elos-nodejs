@@ -60,7 +60,9 @@ angular.module('fscApp', [
         },
         offsetTop:0
     }
-}).controller('ActivityListCtrl', function ($scope, resourcePool, $location, $rootScope, global) {
+}).controller('ActivityListCtrl', function ($scope, resourcePool, $location, $rootScope, global,rootDataService) {
+    var ROOT_messageData = rootDataService.data('ROOT_messageData');
+    ROOT_messageData.title = data.notice.title = "活动列表"
     $rootScope.showBack = false;
     $rootScope.inSelf = false;
     $rootScope.backUrl = "#/";
