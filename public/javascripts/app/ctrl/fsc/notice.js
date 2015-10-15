@@ -38,7 +38,7 @@ angular.module('fscApp', [
     }
 }).controller('NoticeListCtrl', function ($scope, resourcePool, $window, $location, $rootScope, global,rootDataService) {
     var ROOT_messageData = rootDataService.data('ROOT_messageData');
-    ROOT_messageData.title = data.notice.title = "通知公告"
+    ROOT_messageData.title = "通知公告"
     $rootScope.showBack = false;
     $rootScope.backUrl = "#/";
     $scope.noMore = global.noMore;

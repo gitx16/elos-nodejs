@@ -62,7 +62,7 @@ angular.module('fscApp', [
     }
 }).controller('ActivityListCtrl', function ($scope, resourcePool, $location, $rootScope, global,rootDataService) {
     var ROOT_messageData = rootDataService.data('ROOT_messageData');
-    ROOT_messageData.title = data.notice.title = "活动列表"
+    ROOT_messageData.title  = "活动列表"
     $rootScope.showBack = false;
     $rootScope.inSelf = false;
     $rootScope.backUrl = "#/";
@@ -132,7 +132,7 @@ angular.module('fscApp', [
     var Activity = resourcePool.activity;
     Activity.get({}, {actId: $scope.actId}, function (data) {
         $scope.activity = data.model;
-        ROOT_messageData.title = data.model.title
+        ROOT_messageData.title = data.model.actName
         $rootScope.loading = false;
     });
 
