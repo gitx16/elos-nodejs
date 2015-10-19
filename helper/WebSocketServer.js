@@ -25,11 +25,11 @@ var func = function(server){
     var io = require('socket.io').listen(server);
 
     var redis = require('redis');
-    var client = redis.createClient(41512,"redis1.os");
+    var client = redis.createClient(6379,"redis1.os");
     var RedisNotifier = require('redis-notifier');
 
     var eventNotifier = new RedisNotifier(redis, {
-        redis : { host : 'redis1.os', port : 41512 },
+        redis : { host : 'redis1.os', port : 6379 },
         expired : true,
         evicted : true,
         logLevel : 'DEBUG' //Defaults To INFO
