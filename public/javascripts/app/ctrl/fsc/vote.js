@@ -119,6 +119,10 @@ angular.module('fscApp', [
         $rootScope.loading = false;
     });
 
+    window.getCoverImg = function(){
+        window.control&&window.control.getCoverImg($scope.vote.coverImg||"");
+    }
+
     /**
      * 选择
      * @param voteQues

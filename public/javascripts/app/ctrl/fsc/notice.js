@@ -93,4 +93,7 @@ angular.module('fscApp', [
         $scope.notice.noticeType = data.noticeType;
         $rootScope.loading = false;
     });
+    window.getCoverImg = function(){
+        window.control&&window.control.getCoverImg($scope.notice.coverImg||"");
+    }
 })
