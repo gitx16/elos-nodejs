@@ -4,5 +4,6 @@ module.exports = {
     imSocketUserMap:{},//聊天
     imUserSocketMap:{},//聊天
     boardSocketUserMap:{},//白板
-    boardUserSocketMap:{}//白板
+    boardUserSocketMap:{},//白板
+    onlineScSet:{}//在线直播间
 };

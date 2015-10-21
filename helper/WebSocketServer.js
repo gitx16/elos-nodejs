@@ -82,6 +82,12 @@ var func = function(server){
                 CachedClient.del("session-board-" + userId,function(e){});
             }
             delete Global.boardSocketUserMap[socket.id];
+
+            var roomId = socket.roomId;
+            if(roomId){
+                socket.broadcast.to(roomId).emit('anchorOffline');
+                delete Global.onlineScSet[roomId];
+            }
         });
 
         /***********************Im Start****************************/
@@ -119,15 +125,21 @@ var func = function(server){
         })
 
         /***********************同步课堂 Start****************************/
-        socket.on('board-register', function (userId) {
+        socket.on('board-register', function (userId,roomId) {
+            socket.roomId = roomId;
+            Global.onlineScSet[roomId] = roomId;
             Global.boardSocketUserMap[socket.id] = userId;
             Global.boardUserSocketMap[userId] = socket.id;
             CachedClient.set("session-board-" + userId, SocketServer.getIpPort(),{ flags: 0, exptime: 0},function(err, status){
             });
+            socket.broadcast.to(roomId).emit('anchorOnline');
         });
 
-        socket.on("jionRoom",function(roomId,user){
+        socket.on("joinRoom",function(roomId,user){
             socket.join(roomId);
+            if(!Global.onlineScSet[roomId]){
+                socket.emit('anchorOffline');
+            }
             if(user){
                 client.hget("picList",roomId,function(err,reply){
                     socket.emit( 'reDraw',reply);
