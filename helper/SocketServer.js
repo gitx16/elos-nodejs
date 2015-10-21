@@ -14,10 +14,19 @@ var SocketServer = function(data,stat){
         client.on('data',function(data){
             var subData = data.slice(0, data.length-5);
             var signPb = CmdSignPb.decode(subData);
-            var userId = signPb.msg;
-            var socketId = Global.userSocketMap[userId];
-            if(socketId){
-                Global.io.to(socketId).emit("notify",{reqCode:signPb.reqCode});
+            if(signPb.cmdCode=="FSC_NOTIFY_POST"){
+                var userId = signPb.msg;
+                var socketId = Global.imUserSocketMap[userId];
+                if(socketId){
+                    Global.io.to(socketId).emit("notify",{reqCode:signPb.reqCode});
+                }
+            }else{
+                var obj = JSON.parse(signPb.msg);
+                var userId = obj.userId;
+                var socketId = Global.boardUserSocketMap[userId];
+                if(socketId){
+                    Global.io.to(socketId).emit("board-notify",{imgPath:obj.imgPath});
+                }
             }
         });
     });

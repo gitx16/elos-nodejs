@@ -2,7 +2,7 @@ var Mc = require('mc');
 var Global = require("./Global");
 var client;
 if(Global.env=="dev"){
-    client  = new Mc.Client(["cs4.os:40242","cs4.os:40252"]);
+    client  = new Mc.Client(["cs4.os:40242"]);
 }else if(Global.env=="prod"){
     client  = new Mc.Client(["cs21.fsc:11211"]);
 }

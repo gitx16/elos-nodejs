@@ -24,12 +24,19 @@ var sendSign = function(ip,port,userId,reqCode){
 var func = function(server){
     var io = require('socket.io').listen(server);
 
+    var port;
+    if(Global.env=="dev"){
+        port = 41512;
+    }else if(Global.env=="prod"){
+        port = 6379;
+    }
+
     var redis = require('redis');
-    var client = redis.createClient(6379,"redis1.os");
+    var client = redis.createClient(port,"redis1.os");
     var RedisNotifier = require('redis-notifier');
 
     var eventNotifier = new RedisNotifier(redis, {
-        redis : { host : 'redis1.os', port : 6379 },
+        redis : { host : 'redis1.os', port : port },
         expired : true,
         evicted : true,
         logLevel : 'DEBUG' //Defaults To INFO
@@ -61,16 +68,26 @@ var func = function(server){
     });
     io.sockets.on('connection', function (socket) {
         socket.on('disconnect', function () {
-            var userId = Global.socketUserMap[socket.id];
+            var userId = Global.imSocketUserMap[socket.id];
             if(userId){
-                delete Global.userSocketMap[userId];
+                delete Global.imUserSocketMap[userId];
                 CachedClient.del("session-node-" + userId,function(e){});
             }
-            delete Global.socketUserMap[socket.id];
+            delete Global.imSocketUserMap[socket.id];
+
+
+            userId = Global.boardSocketUserMap[socket.id];
+            if(userId){
+                delete Global.boardUserSocketMap[userId];
+                CachedClient.del("session-board-" + userId,function(e){});
+            }
+            delete Global.boardSocketUserMap[socket.id];
         });
+
+        /***********************Im Start****************************/
         socket.on('register', function (data) {
-            Global.socketUserMap[socket.id] = data.id;
-            Global.userSocketMap[data.id] = socket.id;
+            Global.imSocketUserMap[socket.id] = data.id;
+            Global.imUserSocketMap[data.id] = socket.id;
             CachedClient.set("session-node-" + data.id, SocketServer.getIpPort(),{ flags: 0, exptime: 0},function(err, status){
             });
         });
@@ -87,7 +104,7 @@ var func = function(server){
                         if(obj&&obj[key]){
                             var ipPort = obj[key].split(":");
                             if(ipPort[0]==Global.serverIp){
-                                var socketId = Global.userSocketMap[userId];
+                                var socketId = Global.imUserSocketMap[userId];
                                 if(socketId){
                                     Global.io.to(socketId).emit("notify",{reqCode:data.reqCode});
                                 }
@@ -99,8 +116,16 @@ var func = function(server){
                     });
                 });
             });
-
         })
+
+        /***********************同步课堂 Start****************************/
+        socket.on('board-register', function (userId) {
+            Global.boardSocketUserMap[socket.id] = userId;
+            Global.boardUserSocketMap[userId] = socket.id;
+            CachedClient.set("session-board-" + userId, SocketServer.getIpPort(),{ flags: 0, exptime: 0},function(err, status){
+            });
+        });
+
         socket.on("jionRoom",function(roomId,user){
             socket.join(roomId);
             if(user){
