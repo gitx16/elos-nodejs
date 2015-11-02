@@ -50,13 +50,13 @@
                 <div class="col-xs-4 control-label text-right">图片：</div>
                 <div class="col-xs-8 control-label text-left">
                     <p ng-if="!picture">暂无图片</p>
-                    <img ng-repeat="pic in picture track by $index" src="{{pic}}">
+                    <img ng-repeat="pic in picture track by $index" ng-src="{{resServer}}/{{pic}}">
                 </div>
             </div>
             <div ng-if="node.nodeType==4" class="form-group">
-                <div class="col-xs-4 control-label text-right">语音：</div>
+                <div class="col-xs-4 control-label text-right">语音: </div>
                 <div class="col-xs-8 control-label text-left">
-                    <p ng-if="!node.voice">语音</p>
+                    <p ng-if="!node.voice">暂无语音</p>
                     <audio ng-if="node.voice" controls="controls" src="{{node.voice}}"></audio>
                 </div>
             </div>
