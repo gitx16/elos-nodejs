@@ -16,4 +16,7 @@ router.get('/plan_nodes/:id', function (req, res) {
 router.get('/time_table/:id', function (req, res) {
     res.render('app/time_table', { classId: req.params.id });
 });
+router.get('/feedback', function (req, res) {
+    res.render('app/feedback', {});
+});
 module.exports = router;

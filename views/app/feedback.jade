@@ -1,0 +1,31 @@
+head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
+    title(ng-bind="ROOT_messageData.title")
+    link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/3.3.5/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/node_static/stylesheets/feedback.css')
+doctype html
+html(ng-app='fscApp')
+    body.vote
+        .notify
+            div(class="messages alert alert-{{ROOT_messageData.globalMsg.type}} {{ROOT_messageData.globalMsg.show ? 'show' : ''}}")
+                p(ng-repeat="item in ROOT_messageData.globalMsg.messages" ng-bind="item.msg")
+
+        div(ng-hide="loading" ng-view)
+        div.loading(ng-show="loading")
+            i.fa.fa-spinner.fa-pulse
+
+
+        script(src='/node_static/bower_components/angular/angular.min.js')
+        script(src='/node_static/bower_components/angular-route/angular-route.min.js')
+        script(src='/node_static/bower_components/ngtouch/build/ngTouch.min.js')
+        script(src='/node_static/javascripts/app/ctrl/fsc/feedback.js')
+        script(src='/node_static/javascripts/app/services/loading.js')
+        script(src='/node_static/javascripts/app/services/ajax.js')
+        script(src='/node_static/javascripts/app/services/resource.js')
+        script(src='/node_static/javascripts/app/services/msg.js')
+        script(src='/node_static/javascripts/app/services/msg_register.js')
+        script(src='/node_static/javascripts/app/services/constants.js')
+
+
+
