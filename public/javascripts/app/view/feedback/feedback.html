@@ -1,0 +1,36 @@
+<div class="feedback" ng-hide="fbDone">
+    <div class="fb-desc">请选择问题发生的场景</div>
+    <div ng-repeat="item in fbItems" ng-class="{'fb-item clearfix':true,'fb-item-hover':selectId==item.id}"
+         ng-touchstart="onTouchstart(item)"
+         ng-touchend="onTouchend(item)"
+         ng-click="clickItem(item)">
+
+        <span class="fb-title pull-left">{{item.title}}</span>
+
+        <span class="fb-nav pull-right" ng-show="parentArray.length!=2"> &gt; </span>
+        <span class="fb-sub-title pull-right" ng-show="parentArray.length!=2">{{item.subTitle}}</span>
+
+        <span class="fb-select pull-right" ng-show="parentArray.length==2"><i ng-class="{'fa fa-circle-o':!item.selected,'fa fa-check-circle item-select':item.selected}"></i></span>
+
+    </div>
+    <div  ng-show="parentArray.length==2">
+        <div class="fb-desc">补充内容</div>
+        <div class="fb-supplement">
+            <textarea class="form-control" ng-model="fb.supplement"></textarea>
+        </div>
+        <div class="fb-submit">
+            <button type="button" ng-click="submitFb()" class="form-control btn btn-success">提交反馈</button>
+        </div>
+    </div>
+
+    <div class="status-bar" ng-show="parentArray.length" ng-click="backParent()">
+        <span class="btn btn-block col-back"><i class="fa fa-chevron-circle-left">&nbsp;{{parentArray[parentArray.length-1].title}}</i></span>
+    </div>
+</div>
+<div ng-show="fbDone" class="fb-done">
+    <div class="text-center">
+        <i class="fa fa-check-circle"></i>
+    </div>
+    <div class="fb-done-title">反馈成功</div>
+    <div class="fb-done-content">感谢你对爱课堂的关注和支持，我们会认真处理你的反馈，尽快修复和完善相关功能</div>
+</div>
