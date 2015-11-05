@@ -59,6 +59,11 @@ angular.module('fscApp', [
     $scope.links = []
     resourceNode.get({nodeId:$scope.nodeId,suuid:$scope.suuid},function(data){
         $scope.node= data.model;
+        if($scope.node.voice){
+            $scope.node.voice = $rootScope.resServer +"/"+ $scope.node.voice
+            $scope.node.voice = $scope.node.voice.replace(".amr","_mp4.mp4")
+            $scope.node.voice = $sce.trustAsResourceUrl($scope.node.voice)
+        }
         ROOT_messageData.title = data.model.nodeName
         if( $scope.node.teacherPortrait){
             $scope.node.teacherPortrait = $rootScope.resServer+'/'+ $scope.node.teacherPortrait
@@ -68,6 +73,7 @@ angular.module('fscApp', [
             $scope.picture =  $scope.node.picture.split(",")
         }
         $scope.node.imgText = $sce.trustAsHtml( $scope.node.imgText)
+
         getLinks()
     })
     $scope.analyze = function(type,workId,paperId){
