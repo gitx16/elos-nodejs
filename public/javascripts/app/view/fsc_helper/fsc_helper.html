@@ -1,0 +1,32 @@
+<div class="fsc_helper" >
+    <div ng-hide="helperItem">
+        <div class="fh-desc">请选择问题发生的场景</div>
+        <div ng-repeat="item in fhItems" ng-class="{'fh-item clearfix':true,'fh-item-hover':selectId==item.id}"
+             ng-touchstart="onTouchstart(item)"
+             ng-touchend="onTouchend(item)"
+             ng-click="clickItem(item)">
+
+            <span class="fh-title pull-left">{{item.title}}</span>
+            <span class="fh-nav pull-right"> &gt; </span>
+
+        </div>
+    </div>
+
+    <div class="fh-detail" ng-show="helperItem">
+        <div class="fh-detail-title">{{helperItem.title}}</div>
+        <div class="fh-detail-content">{{helperItem.content}}</div>
+        <div class="fh-detail-fb">
+            <span ng-class="{'fh-detail-fb-item':true,'fb-item-select':fbStatus==1}" ng-click="submitFb(1)">
+                <i class="fa fa-thumbs-up"></i> 已解决
+            </span>
+            &nbsp;&nbsp;&nbsp;
+            <span  ng-class="{'fh-detail-fb-item':true,'fb-item-select':fbStatus==0}" ng-click="submitFb(0)">
+                <i class="fa fa-thumbs-down"></i> 未解决
+            </span>
+        </div>
+    </div>
+
+    <div class="status-bar" ng-show="parentArray.length" ng-click="backParent()">
+        <span class="btn btn-block col-back"><i class="fa fa-chevron-circle-left">&nbsp;{{parentArray[parentArray.length-1].title}}</i></span>
+    </div>
+</div>

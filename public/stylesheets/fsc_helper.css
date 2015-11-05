@@ -1,0 +1,110 @@
+body {
+  background-color: #EFF0F4;
+}
+.fsc_helper {
+  height: 100%;
+}
+.fsc_helper .fh-desc {
+  color: #8A8B8F;
+  padding: 10px 0 5px 10px;
+  font-size: 12px;
+}
+.fsc_helper .fh-item {
+  padding: 10px;
+  border-top: 1px solid #EDEEED;
+  border-bottom: 1px solid #EDEEED;
+  background-color: white;
+}
+.fsc_helper .fh-item .fh-title {
+  color: #2D2D2D;
+}
+.fsc_helper .fh-item .fh-sub-title {
+  color: #B9BABA;
+  margin-right: 10px;
+}
+.fsc_helper .fh-item .fh-nav {
+  color: #B9BABA;
+}
+.fsc_helper .fh-item .fh-select {
+  color: #C9CCCC;
+  font-size: 20px;
+}
+.fsc_helper .fh-item .item-select {
+  color: #00BC00;
+}
+.fsc_helper .fh-item-hover {
+  background-color: #E4E5E6;
+}
+.fsc_helper .status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #505A66;
+  color: #fff;
+  z-index: 1000;
+}
+.fsc_helper .status-bar .col-back {
+  background-color: #FB9030;
+  border-color: #fb9030;
+}
+.fsc_helper .fh-detail {
+  height: 100%;
+  background-color: white;
+}
+.fsc_helper .fh-detail .fh-detail-title {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom: 1px solid #ECEDEC;
+}
+.fsc_helper .fh-detail .fh-detail-content {
+  padding: 10px;
+}
+.fsc_helper .fh-detail .fh-detail-fb {
+  margin-top: 20px;
+  text-align: center;
+}
+.fsc_helper .fh-detail .fh-detail-fb .fh-detail-fb-item {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #AAABAC;
+  color: #AAABAC;
+}
+.fsc_helper .fh-detail .fh-detail-fb .fb-item-select {
+  border: 1px solid #00BC00;
+  color: #00BC00;
+}
+.notify {
+  position: fixed;
+  top: -52px;
+  z-index: 2000;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  border-radius: 0 0 4px 4px;
+  text-align: center;
+}
+.notify .alert {
+  border-radius: 0 0 4px 4px;
+}
+.notify .loading {
+  position: relative;
+  top: 52px;
+  display: none;
+}
+.notify .loading.show {
+  display: block;
+}
+.notify .messages {
+  position: relative;
+  top: 0px;
+  -webkit-transition: top 0.4s;
+  -moz-transition: top 0.4s;
+  -ms-transition: top 0.4s;
+  -o-transition: top 0.4s;
+  transition: top 0.4s;
+}
+.notify .messages.show {
+  top: 52px;
+}

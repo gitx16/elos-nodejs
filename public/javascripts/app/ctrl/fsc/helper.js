@@ -14,28 +14,26 @@ angular.module('fscApp', [
     var viewPath = "/node_static/javascripts/app/";
     $routeProvider
         .otherwise({
-            templateUrl: viewPath + 'view/feedback/feedback.html',
-            controller: 'FeedbackCtrl'
+            templateUrl: viewPath + 'view/fsc_helper/fsc_helper.html',
+            controller: 'FscHelperCtrl'
         });
 }).factory('resourcePool', function (resource) {
     var rc = resource.create;
     return {
-        feedback: rc('/open/feedbacks'),
-        item: rc('/open/feedback/items')
+        item: rc('/open/fsc_helper/items/{itemId}'),
+        fb: rc('/open/fsc_helper/fb')
     }
 }).factory('global', function ($rootScope, resourcePool) {
     return {}
-}).controller('FeedbackCtrl', function ($scope, resourcePool, $location, $rootScope, global, rootDataService,msg) {
+}).controller('FscHelperCtrl', function ($scope, resourcePool, $location, $rootScope, global, rootDataService,msg) {
     var ROOT_messageData = rootDataService.data('ROOT_messageData');
-    ROOT_messageData.title = "意见反馈";
+    ROOT_messageData.title = "帮助手册";
 
     var Item = resourcePool.item;
-    var Feedback = resourcePool.feedback;
+    var Fb = resourcePool.fb;
     $scope.parentArray = [];
-    $scope.fb = {};
-    $scope.fbDone = false;
     Item.query({}, function (data) {
-        $scope.fbItems = data;
+        $scope.fhItems = data;
     });
 
     $scope.onTouchend = function (item) {
@@ -45,37 +43,34 @@ angular.module('fscApp', [
         $scope.selectId = item.id;
     };
     $scope.clickItem = function (item) {
+        $scope.parentArray.push(item);
         if (item.isParent) {
-            $scope.parentArray.push(item);
             Item.query({parentId: item.id}, function (data) {
-                $scope.fbItems = data;
+                $scope.fhItems = data;
             });
-        }else if($scope.parentArray.length==2){
-            item.selected = item.selected?!item.selected:true;
+        }else{
+            Item.get({itemId: item.id}, function (data) {
+                $scope.helperItem = data.model;
+            });
         }
     };
     $scope.backParent = function () {
         if ($scope.parentArray.length) {
             var parentItem = $scope.parentArray.pop();
             Item.query({parentId: parentItem.parentId}, function (data) {
-                $scope.fbItems = data;
+                $scope.fhItems = data;
+                $scope.helperItem = null;
+                $scope.fbStatus=undefined;
             });
         }
     };
-    $scope.submitFb = function(){
-        var itemIdArray = [];
-        angular.forEach($scope.fbItems,function(item){
-            if(item.selected){
-                itemIdArray.push({itemId:item.id});
+    $scope.submitFb = function(status){
+        if($scope.fbStatus==undefined){
+            if($scope.helperItem){
+                Fb.create({}, {itemId:$scope.helperItem.id,fbStatus:status}, function (data) {
+                    $scope.fbStatus = status;
+                });
             }
-        });
-        if(itemIdArray.length){
-            $scope.fb.mapList = itemIdArray;
-            Feedback.create({}, $scope.fb, function (data) {
-                $scope.fbDone = true;
-            });
-        }else{
-            msg.error('请选择反馈项');
         }
     }
 });

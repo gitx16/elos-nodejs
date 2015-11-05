@@ -19,4 +19,7 @@ router.get('/time_table/:id', function (req, res) {
 router.get('/feedback', function (req, res) {
     res.render('app/feedback', {});
 });
+router.get('/fsc_helper', function (req, res) {
+    res.render('app/fsc_helper', {});
+});
 module.exports = router;
