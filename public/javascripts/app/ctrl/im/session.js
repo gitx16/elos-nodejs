@@ -153,7 +153,24 @@ angular.module('fscApp')
             }
             return pos;
         };
-
+        $("#chat-input").bind("paste", function(ev) {
+            var original =  ev.originalEvent;
+            var pasteList =  original.clipboardData.items[original.clipboardData.items.length-1];
+            var file = pasteList.getAsFile();
+            if(file){
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function () {
+                        var result = evt.target.result;
+                        $scope.file.filePath = result
+                        $scope.jmdc = result;
+                        $scope.view = true;
+                        $scope.viewHeight = 182;
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
         $scope.click = false;
         $scope.faceOn = function(){
             $scope.click = !$scope.click;
