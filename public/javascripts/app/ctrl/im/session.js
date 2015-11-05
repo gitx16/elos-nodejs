@@ -162,6 +162,12 @@ angular.module('fscApp')
                 reader.onload = function (evt) {
                     $scope.$apply(function () {
                         var result = evt.target.result;
+                        if(!$scope.file){
+                            $scope.file = {
+                                filepath:"",
+                                viewHeight:0
+                            };
+                        }
                         $scope.file.filePath = result
                         $scope.jmdc = result;
                         $scope.view = true;
