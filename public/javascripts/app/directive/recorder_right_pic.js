@@ -25,11 +25,17 @@ angular.module('fscApp')
                             windowClass:'modal-content-opacity',
                             size:'md',
                             onComplete: function (dialogScope,modalInstance) {
+                                dialogScope.magnify = function(){
+                                    var width = $(".dialog-img img").width()
+                                    if(width<800){
+                                        $(".dialog-img img").css("width",width*2+"px")
+                                        $(".modal-dialog").css("width",width*2+42+"px")
+                                    }
+                                }
                                 setTimeout(function(){
-                                    dialogScope.$apply(function() {
-                                        var imgHeight = $(".dialog-img").height()
-                                        dialogScope.imgStytle = {height:imgHeight+'px','line-height':imgHeight+'px'}
-                                    });
+                                    var width = $(".dialog-img img").width()+40
+                                    $(".modal-dialog").css("width",width+"px")
+                                    $(".modal-dialog").css("max-width","800px")
                                 },100)
                                 dialogScope.message = message;
                                 dialogScope.resUrl = scope.resUrl;

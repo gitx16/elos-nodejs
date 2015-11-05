@@ -1052,10 +1052,11 @@ li a {
   width: 10%;
 }
 .recorder-pic .recorder-pic-img {
-  width: 80%;
+  overflow: auto;
 }
 .recorder-pic .recorder-pic-img img {
   width: 100%;
+  cursor: -webkit-zoom-in;
 }
 .modal-content-opacity .modal-content {
   background: rgba(0, 0, 0, 0.45) none repeat scroll !important;
