@@ -3,17 +3,18 @@ body {
 }
 .feedback .fb-desc {
   color: #8A8B8F;
-  padding: 10px 0 5px 10px;
-  font-size: 12px;
+  padding: 10px 0 5px 15px;
+  font-size: 14px;
 }
 .feedback .fb-item {
-  padding: 10px;
+  padding: 10px 10px 10px 15px;
   border-top: 1px solid #EDEEED;
   border-bottom: 1px solid #EDEEED;
   background-color: white;
 }
 .feedback .fb-item .fb-title {
   color: #2D2D2D;
+  font-size: 16px;
 }
 .feedback .fb-item .fb-sub-title {
   color: #B9BABA;
@@ -21,6 +22,7 @@ body {
 }
 .feedback .fb-item .fb-nav {
   color: #B9BABA;
+  font-size: 20px;
 }
 .feedback .fb-item .fb-select {
   color: #C9CCCC;
@@ -42,8 +44,14 @@ body {
   z-index: 1000;
 }
 .feedback .status-bar .col-back {
+  height: 40px;
+  font-size: 16px;
+  color: white;
   background-color: #FB9030;
-  border-color: #fb9030;
+  border-color: #FB9030;
+}
+.feedback .status-bar .col-back i {
+  line-height: 25px;
 }
 .feedback .fb-supplement {
   padding: 0 10px;

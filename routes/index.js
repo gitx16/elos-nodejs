@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var Global = require("../helper/Global");
+
 /* GET home page. */
 router.get('/', function (req, res) {
     var menu = [
@@ -25,7 +27,13 @@ router.get('/', function (req, res) {
             link:"#/group"
         }
     ];
-    res.render('index', { menu: menu});
+    var resServer = "";
+    if(Global.env=="dev"){
+        resServer  = "http://res.tourerp.cn";
+    }else if(Global.env=="prod"){
+        resServer  = "http://res.x16.com";
+    }
+    res.render('index', { menu: menu,resServer:resServer});
 });
 
 module.exports = router;

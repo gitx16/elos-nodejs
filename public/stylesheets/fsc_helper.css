@@ -6,17 +6,18 @@ body {
 }
 .fsc_helper .fh-desc {
   color: #8A8B8F;
-  padding: 10px 0 5px 10px;
-  font-size: 12px;
+  padding: 10px 0 5px 15px;
+  font-size: 14px;
 }
 .fsc_helper .fh-item {
-  padding: 10px;
+  padding: 10px 10px 10px 15px;
   border-top: 1px solid #EDEEED;
   border-bottom: 1px solid #EDEEED;
   background-color: white;
 }
 .fsc_helper .fh-item .fh-title {
   color: #2D2D2D;
+  font-size: 16px;
 }
 .fsc_helper .fh-item .fh-sub-title {
   color: #B9BABA;
@@ -24,6 +25,7 @@ body {
 }
 .fsc_helper .fh-item .fh-nav {
   color: #B9BABA;
+  font-size: 20px;
 }
 .fsc_helper .fh-item .fh-select {
   color: #C9CCCC;
@@ -45,8 +47,14 @@ body {
   z-index: 1000;
 }
 .fsc_helper .status-bar .col-back {
+  height: 40px;
+  font-size: 16px;
   background-color: #FB9030;
-  border-color: #fb9030;
+  color: white;
+  border-color: #FB9030;
+}
+.fsc_helper .status-bar .col-back i {
+  line-height: 25px;
 }
 .fsc_helper .fh-detail {
   height: 100%;

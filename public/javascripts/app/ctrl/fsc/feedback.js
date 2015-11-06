@@ -25,7 +25,7 @@ angular.module('fscApp', [
     }
 }).factory('global', function ($rootScope, resourcePool) {
     return {}
-}).controller('FeedbackCtrl', function ($scope, resourcePool, $location, $rootScope, global, rootDataService,msg) {
+}).controller('FeedbackCtrl', function ($scope, resourcePool, $location, $rootScope, global, rootDataService, msg) {
     var ROOT_messageData = rootDataService.data('ROOT_messageData');
     ROOT_messageData.title = "意见反馈";
 
@@ -50,8 +50,8 @@ angular.module('fscApp', [
             Item.query({parentId: item.id}, function (data) {
                 $scope.fbItems = data;
             });
-        }else if($scope.parentArray.length==2){
-            item.selected = item.selected?!item.selected:true;
+        } else if ($scope.parentArray.length == 2) {
+            item.selected = item.selected ? !item.selected : true;
         }
     };
     $scope.backParent = function () {
@@ -62,20 +62,34 @@ angular.module('fscApp', [
             });
         }
     };
-    $scope.submitFb = function(){
+
+    $scope.submitFb = function () {
         var itemIdArray = [];
-        angular.forEach($scope.fbItems,function(item){
-            if(item.selected){
-                itemIdArray.push({itemId:item.id});
+        angular.forEach($scope.fbItems, function (item) {
+            if (item.selected) {
+                itemIdArray.push({itemId: item.id});
             }
         });
-        if(itemIdArray.length){
+        if (itemIdArray.length) {
             $scope.fb.mapList = itemIdArray;
             Feedback.create({}, $scope.fb, function (data) {
                 $scope.fbDone = true;
             });
-        }else{
+        } else {
             msg.error('请选择反馈项');
         }
+    };
+
+    $scope.showBack = true;
+    $scope.inputBlur = function () {
+        $scope.showBack = true;
+
+    }
+
+    $scope.inputFocus = function () {
+        $scope.showBack = false;
+        setTimeout(function () {
+            $("html, body").animate({ scrollTop: $(".feedback").height() }, 100)
+        }, 100)
     }
 });

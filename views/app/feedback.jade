@@ -1,5 +1,5 @@
 head
-    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
+    meta(name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
     title(ng-bind="ROOT_messageData.title")
     link(rel='stylesheet', href='/node_static/stylesheets/bootstrap/3.3.5/css/bootstrap.min.css')
     link(rel='stylesheet', href='/node_static/stylesheets/fontawesome/css/font-awesome.min.css')
@@ -16,6 +16,7 @@ html(ng-app='fscApp')
             i.fa.fa-spinner.fa-pulse
 
 
+        script(src='/node_static/bower_components/jquery/jquery.min.js')
         script(src='/node_static/bower_components/angular/angular.min.js')
         script(src='/node_static/bower_components/angular-route/angular-route.min.js')
         script(src='/node_static/bower_components/ngtouch/build/ngTouch.min.js')
