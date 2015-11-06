@@ -1,0 +1,11 @@
+<smil>
+  <head>
+    <meta base="rtmp://192.168.1.253:40512/vod/flv" />
+  </head>
+  <body>
+    <switch>
+      <video src="1080p/test.flv"  height="720" system-bitrate="2000000" width="1280" />
+      <video src="1080p/test.flv"  height="720" system-bitrate="2000000" width="1280" />
+    </switch>
+  </body>
+</smil>

@@ -21,10 +21,19 @@ angular.module('fscApp')
                 session:'='
             },
             link: function (scope, element, attrs) {
-                scope.voice = function(){
-                    msg.info("正在接入中");
-                };
                 scope.resUrl = global.cache.resUrl;
+                scope.recorder.message = scope.recorder.message.replace(".amr","_mp4.mp4")
+                setTimeout(function(){
+                    var id = scope.recorder.id+""
+                    window.jwplayer(id).setup({
+                        flashplayer: '/node_static/javascripts/thd/jwplayer/jwplayer2/jwplayer.swf',
+                        file: scope.resUrl+"/"+scope.recorder.message,
+                        stretching: 'exactfit',
+                        width: 200,
+                        height: 40,
+                        primary: 'flash'
+                    });
+                },10)
                 scope.openLinkman = function(){
                     sync.openLinkman(scope.recorder,scope.session,scope.resUrl);
                 };
