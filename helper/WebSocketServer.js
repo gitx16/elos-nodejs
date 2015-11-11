@@ -27,7 +27,7 @@ var func = function(server){
     var port;
     if(Global.env=="dev"){
         port = 41512;
-    }else if(Global.env=="prod"){
+    }else if(Global.env=="prod"||Global.env=="lan"){
         port = 6379;
     }
 

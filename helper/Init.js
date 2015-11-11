@@ -17,7 +17,7 @@ Object.keys(ifaces).forEach(function (ifname) {
         var indexIp = "192.168.1.";
         if(Global.env=="dev"){
             indexIp = "192.168.1.";
-        }else if(Global.env=="prod"){
+        }else if(Global.env=="prod"||Global.env=="lan"){
             indexIp = "192.168.";
         }
         if(iface.address.indexOf(indexIp)!=-1){

@@ -28,7 +28,7 @@ router.get('/', function (req, res) {
         }
     ];
     var resServer = "";
-    if(Global.env=="dev"){
+    if(Global.env=="dev"||Global.env=="lan"){
         resServer  = "http://res.tourerp.cn";
     }else if(Global.env=="prod"){
         resServer  = "http://res.x16.com";

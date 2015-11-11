@@ -15,7 +15,7 @@ angular.module('fscApp')
                     socketUrl: "http://localhost:3000"
                 },
                 lan: {
-                    socketUrl: "http://192.168.1.253:41932"
+                    socketUrl: "http://192.168.1.253:41034"
                 },
                 wan: {
                     socketUrl: "http://183.203.18.48:41032"
