@@ -26,7 +26,7 @@ angular.module('fscApp')
                 setTimeout(function(){
                     var id = scope.recorder.id+""
                     window.jwplayer(id).setup({
-                        flashplayer: '/node_static/javascripts/thd/jwplayer/jwplayer2/jwplayer.swf',
+                        flashplayer: scope.resUrl+'/thirdparty/jwplayer2/jwplayer.swf',
                         file: scope.resUrl+"/"+scope.recorder.message,
                         stretching: 'exactfit',
                         width: 200,
