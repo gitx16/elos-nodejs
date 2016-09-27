@@ -10,7 +10,7 @@
 angular.module('fscApp')
     .factory('global', function () {
         return {
-            env:"dev",//dev intranet prod jz
+            env:"lan",//dev intranet prod jz
             /**
              * 表情缓存 emojiCache
              */
