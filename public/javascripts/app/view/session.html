@@ -90,7 +90,8 @@
                          <img ng-src="/node_static/images/face.png">
                     </span>
                     <!--图片上传-->
-                    <span class="input-widget-pic" ngf-select ng-model="file" ngf-multiple="false">
+                    <span class="input-widget-pic" ngf-select
+                          ngf-accept="'image/*'" ng-model="file" ngf-multiple="false">
                         <img ng-src="/node_static/images/pic.png">
                     </span>
                     <div class="emotion" ng-if="click">

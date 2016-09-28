@@ -255,24 +255,27 @@ angular.module('fscApp')
         $scope.$on("$destroy", function () {
             msgRegister.removeMsg(constants.msgCode.SESSION_UPDATE, sessionUpdateHandler);
         });
-
+        var imgSrcType = "image/jpeg,image/png,image/gif,image/bmp"
         $scope.$watch('file', function () {
             $scope.upload = function (files) {
-                if (files && files.length&&files[0].filepath != "") {
+                if (files && files.length&&files[0]&&files[0].filepath != "") {
                     for (var i = 0; i < files.length; i++) {
                         var file = files[i];
-                        Upload.upload({
-                            url: '/files',
-                            fileFormDataName:"myfile",
-                            file: file
-                        }).success(function (data, status, headers, config) {
-                            $timeout(function() {
-                                $scope.file.filePath = $scope.resUrl+'/'+data.data.url;
-                                $scope.jmdc = data.data.url;
-                                $scope.view = true;
-                                $scope.viewHeight = 182;
+                        if(imgSrcType.indexOf(file.type)>=0){
+                            Upload.upload({
+                                url: '/files',
+                                fileFormDataName:"myfile",
+                                file: file
+                            }).success(function (data, status, headers, config) {
+                                $timeout(function() {
+                                    $scope.file.filePath = $scope.resUrl+'/'+data.data.url;
+                                    $scope.jmdc = data.data.url;
+                                    $scope.view = true;
+                                    $scope.viewHeight = 182;
+                                });
                             });
-                        });
+                        }
+
                     }
                 }
             };
