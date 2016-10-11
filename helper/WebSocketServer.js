@@ -26,7 +26,7 @@ var func = function(server){
 
     var port;
     if(Global.env=="dev"){
-        port = 41512;
+        port = 41052;
     }else if(Global.env=="prod"||Global.env=="lan"){
         port = 6379;
     }
@@ -119,6 +119,16 @@ var func = function(server){
                             }
 
                         }
+
+                        var loginUserId = Global.imSocketUserMap[socket.id];
+                        key = "session-app-"+loginUserId;
+                        CachedClient.get(key, function (err, obj) {
+                            if(obj&&obj[key]){
+                                console.log(obj[key]);
+                                var ipPort = obj[key].split(":");
+                                sendSign(ipPort[0],ipPort[1],loginUserId,data.reqCode);
+                            }
+                        });
                     });
                 });
             });
